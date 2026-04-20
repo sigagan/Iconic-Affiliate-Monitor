@@ -1,0 +1,914 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="id"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"&gt;</p>
+<p class="p1">&lt;meta name="mobile-web-app-capable" content="yes"&gt;</p>
+<p class="p1">&lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;</p>
+<p class="p1">&lt;meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"&gt;</p>
+<p class="p1">&lt;meta name="apple-mobile-web-app-title" content="AffMonitor"&gt;</p>
+<p class="p1">&lt;meta name="theme-color" content="#18181b"&gt;</p>
+<p class="p1">&lt;title&gt;Affiliate Monitor&lt;/title&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1">*{box-sizing:border-box;margin:0;padding:0}</p>
+<p class="p1">:root{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--bg:#f0efe8;--white:#fff;--ink:#18181b;--muted:#71717a;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--border:#e4e4d8;--border2:#c8c8b8;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--adit:#dc4a0a;--adit-l:#fff3ee;--adit-m:#fcd3bb;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--najwa:#1666e0;--najwa-l:#eff4ff;--najwa-m:#bdd1fb;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--dio:#7c22e0;--dio-l:#f3eeff;--dio-m:#d5bafc;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--green:#16a34a;--amber:#d97706;--red:#dc2626;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--sh:0 1px 8px rgba(0,0,0,.07);--sh2:0 4px 24px rgba(0,0,0,.11)</p>
+<p class="p1">}</p>
+<p class="p1">html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);font-size:13px}</p>
+<p class="p2"><br></p>
+<p class="p1">/* SETUP */</p>
+<p class="p1">#setup{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;background:var(--bg)}</p>
+<p class="p1">.setup-box{background:var(--white);border-radius:16px;padding:28px;width:100%;max-width:420px;box-shadow:var(--sh2)}</p>
+<p class="p1">.logo{font-size:22px;font-weight:800;margin-bottom:2px}</p>
+<p class="p1">.logo span{color:var(--adit)}</p>
+<p class="p1">.sub{font-size:12px;color:var(--muted);margin-bottom:22px}</p>
+<p class="p1">.sc2{background:var(--bg);border-radius:10px;padding:14px;margin-bottom:10px}</p>
+<p class="p1">.sc2 h4{font-size:12px;font-weight:700;margin-bottom:8px}</p>
+<p class="p1">.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}</p>
+<p class="p1">.wb{padding:14px 8px;border-radius:10px;border:2px solid var(--border);background:var(--white);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:.15s;width:100%}</p>
+<p class="p1">.wb:hover{border-color:var(--border2);background:var(--bg)}</p>
+<p class="p1">.wb.sel-adit{background:var(--adit);color:#fff;border-color:var(--adit)}</p>
+<p class="p1">.wb.sel-najwa{background:var(--najwa);color:#fff;border-color:var(--najwa)}</p>
+<p class="p1">.wb.sel-dio{background:var(--dio);color:#fff;border-color:var(--dio)}</p>
+<p class="p1">.wb.sel-owner{background:var(--ink);color:#fff;border-color:var(--ink)}</p>
+<p class="p1">.lbl{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:5px}</p>
+<p class="p1">.inp{width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--white);outline:none}</p>
+<p class="p1">.inp:focus{border-color:var(--ink)}</p>
+<p class="p1">.start{width:100%;padding:14px;border-radius:10px;border:none;background:#ccc;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:not-allowed;margin-top:12px;transition:.2s}</p>
+<p class="p1">.start.ready{background:var(--ink);cursor:pointer}</p>
+<p class="p1">.start.ready:active{opacity:.8}</p>
+<p class="p1">.hint{font-size:10px;color:var(--muted);text-align:center;margin-top:8px}</p>
+<p class="p2"><br></p>
+<p class="p1">/* APP */</p>
+<p class="p1">#app{display:none;height:100vh;flex-direction:column;overflow:hidden}</p>
+<p class="p1">.hdr{background:var(--ink);color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}</p>
+<p class="p1">.hdr-title{font-size:14px;font-weight:800}</p>
+<p class="p1">.hdr-title span{color:#999;font-weight:400;font-size:11px}</p>
+<p class="p1">.hdr-r{display:flex;align-items:center;gap:6px}</p>
+<p class="p1">.dot{width:7px;height:7px;border-radius:50%;background:#555;flex-shrink:0;transition:.3s}</p>
+<p class="p1">.dot.ok{background:var(--green)}.dot.busy{background:var(--amber);animation:pulse 1s infinite}.dot.err{background:var(--red)}</p>
+<p class="p1">@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}</p>
+<p class="p1">.slbl{font-size:9px;color:#888}</p>
+<p class="p1">.hbtn{padding:5px 9px;border-radius:6px;border:1px solid #333;background:transparent;color:#ccc;font-family:inherit;font-size:10px;font-weight:600;cursor:pointer}</p>
+<p class="p1">.hbtn:active{background:#333}</p>
+<p class="p2"><br></p>
+<p class="p1">/* WEEK NAV */</p>
+<p class="p1">.wnav{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;flex-shrink:0;background:var(--white);border-bottom:1px solid var(--border)}</p>
+<p class="p1">.wnav-lbl{font-size:11px;font-weight:700}</p>
+<p class="p1">.wnav-btn{padding:5px 12px;border-radius:6px;border:1.5px solid var(--border2);background:var(--bg);font-family:inherit;font-size:11px;font-weight:600;cursor:pointer}</p>
+<p class="p1">.wnav-btn:active{background:var(--border2)}</p>
+<p class="p2"><br></p>
+<p class="p1">/* STATS */</p>
+<p class="p1">.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 12px;flex-shrink:0}</p>
+<p class="p1">.sc{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:9px;box-shadow:var(--sh)}</p>
+<p class="p1">.sc-l{font-size:7px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:2px}</p>
+<p class="p1">.sc-v{font-size:18px;font-weight:800;line-height:1}</p>
+<p class="p1">.sc-s{font-size:8px;color:var(--muted);margin-top:1px}</p>
+<p class="p1">.sc-bar{margin-top:5px;height:2px;background:var(--border);border-radius:2px;overflow:hidden}</p>
+<p class="p1">.sc-f{height:100%;border-radius:2px;transition:width .5s}</p>
+<p class="p2"><br></p>
+<p class="p1">/* TABS */</p>
+<p class="p1">.tabs{display:flex;gap:2px;padding:0 12px 8px;overflow-x:auto;flex-shrink:0;scrollbar-width:none}</p>
+<p class="p1">.tabs::-webkit-scrollbar{display:none}</p>
+<p class="p1">.tab{padding:6px 13px;border-radius:6px;border:none;background:transparent;color:var(--muted);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0}</p>
+<p class="p1">.tab.on{background:var(--ink);color:#fff}</p>
+<p class="p2"><br></p>
+<p class="p1">/* CONTENT */</p>
+<p class="p1">.content{flex:1;overflow-y:auto;padding:0 12px 80px;-webkit-overflow-scrolling:touch}</p>
+<p class="p1">.view{display:none}.view.on{display:block;animation:fu .2s ease}</p>
+<p class="p1">@keyframes fu{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}</p>
+<p class="p2"><br></p>
+<p class="p1">/* LEGEND */</p>
+<p class="p1">.legend{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}</p>
+<p class="p1">.li{display:flex;align-items:center;gap:3px;padding:4px 9px;border-radius:20px;border:1.5px solid var(--border2);font-size:9px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.04em}</p>
+<p class="p1">.li.on.all{background:var(--ink);color:#fff;border-color:var(--ink)}</p>
+<p class="p1">.li.on.adit{background:var(--adit);color:#fff;border-color:var(--adit)}</p>
+<p class="p1">.li.on.najwa{background:var(--najwa);color:#fff;border-color:var(--najwa)}</p>
+<p class="p1">.li.on.dio{background:var(--dio);color:#fff;border-color:var(--dio)}</p>
+<p class="p1">.sw{width:5px;height:5px;border-radius:50%}</p>
+<p class="p2"><br></p>
+<p class="p1">/* CALENDAR */</p>
+<p class="p1">.cal-outer{overflow-x:auto;border-radius:10px;border:1.5px solid var(--border);box-shadow:var(--sh2)}</p>
+<p class="p1">.cal-grid{display:grid;grid-template-columns:80px repeat(7,minmax(110px,1fr));background:var(--border);gap:1px;min-width:850px}</p>
+<p class="p1">.ch{background:var(--ink);color:#fff;padding:8px 9px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}</p>
+<p class="p1">.ch.corner{background:#141418;font-size:7px;display:flex;align-items:flex-end;padding-bottom:9px}</p>
+<p class="p1">.ch .dn{font-size:16px;font-weight:800;display:block;line-height:1;margin-bottom:1px}</p>
+<p class="p1">.ch.td-h{background:var(--adit)}.ch.we-h{background:#2c2c30}</p>
+<p class="p1">.dlbl{background:var(--white);padding:8px 7px;display:flex;flex-direction:column;justify-content:center;border-left:3px solid transparent}</p>
+<p class="p1">.dlbl.adit{border-left-color:var(--adit)}.dlbl.najwa{border-left-color:var(--najwa)}.dlbl.dio{border-left-color:var(--dio)}</p>
+<p class="p1">.dav{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;margin-bottom:3px}</p>
+<p class="p1">.dav.adit{background:var(--adit-l);color:var(--adit)}.dav.najwa{background:var(--najwa-l);color:var(--najwa)}.dav.dio{background:var(--dio-l);color:var(--dio)}</p>
+<p class="p1">.dname{font-size:10px;font-weight:700}.drole{font-size:7px;text-transform:uppercase;color:var(--muted);margin-top:1px}</p>
+<p class="p1">.dcell{background:var(--white);padding:6px;min-height:90px;display:flex;flex-direction:column;gap:3px}</p>
+<p class="p1">.dcell.we{background:#f7f7f3}</p>
+<p class="p1">.tc{display:flex;align-items:flex-start;gap:3px;padding:4px 5px;border-radius:5px;border:1px solid transparent;cursor:pointer;user-select:none}</p>
+<p class="p1">.tc.adit{background:var(--adit-l);border-color:var(--adit-m)}.tc.najwa{background:var(--najwa-l);border-color:var(--najwa-m)}.tc.dio{background:var(--dio-l);border-color:var(--dio-m)}</p>
+<p class="p1">.tc.done{opacity:.4}.tc.done .tc-t{text-decoration:line-through}</p>
+<p class="p1">.chk{width:12px;height:12px;border-radius:3px;border:1.5px solid currentColor;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:800}</p>
+<p class="p1">.tc.adit .chk{color:var(--adit)}.tc.najwa .chk{color:var(--najwa)}.tc.dio .chk{color:var(--dio)}</p>
+<p class="p1">.tc.done.adit .chk{background:var(--adit);color:#fff;border-color:var(--adit)}</p>
+<p class="p1">.tc.done.najwa .chk{background:var(--najwa);color:#fff;border-color:var(--najwa)}</p>
+<p class="p1">.tc.done.dio .chk{background:var(--dio);color:#fff;border-color:var(--dio)}</p>
+<p class="p1">.tc-b{flex:1;min-width:0}</p>
+<p class="p1">.tc-t{font-size:9px;font-weight:500;line-height:1.3;color:var(--ink)}</p>
+<p class="p1">.tc-tags{display:flex;gap:2px;flex-wrap:wrap;margin-top:2px}</p>
+<p class="p1">.tt{font-size:6px;font-weight:700;text-transform:uppercase;padding:1px 3px;border-radius:3px}</p>
+<p class="p1">.tt.shopee{background:#ffe4cc;color:#b84400}.tt.tiktok{background:#d4fde4;color:#006830}</p>
+<p class="p1">.tt.ig{background:#ffd6eb;color:#9c0060}.tt.yt{background:#ffd6d6;color:#9c0000}</p>
+<p class="p1">.tt.x{background:#d6edff;color:#004da0}.tt.fb{background:#d6e0ff;color:#002da0}</p>
+<p class="p1">.tt.threads{background:#ecdaff;color:#4c00a0}.tt.produk{background:#fff0d6;color:#8c4a00}</p>
+<p class="p1">.tt.konten{background:#e8ffd6;color:#2a6a00}.tt.edit{background:#d6eeff;color:#004888}</p>
+<p class="p1">.tc-del{font-size:8px;color:var(--muted);padding:0 3px;cursor:pointer;margin-left:auto;flex-shrink:0;opacity:0}</p>
+<p class="p1">.tc:hover .tc-del{opacity:1}</p>
+<p class="p1">@media(hover:none){.tc-del{opacity:.5}}</p>
+<p class="p1">.add-btn{width:100%;padding:4px;border:1.5px dashed var(--border2);border-radius:5px;background:transparent;color:var(--muted);font-size:8px;cursor:pointer;font-family:inherit;margin-top:auto}</p>
+<p class="p2"><br></p>
+<p class="p1">/* PRODUCTS */</p>
+<p class="p1">.pt{background:var(--white);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:var(--sh);margin-bottom:14px}</p>
+<p class="p1">.pt-h{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid var(--border)}</p>
+<p class="p1">.pt-h h3{font-size:13px;font-weight:800}</p>
+<p class="p1">table{width:100%;border-collapse:collapse}</p>
+<p class="p1">th{background:var(--bg);padding:6px 9px;text-align:left;font-size:7px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}</p>
+<p class="p1">td{padding:7px 9px;border-bottom:1px solid var(--border);font-size:11px;vertical-align:middle}</p>
+<p class="p1">tr:last-child td{border-bottom:none}</p>
+<p class="p1">.sb{display:inline-flex;padding:2px 6px;border-radius:20px;font-size:8px;font-weight:700;text-transform:uppercase}</p>
+<p class="p1">.sb.riset{background:#fff3e0;color:#b05500}.sb.checkout{background:#e0f0ff;color:#005bb0}</p>
+<p class="p1">.sb.menunggu{background:#fff0eb;color:#c43000}.sb.datang{background:#edfff5;color:#006830}</p>
+<p class="p1">.sb.konten{background:var(--dio-l);color:var(--dio)}.sb.editing{background:var(--najwa-l);color:var(--najwa)}</p>
+<p class="p1">.sb.upload{background:#d4fde4;color:#005a20}.sb.live{background:#c8fcd8;color:#003d15}.sb.review{background:#ffe0e0;color:#a00000}</p>
+<p class="p1">.sdots{display:flex;gap:2px}</p>
+<p class="p1">.sd{width:5px;height:5px;border-radius:50%;background:var(--border)}.sd.done{background:var(--green)}.sd.act{background:var(--amber)}</p>
+<p class="p2"><br></p>
+<p class="p1">/* REPORT */</p>
+<p class="p1">.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}</p>
+<p class="p1">.rc{background:var(--white);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:var(--sh)}</p>
+<p class="p1">.rc-h{padding:10px 12px}</p>
+<p class="p1">.rc-h.adit{background:var(--adit)}.rc-h.najwa{background:var(--najwa)}.rc-h.dio{background:var(--dio)}</p>
+<p class="p1">.rn{font-size:13px;font-weight:800;color:#fff}.rr{font-size:7px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-top:1px}</p>
+<p class="p1">.rc-b{padding:10px 12px}</p>
+<p class="p1">.rs{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border);font-size:11px}</p>
+<p class="p1">.rs:last-child{border-bottom:none}.rv{font-weight:700}</p>
+<p class="p2"><br></p>
+<p class="p1">/* MODAL */</p>
+<p class="p1">.ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;align-items:flex-end;justify-content:center}</p>
+<p class="p1">.ovl.on{display:flex}</p>
+<p class="p1">.modal{background:var(--white);border-radius:16px 16px 0 0;padding:20px;width:100%;max-width:500px;box-shadow:var(--sh2);animation:slideUp .25s ease;max-height:88vh;overflow-y:auto}</p>
+<p class="p1">@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}</p>
+<p class="p1">.modal-h{font-size:15px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}</p>
+<p class="p1">.dpill{font-size:8px;padding:2px 6px;border-radius:4px;text-transform:uppercase;font-weight:700}</p>
+<p class="p1">.dpill.adit{background:var(--adit-l);color:var(--adit)}.dpill.najwa{background:var(--najwa-l);color:var(--najwa)}.dpill.dio{background:var(--dio-l);color:var(--dio)}</p>
+<p class="p1">.fg{margin-bottom:11px}</p>
+<p class="p1">.fl2{display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}</p>
+<p class="p1">.fi2,.fsel{width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--bg);outline:none}</p>
+<p class="p1">.fi2:focus,.fsel:focus{border-color:var(--ink);background:var(--white)}</p>
+<p class="p1">.tag-row{display:flex;gap:4px;flex-wrap:wrap}</p>
+<p class="p1">.to{padding:3px 7px;border-radius:4px;font-size:9px;font-weight:700;text-transform:uppercase;cursor:pointer;border:1.5px solid transparent}</p>
+<p class="p1">.to.sel{border-color:var(--ink)!important}</p>
+<p class="p1">.m-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}</p>
+<p class="p1">.btn{display:inline-flex;align-items:center;gap:4px;padding:7px 13px;border-radius:7px;border:1.5px solid var(--border2);background:var(--white);color:var(--ink);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}</p>
+<p class="p1">.btn.pri{background:var(--ink);color:#fff;border-color:var(--ink)}</p>
+<p class="p1">.btn.sm{padding:4px 8px;font-size:10px}</p>
+<p class="p1">.btn.danger{color:var(--red);border-color:var(--red)}</p>
+<p class="p2"><br></p>
+<p class="p1">/* GUIDE */</p>
+<p class="p1">.guide-card{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:16px;box-shadow:var(--sh);margin-bottom:12px}</p>
+<p class="p1">.guide-card h3{font-size:12px;font-weight:800;margin-bottom:8px}</p>
+<p class="p1">.gstep{display:flex;gap:7px;margin-bottom:6px;padding:8px 10px;background:var(--bg);border-radius:7px;align-items:flex-start}</p>
+<p class="p1">.gsn{background:var(--ink);color:#fff;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;flex-shrink:0}</p>
+<p class="p1">.gstep.blue .gsn{background:var(--najwa)}.gstep.green .gsn{background:var(--green)}</p>
+<p class="p1">.gstep p{font-size:11px;color:#333;line-height:1.5;margin:0}</p>
+<p class="p2"><br></p>
+<p class="p1">/* BANNER */</p>
+<p class="p1">.banner{display:none;position:fixed;top:58px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:7px 16px;border-radius:20px;font-size:11px;font-weight:600;z-index:1000;box-shadow:var(--sh2);white-space:nowrap;pointer-events:none}</p>
+<p class="p1">.banner.show{display:block}</p>
+<p class="p2"><br></p>
+<p class="p1">@media(max-width:540px){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.stats{grid-template-columns:repeat(2,1fr)}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.rg{grid-template-columns:1fr}</p>
+<p class="p1">}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- ══ SETUP ══ --&gt;</p>
+<p class="p1">&lt;div id="setup"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="setup-box"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="logo"&gt;Affiliate &lt;span&gt;Monitor&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sub"&gt;Pilih nama kamu untuk masuk dashboard&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sc2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h4&gt;👤 Kamu siapa?&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="who-grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="wb" id="wb-adit"<span class="Apple-converted-space">  </span>onclick="pickWho('adit')"&gt;👤 Adit&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="wb" id="wb-najwa" onclick="pickWho('najwa')"&gt;👤 Najwa&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="wb" id="wb-dio" <span class="Apple-converted-space">  </span>onclick="pickWho('dio')"&gt;👤 Dio&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="wb" id="wb-owner" onclick="pickWho('owner')"&gt;👑 Owner&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sc2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h4&gt;🔗 URL Apps Script &lt;span style="font-weight:400;color:var(--muted)"&gt;(opsional)&lt;/span&gt;&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="lbl"&gt;Kosongkan untuk mode demo offline&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input class="inp" id="url-inp" type="url" placeholder="https://script.google.com/macros/s/.../exec"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="start" id="start-btn" onclick="doStart()"&gt;Pilih nama dulu ↑&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="hint"&gt;Data disimpan lokal + Google Sheet (jika URL diisi)&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- ══ APP ══ --&gt;</p>
+<p class="p1">&lt;div id="app"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="hdr"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="hdr-title"&gt;Affiliate &lt;span id="hdr-sub"&gt;Monitor&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="hdr-r"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="slbl" id="slbl"&gt;—&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="dot" id="sdot"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="hbtn" onclick="forceSync()"&gt;↻&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="hbtn" onclick="doLogout()"&gt;Logout&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="hbtn" onclick="doReset()"&gt;⚙&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="wnav"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="wnav-btn" onclick="shiftWeek(-1)"&gt;‹ Lalu&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span class="wnav-lbl" id="wnav-lbl"&gt;Minggu Ini&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="wnav-btn" onclick="shiftWeek(1)"&gt;Depan ›&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="stats"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sc"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-l"&gt;✅ Selesai&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-v" id="s-done"&gt;0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-s" id="s-dones"&gt;dari 0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-bar"&gt;&lt;div class="sc-f" id="sf-done" style="background:var(--green);width:0%"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sc"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-l"&gt;🛍️ Produk&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-v" id="s-prod"&gt;0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-s"&gt;aktif&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-bar"&gt;&lt;div class="sc-f" id="sf-prod" style="background:var(--adit);width:0%"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sc"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-l"&gt;📲 Live&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-v" id="s-live"&gt;0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-s"&gt;konten&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-bar"&gt;&lt;div class="sc-f" id="sf-live" style="background:var(--najwa);width:0%"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sc"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-l"&gt;🔗 Sebar&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-v" id="s-share"&gt;0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-s"&gt;Dio done&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sc-bar"&gt;&lt;div class="sc-f" id="sf-share" style="background:var(--dio);width:0%"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="tabs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="tab on" id="tb-calendar" onclick="gv('calendar')"&gt;📅 Kalender&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="tab" id="tb-products"<span class="Apple-converted-space">  </span>onclick="gv('products')"&gt;🛍️ Produk&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="tab" id="tb-report"<span class="Apple-converted-space">    </span>onclick="gv('report')"&gt;📊 Laporan&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="tab" id="tb-install" <span class="Apple-converted-space">  </span>onclick="gv('install')"&gt;📱 Install&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="content"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- CALENDAR --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="view on" id="view-calendar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="legend"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="li all on" data-d="all" <span class="Apple-converted-space">  </span>onclick="fd('all')"&gt;&lt;div class="sw" style="background:var(--ink)"&gt;&lt;/div&gt;Semua&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="li adit"<span class="Apple-converted-space">  </span>data-d="adit"<span class="Apple-converted-space">  </span>onclick="fd('adit')"&gt;&lt;div class="sw" style="background:var(--adit)"&gt;&lt;/div&gt;Adit&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="li najwa" data-d="najwa" onclick="fd('najwa')"&gt;&lt;div class="sw" style="background:var(--najwa)"&gt;&lt;/div&gt;Najwa&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="li dio" <span class="Apple-converted-space">  </span>data-d="dio" <span class="Apple-converted-space">  </span>onclick="fd('dio')"&gt;&lt;div class="sw" style="background:var(--dio)"&gt;&lt;/div&gt;Dio&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="openTM()"&gt;+ Tugas&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="cal-outer"&gt;&lt;div id="cal-grid"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- PRODUCTS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="view" id="view-products"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pt"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pt-h"&gt;&lt;h3&gt;🛍️ Tracker Produk&lt;/h3&gt;&lt;button class="btn" onclick="openPM()"&gt;+ Produk&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="overflow-x:auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;#&lt;/th&gt;&lt;th&gt;Nama&lt;/th&gt;&lt;th&gt;PIC&lt;/th&gt;&lt;th&gt;Checkout&lt;/th&gt;&lt;th&gt;Datang&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;th&gt;Progress&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;tbody id="prod-body"&gt;&lt;/tbody&gt;&lt;/table&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- REPORT --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="view" id="view-report"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="rg" id="rep-cards"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pt"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pt-h"&gt;&lt;h3&gt;📊 Rekap Mingguan&lt;/h3&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="overflow-x:auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Divisi&lt;/th&gt;&lt;th&gt;Total&lt;/th&gt;&lt;th&gt;Selesai&lt;/th&gt;&lt;th&gt;Belum&lt;/th&gt;&lt;th&gt;Progress&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;tbody id="rep-rows"&gt;&lt;/tbody&gt;&lt;/table&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- INSTALL --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="view" id="view-install"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="guide-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;🍎 Add to Home Screen — iPhone&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="gstep"&gt;&lt;div class="gsn"&gt;1&lt;/div&gt;&lt;p&gt;Buka file di &lt;b&gt;Safari&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="gstep"&gt;&lt;div class="gsn"&gt;2&lt;/div&gt;&lt;p&gt;Tap ikon &lt;b&gt;Share ↑&lt;/b&gt; → pilih &lt;b&gt;"Add to Home Screen"&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="gstep"&gt;&lt;div class="gsn"&gt;3&lt;/div&gt;&lt;p&gt;Tap &lt;b&gt;Add&lt;/b&gt; ✅&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="guide-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;🤖 Add to Home Screen — Android&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="gstep blue"&gt;&lt;div class="gsn"&gt;1&lt;/div&gt;&lt;p&gt;Buka file di &lt;b&gt;Chrome&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="gstep blue"&gt;&lt;div class="gsn"&gt;2&lt;/div&gt;&lt;p&gt;Tap &lt;b&gt;⋮&lt;/b&gt; → &lt;b&gt;"Add to Home screen"&lt;/b&gt; atau &lt;b&gt;"Install app"&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="gstep blue"&gt;&lt;div class="gsn"&gt;3&lt;/div&gt;&lt;p&gt;Konfirmasi → ikon muncul ✅&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="guide-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;📲 Bagikan ke Tim&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="gstep green"&gt;&lt;div class="gsn"&gt;1&lt;/div&gt;&lt;p&gt;Kirim file &lt;b&gt;affiliate-monitor.html&lt;/b&gt; via WhatsApp / Telegram ke semua anggota&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="gstep green"&gt;&lt;div class="gsn"&gt;2&lt;/div&gt;&lt;p&gt;Masing-masing buka → pilih nama → isi URL Apps Script yang sama → masuk dashboard&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="gstep green"&gt;&lt;div class="gsn"&gt;3&lt;/div&gt;&lt;p&gt;Data tersinkron otomatis setiap 30 detik melalui Google Sheet&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- BANNER --&gt;</p>
+<p class="p1">&lt;div class="banner" id="banner"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- CONFIRM DIALOG --&gt;</p>
+<p class="p1">&lt;div id="confirm-ovl" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1100;align-items:center;justify-content:center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div style="background:#fff;border-radius:14px;padding:24px;width:280px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.2)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div style="font-size:28px;margin-bottom:8px"&gt;🗑️&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div style="font-size:14px;font-weight:700;margin-bottom:6px"&gt;Hapus tugas?&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div style="font-size:12px;color:var(--muted);margin-bottom:18px" id="confirm-text"&gt;Tugas ini akan dihapus permanen.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div style="display:flex;gap:10px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button onclick="confirmNo()" style="flex:1;padding:10px;border-radius:8px;border:1.5px solid var(--border2);background:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer"&gt;Batal&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button onclick="confirmYes()" style="flex:1;padding:10px;border-radius:8px;border:none;background:var(--red);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer"&gt;Hapus&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- TASK MODAL --&gt;</p>
+<p class="p1">&lt;div class="ovl" id="tm" onclick="bgClose(event,'tm')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="modal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="modal-h"&gt;Tambah Tugas &lt;div class="dpill" id="tm-pill"&gt;—&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="fg"&gt;&lt;label class="fl2"&gt;Divisi&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;select class="fsel" id="tm-div" onchange="upPill()"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="adit"&gt;Adit&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="najwa"&gt;Najwa&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="dio"&gt;Dio&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="fg"&gt;&lt;label class="fl2"&gt;Hari&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;select class="fsel" id="tm-day"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="0"&gt;Senin&lt;/option&gt;&lt;option value="1"&gt;Selasa&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="2"&gt;Rabu&lt;/option&gt;&lt;option value="3"&gt;Kamis&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="4"&gt;Jumat&lt;/option&gt;&lt;option value="5"&gt;Sabtu&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="6"&gt;Minggu&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="fg"&gt;&lt;label class="fl2"&gt;Tugas&lt;/label&gt;&lt;input class="fi2" id="tm-text" placeholder="Deskripsi tugas..."&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="fg"&gt;&lt;label class="fl2"&gt;Tag&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="tag-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="to shopee"<span class="Apple-converted-space">  </span>onclick="tg(this,'shopee')"&gt;Shopee&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="to tiktok"<span class="Apple-converted-space">  </span>onclick="tg(this,'tiktok')"&gt;TikTok&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="to ig"<span class="Apple-converted-space">      </span>onclick="tg(this,'ig')"&gt;IG&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="to yt"<span class="Apple-converted-space">      </span>onclick="tg(this,'yt')"&gt;YouTube&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="to x" <span class="Apple-converted-space">      </span>onclick="tg(this,'x')"&gt;X&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="to fb"<span class="Apple-converted-space">      </span>onclick="tg(this,'fb')"&gt;Facebook&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="to threads"<span class="Apple-converted-space">  </span>onclick="tg(this,'threads')"&gt;Threads&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="to produk"<span class="Apple-converted-space">  </span>onclick="tg(this,'produk')"&gt;Produk&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="to konten"<span class="Apple-converted-space">  </span>onclick="tg(this,'konten')"&gt;Konten&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="to edit"<span class="Apple-converted-space">    </span>onclick="tg(this,'edit')"&gt;Edit&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="m-btns"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn" onclick="cm('tm')"&gt;Batal&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn pri" onclick="saveTask()"&gt;Simpan&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- PRODUCT MODAL --&gt;</p>
+<p class="p1">&lt;div class="ovl" id="pm" onclick="bgClose(event,'pm')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="modal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="modal-h"&gt;Tambah Produk&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="fg"&gt;&lt;label class="fl2"&gt;Nama Produk&lt;/label&gt;&lt;input class="fi2" id="pm-name" placeholder="Nama produk..."&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="fg"&gt;&lt;label class="fl2"&gt;PIC&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;select class="fsel" id="pm-pic"&gt;&lt;option&gt;Adit&lt;/option&gt;&lt;option&gt;Najwa&lt;/option&gt;&lt;option&gt;Dio&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="fg"&gt;&lt;label class="fl2"&gt;Tgl Checkout&lt;/label&gt;&lt;input class="fi2" id="pm-co" type="date"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="fg"&gt;&lt;label class="fl2"&gt;Est. Datang&lt;/label&gt;&lt;input class="fi2" id="pm-arr" type="date"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="fg"&gt;&lt;label class="fl2"&gt;Status&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;select class="fsel" id="pm-st"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="riset"&gt;Riset&lt;/option&gt;&lt;option value="checkout"&gt;Check Out&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="menunggu"&gt;Menunggu Datang&lt;/option&gt;&lt;option value="datang"&gt;Produk Datang&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="konten"&gt;Buat Konten&lt;/option&gt;&lt;option value="editing"&gt;Editing&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="upload"&gt;Upload&lt;/option&gt;&lt;option value="live"&gt;Live&lt;/option&gt;&lt;option value="review"&gt;Review&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="m-btns"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn" onclick="cm('pm')"&gt;Batal&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn pri" onclick="saveProd()"&gt;Simpan&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// DATA</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">var DAYS=['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];</p>
+<p class="p1">var WKEND=[5,6];</p>
+<p class="p1">var DIVS=[</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:'adit', name:'Adit', role:'Produk &amp; Konten'},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:'najwa',name:'Najwa',role:'Edit &amp; Ops'},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:'dio',<span class="Apple-converted-space">  </span>name:'Dio',<span class="Apple-converted-space">  </span>role:'Media Sosial'}</p>
+<p class="p1">];</p>
+<p class="p1">var STAGES=['riset','checkout','menunggu','datang','konten','editing','upload','live','review'];</p>
+<p class="p1">var SL={riset:'Riset',checkout:'Checkout',menunggu:'Menunggu',datang:'Datang',konten:'Konten',editing:'Editing',upload:'Upload',live:'Live',review:'Review'};</p>
+<p class="p1">var DEF=[</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:1,div:'adit',day:0,text:'Riset produk trending minggu ini',tags:['produk'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:2,div:'adit',day:0,text:'Ajukan list produk ke Najwa untuk checkout',tags:['produk'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:3,div:'adit',day:1,text:'Buat konten produk batch 1',tags:['konten'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:4,div:'adit',day:1,text:'Shooting konten produk yang sudah datang',tags:['konten'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:5,div:'adit',day:2,text:'Buat konten produk batch 2',tags:['konten'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:6,div:'adit',day:3,text:'Riset produk untuk minggu depan',tags:['produk'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:7,div:'adit',day:4,text:'Review performance konten live',tags:['produk'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:8,div:'najwa',day:0,text:'Proses checkout produk dari list Adit',tags:['produk','shopee'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:9,div:'najwa',day:1,text:'Edit video konten batch 1',tags:['edit','tiktok'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:10,div:'najwa',day:2,text:'Edit video konten batch 2',tags:['edit'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:11,div:'najwa',day:2,text:'Upload ke TikTok Affiliate',tags:['tiktok'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:12,div:'najwa',day:3,text:'Upload ke Shopee Affiliate',tags:['shopee'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:13,div:'najwa',day:3,text:'Kirim link TikTok &amp; Shopee ke Dio',tags:['tiktok','shopee'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:14,div:'dio',day:0,text:'Review engagement minggu lalu',tags:['ig','x'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:15,div:'dio',day:2,text:'Siapkan caption &amp; visual penyebaran link',tags:['ig','threads'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:16,div:'dio',day:3,text:'Sebar link TikTok ke IG (story + reels)',tags:['ig'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:17,div:'dio',day:3,text:'Sebar link Shopee ke Threads &amp; Facebook',tags:['threads','fb'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:18,div:'dio',day:4,text:'Monitor engagement &amp; balas komentar',tags:['ig','x','threads'],done:false},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:19,div:'dio',day:4,text:'Laporan reach &amp; engagement ke owner',tags:['ig','fb'],done:false},</p>
+<p class="p1">];</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// STATE</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">var tasks=[], products=[], selTags=[], curFilt='all', curView='calendar';</p>
+<p class="p1">var apiUrl='', whoAmI='';</p>
+<p class="p1">var syncInt=null, banTmr=null, weekOffset=0;</p>
+<p class="p2"><br></p>
+<p class="p1">var TODAY=new Date();</p>
+<p class="p1">var todayIdx=(function(){var d=TODAY.getDay();return d===0?6:d-1;})();</p>
+<p class="p2"><br></p>
+<p class="p1">function getMon(offset){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var d=new Date(TODAY);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var day=d.getDay();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>d.setDate(d.getDate()-day+(day===0?-6:1)+(offset||0)*7);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return d;</p>
+<p class="p1">}</p>
+<p class="p1">var MON=getMon(0);</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// SETUP — pilih nama</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">function pickWho(w){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>whoAmI=w;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Reset semua tombol</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var btns=document.querySelectorAll('.wb');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(var i=0;i&lt;btns.length;i++){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>btns[i].className='wb';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Aktifkan yang dipilih</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var btn=document.getElementById('wb-'+w);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(btn) btn.className='wb sel-'+w;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Aktifkan tombol start</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var sb=document.getElementById('start-btn');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>sb.textContent='Masuk sebagai '+capitalize(w)+' →';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>sb.className='start ready';</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function capitalize(s){return s.charAt(0).toUpperCase()+s.slice(1);}</p>
+<p class="p2"><br></p>
+<p class="p1">function doStart(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!whoAmI){alert('Pilih nama dulu!');return;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>apiUrl=document.getElementById('url-inp').value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>save('aff_who',whoAmI);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>save('aff_api',apiUrl);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>launch();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// AUTO LOGIN</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">window.onload=function(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var w=load('aff_who');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var u=load('aff_api');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(w){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>whoAmI=w;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>apiUrl=u||'';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>launch();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('setup').style.display='flex';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// LAUNCH</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">function launch(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('setup').style.display='none';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('app').style.display='flex';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>var labels={adit:'Adit 👤',najwa:'Najwa 👤',dio:'Dio 👤',owner:'Owner 👑'};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('hdr-sub').textContent=labels[whoAmI]||whoAmI;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>var lt=load('aff_tasks');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var lp=load('aff_prods');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>tasks=lt?JSON.parse(lt):clone(DEF);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>products=lp?JSON.parse(lp):[];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>weekOffset=0;MON=getMon(0);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>updateWeekLabel();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>render();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(apiUrl){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fetchSheet();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>syncInt=setInterval(fetchSheet,30000);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setSyncState('','Demo offline');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function doLogout(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>clearInterval(syncInt);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>del('aff_who');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>whoAmI='';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Kembali ke setup, URL tetap tersimpan</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('app').style.display='none';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Reset tampilan setup</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var btns=document.querySelectorAll('.wb');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(var i=0;i&lt;btns.length;i++) btns[i].className='wb';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var sb=document.getElementById('start-btn');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>sb.textContent='Pilih nama dulu ↑';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>sb.className='start';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Pre-fill URL</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var u=load('aff_api');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(u) document.getElementById('url-inp').value=u;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('setup').style.display='flex';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>showBanner('👋 Logged out');</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function doReset(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!confirm('Reset semua konfigurasi?')) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>clearInterval(syncInt);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>del('aff_who');del('aff_api');del('aff_tasks');del('aff_prods');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>location.reload();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// STORAGE HELPERS</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">function save(k,v){try{localStorage.setItem(k,v);}catch(e){}}</p>
+<p class="p1">function load(k){try{return localStorage.getItem(k);}catch(e){return null;}}</p>
+<p class="p1">function del(k){try{localStorage.removeItem(k);}catch(e){}}</p>
+<p class="p1">function clone(o){return JSON.parse(JSON.stringify(o));}</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// SYNC</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">function setSyncState(s,lbl){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('sdot').className='dot'+(s?' '+s:'');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('slbl').textContent=lbl||'';</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function fetchSheet(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!apiUrl) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>setSyncState('busy','Syncing...');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var t=Date.now();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var p1=fetch(apiUrl+'?action=getTasks&amp;t='+t).then(function(r){return r.json();});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var p2=fetch(apiUrl+'?action=getProducts&amp;t='+t).then(function(r){return r.json();});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>Promise.all([p1,p2]).then(function(res){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var rawT=res[0], rawP=res[1];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(rawT&amp;&amp;rawT.length&gt;1){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>tasks=rawT.slice(1).map(function(r){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return{id:+r[0],div:r[1],day:+r[2],text:r[3],tags:r[4]?String(r[4]).split(',').filter(Boolean):[],done:r[5]==='TRUE'||r[5]===true||r[5]==='true'};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>save('aff_tasks',JSON.stringify(tasks));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(rawP&amp;&amp;rawP.length&gt;1){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>products=rawP.slice(1).map(function(r){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return{name:r[0],pic:r[1],checkout:r[2]||'',arrive:r[3]||'',status:r[4]||'riset'};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>save('aff_prods',JSON.stringify(products));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var t2=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setSyncState('ok',t2);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>render();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}).catch(function(e){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setSyncState('err','Gagal');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function pushSheet(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!apiUrl) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>setSyncState('busy','Menyimpan...');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var tR=[['id','div','day','text','tags','done']].concat(tasks.map(function(t){return[t.id,t.div,t.day,t.text,(t.tags||[]).join(','),t.done];}));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var pR=[['name','pic','checkout','arrive','status']].concat(products.map(function(p){return[p.name,p.pic,p.checkout||'',p.arrive||'',p.status];}));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var p1=fetch(apiUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'saveTasks',data:tR})});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var p2=fetch(apiUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'saveProducts',data:pR})});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>Promise.all([p1,p2]).then(function(){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var t=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setSyncState('ok',t);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}).catch(function(){setSyncState('err','Gagal simpan');});</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function forceSync(){if(apiUrl)fetchSheet();else showBanner('⚠️ Demo mode — isi URL dulu');}</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// RENDER</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">function render(){updateStats();buildCal();renderProducts();if(curView==='report')renderReport();}</p>
+<p class="p2"><br></p>
+<p class="p1">function updateStats(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var tot=tasks.length,dn=tasks.filter(function(t){return t.done;}).length;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var pct=tot?Math.round(dn/tot*100):0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('s-done').textContent=dn;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('s-dones').textContent='dari '+tot;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('sf-done').style.width=pct+'%';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var pl=products.length;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('s-prod').textContent=pl;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('sf-prod').style.width=Math.min(100,pl*12)+'%';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var live=products.filter(function(p){return p.status==='live'||p.status==='upload';}).length;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('s-live').textContent=live;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('sf-live').style.width=(pl?Math.round(live/pl*100):0)+'%';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var dA=tasks.filter(function(t){return t.div==='dio';}).length;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var dD=tasks.filter(function(t){return t.div==='dio'&amp;&amp;t.done;}).length;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('s-share').textContent=dD;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('sf-share').style.width=(dA?Math.round(dD/dA*100):0)+'%';</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// WEEK NAV</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">function shiftWeek(dir){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>weekOffset+=dir;MON=getMon(weekOffset);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>updateWeekLabel();buildCal();</p>
+<p class="p1">}</p>
+<p class="p1">function updateWeekLabel(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var sun=new Date(MON);sun.setDate(MON.getDate()+6);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var fmt=function(d){return d.toLocaleDateString('id-ID',{day:'numeric',month:'short'});};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var lbl=weekOffset===0?'Minggu Ini':weekOffset===1?'Minggu Depan':weekOffset===-1?'Minggu Lalu':fmt(MON)+' — '+fmt(sun);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('wnav-lbl').textContent=lbl;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// CALENDAR</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">function buildCal(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var divs=curFilt==='all'?DIVS:DIVS.filter(function(d){return d.id===curFilt;});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var h='&lt;div class="cal-grid"&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>h+='&lt;div class="ch corner"&gt;Divisi&lt;/div&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(var i=0;i&lt;7;i++){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var dt=new Date(MON);dt.setDate(MON.getDate()+i);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var isTd=(weekOffset===0&amp;&amp;i===todayIdx);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var isWE=WKEND.indexOf(i)&gt;=0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>h+='&lt;div class="ch'+(isTd?' td-h':isWE?' we-h':'')+'"&gt;&lt;span class="dn"&gt;'+dt.getDate()+'&lt;/span&gt;'+DAYS[i]+'&lt;/div&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(var di=0;di&lt;divs.length;di++){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var div=divs[di];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>h+='&lt;div class="dlbl '+div.id+'"&gt;&lt;div class="dav '+div.id+'"&gt;'+div.name[0]+'&lt;/div&gt;&lt;div class="dname"&gt;'+div.name+'&lt;/div&gt;&lt;div class="drole"&gt;'+div.role+'&lt;/div&gt;&lt;/div&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>for(var ci=0;ci&lt;7;ci++){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>var isWE2=WKEND.indexOf(ci)&gt;=0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>var dayTasks=tasks.filter(function(t){return t.div===div.id&amp;&amp;t.day===ci;});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>h+='&lt;div class="dcell'+(isWE2?' we':'')+'"&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for(var ti=0;ti&lt;dayTasks.length;ti++) h+=chip(dayTasks[ti]);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>h+='&lt;button class="add-btn" onclick="openTM(\''+div.id+'\','+ci+')"&gt;+ tugas&lt;/button&gt;&lt;/div&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>h+='&lt;/div&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('cal-grid').innerHTML=h;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function chip(t){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var tags=(t.tags||[]).map(function(g){return'&lt;span class="tt '+g+'"&gt;'+g+'&lt;/span&gt;';}).join('');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return'&lt;div class="tc '+t.div+(t.done?' done':'')+'" id="tc-'+t.id+'" onclick="tog('+t.id+')"&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>+'&lt;div class="chk"&gt;'+(t.done?'✓':'')+'&lt;/div&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>+'&lt;div class="tc-b"&gt;&lt;div class="tc-t"&gt;'+esc(t.text)+'&lt;/div&gt;&lt;div class="tc-tags"&gt;'+tags+'&lt;/div&gt;&lt;/div&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>+'&lt;div class="tc-del" onclick="event.stopPropagation();delT('+t.id+')"&gt;✕&lt;/div&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>+'&lt;/div&gt;';</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function esc(s){return s.replace(/&amp;/g,'&amp;amp;').replace(/&lt;/g,'&amp;lt;').replace(/&gt;/g,'&amp;gt;');}</p>
+<p class="p2"><br></p>
+<p class="p1">function tog(id){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var t=null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(var i=0;i&lt;tasks.length;i++){if(tasks[i].id===id){t=tasks[i];break;}}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!t)return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>t.done=!t.done;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>save('aff_tasks',JSON.stringify(tasks));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>updateStats();buildCal();if(curView==='report')renderReport();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>pushSheet();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>showBanner(t.done?'✅ Task selesai!':'↩️ Task dibuka kembali');</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">var pendingDelId=null;</p>
+<p class="p1">function delT(id){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>pendingDelId=id;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var t=tasks.filter(function(x){return x.id===id;})[0];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('confirm-text').textContent=t?'"'+t.text+'"':'Tugas ini akan dihapus permanen.';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var ovl=document.getElementById('confirm-ovl');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ovl.style.display='flex';</p>
+<p class="p1">}</p>
+<p class="p1">function confirmYes(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('confirm-ovl').style.display='none';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(pendingDelId===null)return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>tasks=tasks.filter(function(x){return x.id!==pendingDelId;});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>pendingDelId=null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>save('aff_tasks',JSON.stringify(tasks));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>updateStats();buildCal();pushSheet();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>showBanner('🗑️ Tugas dihapus');</p>
+<p class="p1">}</p>
+<p class="p1">function confirmNo(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('confirm-ovl').style.display='none';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>pendingDelId=null;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// PRODUCTS</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">function renderProducts(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var tb=document.getElementById('prod-body');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!products.length){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tb.innerHTML='&lt;tr&gt;&lt;td colspan="8" style="text-align:center;padding:22px;color:var(--muted)"&gt;Belum ada produk.&lt;/td&gt;&lt;/tr&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var html='';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(var i=0;i&lt;products.length;i++){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var p=products[i];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var si=STAGES.indexOf(p.status);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var dots='';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>for(var j=0;j&lt;STAGES.length;j++) dots+='&lt;div class="sd'+(j&lt;si?' done':j===si?' act':'')+'"&gt;&lt;/div&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var opts='';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>for(var j=0;j&lt;STAGES.length;j++) opts+='&lt;option value="'+STAGES[j]+'"'+(STAGES[j]===p.status?' selected':'')+'&gt;'+SL[STAGES[j]]+'&lt;/option&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>html+='&lt;tr&gt;&lt;td&gt;'+(i+1)+'&lt;/td&gt;&lt;td style="font-weight:700"&gt;'+esc(p.name)+'&lt;/td&gt;&lt;td&gt;'+p.pic+'&lt;/td&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;td&gt;'+(p.checkout||'—')+'&lt;/td&gt;&lt;td&gt;'+(p.arrive||'—')+'&lt;/td&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;td&gt;&lt;span class="sb '+p.status+'"&gt;'+(SL[p.status]||p.status)+'&lt;/span&gt;&lt;/td&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;td&gt;&lt;div class="sdots"&gt;'+dots+'&lt;/div&gt;&lt;/td&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;td style="white-space:nowrap"&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;select style="font-size:10px;padding:3px 5px;border:1px solid var(--border);border-radius:5px;background:var(--bg);font-family:inherit" onchange="updP('+i+',this.value)"&gt;'+opts+'&lt;/select&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+' &lt;button class="btn sm danger" onclick="delP('+i+')"&gt;✕&lt;/button&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;/td&gt;&lt;/tr&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>tb.innerHTML=html;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function updP(i,s){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>products[i].status=s;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>save('aff_prods',JSON.stringify(products));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderProducts();updateStats();pushSheet();showBanner('✅ Status diupdate');</p>
+<p class="p1">}</p>
+<p class="p1">function delP(i){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!confirm('Hapus produk?'))return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>products.splice(i,1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>save('aff_prods',JSON.stringify(products));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderProducts();updateStats();pushSheet();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// REPORT</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">function renderReport(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var cards='',rows='';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(var i=0;i&lt;DIVS.length;i++){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var d=DIVS[i];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var all=tasks.filter(function(t){return t.div===d.id;});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var dn=all.filter(function(t){return t.done;}).length;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var pct=all.length?Math.round(dn/all.length*100):0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cards+='&lt;div class="rc"&gt;&lt;div class="rc-h '+d.id+'"&gt;&lt;div class="rn"&gt;'+d.name+'&lt;/div&gt;&lt;div class="rr"&gt;'+d.role+'&lt;/div&gt;&lt;/div&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;div class="rc-b"&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;div class="rs"&gt;&lt;span&gt;Total&lt;/span&gt;&lt;span class="rv"&gt;'+all.length+'&lt;/span&gt;&lt;/div&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;div class="rs"&gt;&lt;span&gt;Selesai&lt;/span&gt;&lt;span class="rv" style="color:var(--green)"&gt;'+dn+'&lt;/span&gt;&lt;/div&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;div class="rs"&gt;&lt;span&gt;Belum&lt;/span&gt;&lt;span class="rv" style="color:var(--red)"&gt;'+(all.length-dn)+'&lt;/span&gt;&lt;/div&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;div class="rs"&gt;&lt;span&gt;%&lt;/span&gt;&lt;span class="rv"&gt;'+pct+'%&lt;/span&gt;&lt;/div&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;/div&gt;&lt;/div&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>rows+='&lt;tr&gt;&lt;td&gt;&lt;b style="color:var(--'+d.id+')"&gt;'+d.name+'&lt;/b&gt;&lt;/td&gt;&lt;td&gt;'+all.length+'&lt;/td&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;td style="color:var(--green);font-weight:700"&gt;'+dn+'&lt;/td&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;td style="color:var(--red)"&gt;'+(all.length-dn)+'&lt;/td&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;td&gt;&lt;div style="display:flex;align-items:center;gap:5px"&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;div style="flex:1;height:4px;background:var(--border);border-radius:4px;overflow:hidden"&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;div style="width:'+pct+'%;height:100%;background:var(--'+d.id+');border-radius:4px"&gt;&lt;/div&gt;&lt;/div&gt;'</p>
+<p class="p1"><span class="Apple-converted-space">      </span>+'&lt;b style="font-size:10px"&gt;'+pct+'%&lt;/b&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('rep-cards').innerHTML=cards;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('rep-rows').innerHTML=rows;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// MODALS</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">function bgClose(e,id){if(e.target===e.currentTarget)cm(id);}</p>
+<p class="p2"><br></p>
+<p class="p1">function openTM(div,day){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>div=div||'adit';day=day===undefined?0:+day;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('tm-div').value=div;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('tm-day').value=day;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('tm-text').value='';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>selTags=[];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var tags=document.querySelectorAll('.to');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(var i=0;i&lt;tags.length;i++) tags[i].classList.remove('sel');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>upPill();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('tm').classList.add('on');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>setTimeout(function(){document.getElementById('tm-text').focus();},300);</p>
+<p class="p1">}</p>
+<p class="p1">function upPill(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var d=document.getElementById('tm-div').value;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var p=document.getElementById('tm-pill');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>p.textContent={adit:'Adit',najwa:'Najwa',dio:'Dio'}[d]||d;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>p.className='dpill '+d;</p>
+<p class="p1">}</p>
+<p class="p1">function tg(el,tag){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>el.classList.toggle('sel');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var idx=selTags.indexOf(tag);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(idx&gt;=0) selTags.splice(idx,1); else selTags.push(tag);</p>
+<p class="p1">}</p>
+<p class="p1">function saveTask(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var txt=document.getElementById('tm-text').value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!txt) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var nid=1;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(var i=0;i&lt;tasks.length;i++) if(tasks[i].id&gt;=nid) nid=tasks[i].id+1;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>tasks.push({id:nid,div:document.getElementById('tm-div').value,day:+document.getElementById('tm-day').value,text:txt,tags:selTags.slice(),done:false});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>save('aff_tasks',JSON.stringify(tasks));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>cm('tm');updateStats();buildCal();pushSheet();showBanner('✅ Tugas ditambahkan!');</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function openPM(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('pm-name').value='';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('pm-co').value=TODAY.toISOString().split('T')[0];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('pm-arr').value='';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('pm-st').value='riset';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('pm').classList.add('on');</p>
+<p class="p1">}</p>
+<p class="p1">function saveProd(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var n=document.getElementById('pm-name').value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!n) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>products.push({name:n,pic:document.getElementById('pm-pic').value,checkout:document.getElementById('pm-co').value,arrive:document.getElementById('pm-arr').value,status:document.getElementById('pm-st').value});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>save('aff_prods',JSON.stringify(products));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>cm('pm');renderProducts();updateStats();pushSheet();showBanner('✅ Produk ditambahkan!');</p>
+<p class="p1">}</p>
+<p class="p1">function cm(id){document.getElementById(id).classList.remove('on');}</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// NAV</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">function gv(v){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>curView=v;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var views=document.querySelectorAll('.view');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(var i=0;i&lt;views.length;i++) views[i].classList.remove('on');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('view-'+v).classList.add('on');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var tabs=document.querySelectorAll('.tab');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(var i=0;i&lt;tabs.length;i++) tabs[i].classList.remove('on');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('tb-'+v).classList.add('on');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(v==='report') renderReport();</p>
+<p class="p1">}</p>
+<p class="p1">function fd(d){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>curFilt=d;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var lis=document.querySelectorAll('.li');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(var i=0;i&lt;lis.length;i++) lis[i].classList.toggle('on',lis[i].getAttribute('data-d')===d);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>buildCal();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">// BANNER</p>
+<p class="p1">// ═══════════════════════════════════════════════</p>
+<p class="p1">function showBanner(msg){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>var b=document.getElementById('banner');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>b.textContent=msg;b.classList.add('show');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(banTmr) clearTimeout(banTmr);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>banTmr=setTimeout(function(){b.classList.remove('show');},2500);</p>
+<p class="p1">}</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
