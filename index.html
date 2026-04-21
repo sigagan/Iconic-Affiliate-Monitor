@@ -346,7 +346,8 @@ tr:last-child td{border-bottom:none}
 // ═══ SUPABASE CONFIG ═══
 var SB_URL = 'https://knvmvdjgsdikoglhcaxr.supabase.co';
 var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtudm12ZGpnc2Rpa29nbGhjYXhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NTM4MTksImV4cCI6MjA5MjMyOTgxOX0.QHnaq09tGBcfb5UwyrQFTMTQbimxyRGriD-_mPxntB8';
-var SB_HDR = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' };
+var SB_GET = { 'apikey': SB_KEY };
+var SB_POST = { 'apikey': SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates,return=minimal' };
 var DAYS = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
 var WKEND = [5,6];
 var DIVS = [
@@ -504,7 +505,7 @@ function doFetch() {
   setSyncState('busy','Syncing...');
   fetch(SB_URL + '/rest/v1/appdata?select=key,value', {
     method: 'GET',
-    headers: SB_HDR
+    headers: SB_GET
   })
   .then(function(r) {
     if(!r.ok) throw new Error('HTTP ' + r.status);
@@ -518,7 +519,7 @@ function doFetch() {
       }
       if(rows[i].key === 'products') {
         var p = JSON.parse(rows[i].value);
-        if(p && p.length >= 0) { S.products = p; ls_set('aff_prods', rows[i].value); }
+        if(p !== null) { S.products = p; ls_set('aff_prods', rows[i].value); }
       }
     }
     var t = new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
@@ -534,7 +535,7 @@ function doFetch() {
 function sbUpsert(key, value) {
   return fetch(SB_URL + '/rest/v1/appdata', {
     method: 'POST',
-    headers: Object.assign({}, SB_HDR, { 'Prefer': 'resolution=merge-duplicates,return=minimal' }),
+    headers: SB_POST,
     body: JSON.stringify({ key: key, value: JSON.stringify(value) })
   });
 }
