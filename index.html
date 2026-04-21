@@ -213,13 +213,16 @@ tr:last-child td{border-bottom:none}
     </div>
 
     <div class="sc2">
-      <h4>🔗 URL Apps Script <span style="font-weight:400;color:var(--muted)">(opsional)</span></h4>
-      <label class="lbl">Kosongkan untuk mode demo offline</label>
-      <input class="inp" id="url-inp" type="url" placeholder="https://script.google.com/macros/s/.../exec">
+      <h4>🔗 JSONBin Setup <span style="font-weight:400;color:var(--muted)">(untuk sync)</span></h4>
+      <label class="lbl" style="margin-bottom:6px">Bin ID</label>
+      <input class="inp" id="bin-id" placeholder="65abc123def456" style="margin-bottom:8px">
+      <label class="lbl" style="margin-bottom:6px">API Key</label>
+      <input class="inp" id="bin-key" placeholder="$2b$10$..." type="password">
+      <p style="font-size:10px;color:var(--muted);margin-top:8px;line-height:1.5">Buat akun gratis di <b>jsonbin.io</b> → New Bin → copy Bin ID & API Key. Kosongkan untuk mode demo.</p>
     </div>
 
     <button class="start" id="start-btn" onclick="doStart()">Pilih nama dulu ↑</button>
-    <p class="hint">Data disimpan lokal + Google Sheet (jika URL diisi)</p>
+    <p class="hint">Sync realtime via JSONBin.io — works di semua browser & HP</p>
   </div>
 </div>
 
@@ -461,7 +464,7 @@ var DEF=[
 // STATE
 // ═══════════════════════════════════════════════
 var tasks=[], products=[], selTags=[], curFilt='all', curView='calendar';
-var apiUrl='', whoAmI='';
+var apiUrl='', apiKey='', whoAmI='';
 var syncInt=null, banTmr=null, weekOffset=0;
 
 var TODAY=new Date();
@@ -509,10 +512,12 @@ function doStart(){
 // ═══════════════════════════════════════════════
 window.onload=function(){
   var w=load('aff_who');
-  var u=load('aff_api');
+  var binId=load('aff_bin');
+  var binKey=load('aff_key');
   if(w){
     whoAmI=w;
-    apiUrl=u||'';
+    apiUrl=binId||'';
+    apiKey=binKey||'';
     launch();
   } else {
     document.getElementById('setup').style.display='flex';
@@ -538,9 +543,9 @@ function launch(){
   updateWeekLabel();
   render();
 
-  if(apiUrl){
+  if(apiUrl && apiKey){
     fetchSheet();
-    syncInt=setInterval(fetchSheet,30000);
+    syncInt=setInterval(fetchSheet,10000);
   } else {
     setSyncState('','Demo offline');
   }
@@ -550,17 +555,16 @@ function doLogout(){
   clearInterval(syncInt);
   del('aff_who');
   whoAmI='';
-  // Kembali ke setup, URL tetap tersimpan
   document.getElementById('app').style.display='none';
-  // Reset tampilan setup
   var btns=document.querySelectorAll('.wb');
   for(var i=0;i<btns.length;i++) btns[i].className='wb';
   var sb=document.getElementById('start-btn');
   sb.textContent='Pilih nama dulu ↑';
   sb.className='start';
-  // Pre-fill URL
-  var u=load('aff_api');
-  if(u) document.getElementById('url-inp').value=u;
+  var binId=load('aff_bin');
+  var binKey=load('aff_key');
+  if(binId) document.getElementById('bin-id').value=binId;
+  if(binKey) document.getElementById('bin-key').value=binKey;
   document.getElementById('setup').style.display='flex';
   showBanner('👋 Logged out');
 }
@@ -568,7 +572,7 @@ function doLogout(){
 function doReset(){
   if(!confirm('Reset semua konfigurasi?')) return;
   clearInterval(syncInt);
-  del('aff_who');del('aff_api');del('aff_tasks');del('aff_prods');
+  del('aff_who');del('aff_bin');del('aff_key');del('aff_tasks');del('aff_prods');
   location.reload();
 }
 
@@ -589,40 +593,27 @@ function setSyncState(s,lbl){
 }
 
 function fetchSheet(){
-  if(!apiUrl){setSyncState('','Demo offline');return;}
+  if(!apiUrl||!apiKey){setSyncState('','Demo offline');return;}
   setSyncState('busy','Syncing...');
-  var ts=Date.now();
-  // Pakai no-cors tidak bisa baca response, pakai cors mode
-  fetch(apiUrl+'?action=getTasks&t='+ts,{
+  fetch('https://api.jsonbin.io/v3/b/'+apiUrl+'/latest',{
     method:'GET',
-    cache:'no-store',
-    headers:{'Cache-Control':'no-cache'}
+    headers:{
+      'X-Master-Key':apiKey,
+      'X-Bin-Meta':'false'
+    }
   })
-  .then(function(r){return r.json();})
-  .then(function(rawT){
-    if(rawT&&rawT.length>1){
-      tasks=rawT.slice(1).map(function(r){
-        return{
-          id:+r[0],div:String(r[1]),day:+r[2],text:String(r[3]),
-          tags:r[4]?String(r[4]).split(',').filter(Boolean):[],
-          done:r[5]==='TRUE'||r[5]===true||r[5]==='true'||r[5]==='1'
-        };
-      });
+  .then(function(r){
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    return r.json();
+  })
+  .then(function(data){
+    var rec=data.record||data;
+    if(rec.tasks&&rec.tasks.length>0){
+      tasks=rec.tasks;
       save('aff_tasks',JSON.stringify(tasks));
     }
-    // Fetch products setelah tasks berhasil
-    return fetch(apiUrl+'?action=getProducts&t='+(ts+1),{
-      method:'GET',
-      cache:'no-store',
-      headers:{'Cache-Control':'no-cache'}
-    });
-  })
-  .then(function(r){return r.json();})
-  .then(function(rawP){
-    if(rawP&&rawP.length>1){
-      products=rawP.slice(1).map(function(r){
-        return{name:String(r[0]),pic:String(r[1]),checkout:r[2]||'',arrive:r[3]||'',status:r[4]||'riset'};
-      });
+    if(rec.products&&rec.products.length>0){
+      products=rec.products;
       save('aff_prods',JSON.stringify(products));
     }
     var t=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
@@ -636,38 +627,36 @@ function fetchSheet(){
 }
 
 function pushSheet(){
-  if(!apiUrl) return;
+  if(!apiUrl||!apiKey) return;
   setSyncState('busy','Menyimpan...');
-  var tR=[['id','div','day','text','tags','done']].concat(
-    tasks.map(function(t){
-      return[t.id,t.div,t.day,t.text,(t.tags||[]).join(','),t.done?'TRUE':'FALSE'];
-    })
-  );
-  var pR=[['name','pic','checkout','arrive','status']].concat(
-    products.map(function(p){
-      return[p.name,p.pic,p.checkout||'',p.arrive||'',p.status];
-    })
-  );
-  var tUrl=apiUrl+'?action=saveTasks&t='+Date.now()+'&data='+encodeURIComponent(JSON.stringify(tR));
-  var pUrl=apiUrl+'?action=saveProducts&t='+Date.now()+'&data='+encodeURIComponent(JSON.stringify(pR));
-
-  fetch(tUrl,{method:'GET',cache:'no-store'})
-  .then(function(r){return r.json();})
-  .then(function(){
-    return fetch(pUrl,{method:'GET',cache:'no-store'});
+  var payload={tasks:tasks,products:products};
+  fetch('https://api.jsonbin.io/v3/b/'+apiUrl,{
+    method:'PUT',
+    headers:{
+      'Content-Type':'application/json',
+      'X-Master-Key':apiKey
+    },
+    body:JSON.stringify(payload)
   })
-  .then(function(r){return r.json();})
+  .then(function(r){
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    return r.json();
+  })
   .then(function(){
     var t=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
     setSyncState('ok',t);
-    showBanner('✅ Tersimpan & tersinkron!');
-    // Langsung fetch ulang untuk konfirmasi data tersimpan
+    showBanner('✅ Tersimpan!');
     setTimeout(fetchSheet,1500);
   })
   .catch(function(err){
     setSyncState('err','Gagal simpan');
     showBanner('❌ Gagal simpan: '+err.message);
   });
+}
+
+function forceSync(){
+  if(apiUrl&&apiKey) fetchSheet();
+  else showBanner('⚠️ Demo mode — isi Bin ID & API Key dulu');
 }
 
 function forceSync(){if(apiUrl)fetchSheet();else showBanner('⚠️ Demo mode — isi URL dulu');}
