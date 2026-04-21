@@ -21,50 +21,39 @@
   --sh:0 1px 8px rgba(0,0,0,.07);--sh2:0 4px 24px rgba(0,0,0,.11)
 }
 html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);font-size:13px}
-
-/* SETUP */
 #setup{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;background:var(--bg)}
 .setup-box{background:var(--white);border-radius:16px;padding:28px;width:100%;max-width:420px;box-shadow:var(--sh2)}
-.logo{font-size:22px;font-weight:800;margin-bottom:2px}
-.logo span{color:var(--adit)}
+.logo{font-size:22px;font-weight:800;margin-bottom:2px}.logo span{color:var(--adit)}
 .sub{font-size:12px;color:var(--muted);margin-bottom:22px}
 .sc2{background:var(--bg);border-radius:10px;padding:14px;margin-bottom:10px}
 .sc2 h4{font-size:12px;font-weight:700;margin-bottom:8px}
 .who-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.wb{padding:14px 8px;border-radius:10px;border:2px solid var(--border);background:var(--white);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:.15s;width:100%}
-.wb:hover{border-color:var(--border2);background:var(--bg)}
+.wb{padding:14px 8px;border-radius:10px;border:2px solid var(--border);background:var(--white);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;text-align:center;width:100%}
 .wb.sel-adit{background:var(--adit);color:#fff;border-color:var(--adit)}
 .wb.sel-najwa{background:var(--najwa);color:#fff;border-color:var(--najwa)}
 .wb.sel-dio{background:var(--dio);color:#fff;border-color:var(--dio)}
 .wb.sel-owner{background:var(--ink);color:#fff;border-color:var(--ink)}
 .lbl{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:5px}
-.inp{width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--white);outline:none}
+.inp{width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--white);outline:none;margin-bottom:8px}
 .inp:focus{border-color:var(--ink)}
-.start{width:100%;padding:14px;border-radius:10px;border:none;background:#ccc;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:not-allowed;margin-top:12px;transition:.2s}
+.start{width:100%;padding:14px;border-radius:10px;border:none;background:#ccc;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:not-allowed;margin-top:4px}
 .start.ready{background:var(--ink);cursor:pointer}
-.start.ready:active{opacity:.8}
-.hint{font-size:10px;color:var(--muted);text-align:center;margin-top:8px}
-
-/* APP */
+.hint{font-size:10px;color:var(--muted);text-align:center;margin-top:8px;line-height:1.5}
+.hint a{color:var(--najwa)}
 #app{display:none;height:100vh;flex-direction:column;overflow:hidden}
 .hdr{background:var(--ink);color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .hdr-title{font-size:14px;font-weight:800}
 .hdr-title span{color:#999;font-weight:400;font-size:11px}
 .hdr-r{display:flex;align-items:center;gap:6px}
-.dot{width:7px;height:7px;border-radius:50%;background:#555;flex-shrink:0;transition:.3s}
+.dot{width:7px;height:7px;border-radius:50%;background:#555;flex-shrink:0}
 .dot.ok{background:var(--green)}.dot.busy{background:var(--amber);animation:pulse 1s infinite}.dot.err{background:var(--red)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .slbl{font-size:9px;color:#888}
 .hbtn{padding:5px 9px;border-radius:6px;border:1px solid #333;background:transparent;color:#ccc;font-family:inherit;font-size:10px;font-weight:600;cursor:pointer}
 .hbtn:active{background:#333}
-
-/* WEEK NAV */
 .wnav{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;flex-shrink:0;background:var(--white);border-bottom:1px solid var(--border)}
 .wnav-lbl{font-size:11px;font-weight:700}
 .wnav-btn{padding:5px 12px;border-radius:6px;border:1.5px solid var(--border2);background:var(--bg);font-family:inherit;font-size:11px;font-weight:600;cursor:pointer}
-.wnav-btn:active{background:var(--border2)}
-
-/* STATS */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 12px;flex-shrink:0}
 .sc{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:9px;box-shadow:var(--sh)}
 .sc-l{font-size:7px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:2px}
@@ -72,28 +61,19 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .sc-s{font-size:8px;color:var(--muted);margin-top:1px}
 .sc-bar{margin-top:5px;height:2px;background:var(--border);border-radius:2px;overflow:hidden}
 .sc-f{height:100%;border-radius:2px;transition:width .5s}
-
-/* TABS */
 .tabs{display:flex;gap:2px;padding:0 12px 8px;overflow-x:auto;flex-shrink:0;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tab{padding:6px 13px;border-radius:6px;border:none;background:transparent;color:var(--muted);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0}
 .tab.on{background:var(--ink);color:#fff}
-
-/* CONTENT */
 .content{flex:1;overflow-y:auto;padding:0 12px 80px;-webkit-overflow-scrolling:touch}
-.view{display:none}.view.on{display:block;animation:fu .2s ease}
-@keyframes fu{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-
-/* LEGEND */
+.view{display:none}.view.on{display:block}
 .legend{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
-.li{display:flex;align-items:center;gap:3px;padding:4px 9px;border-radius:20px;border:1.5px solid var(--border2);font-size:9px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.04em}
+.li{display:flex;align-items:center;gap:3px;padding:4px 9px;border-radius:20px;border:1.5px solid var(--border2);font-size:9px;font-weight:700;cursor:pointer;text-transform:uppercase}
 .li.on.all{background:var(--ink);color:#fff;border-color:var(--ink)}
 .li.on.adit{background:var(--adit);color:#fff;border-color:var(--adit)}
 .li.on.najwa{background:var(--najwa);color:#fff;border-color:var(--najwa)}
 .li.on.dio{background:var(--dio);color:#fff;border-color:var(--dio)}
 .sw{width:5px;height:5px;border-radius:50%}
-
-/* CALENDAR */
 .cal-outer{overflow-x:auto;border-radius:10px;border:1.5px solid var(--border);box-shadow:var(--sh2)}
 .cal-grid{display:grid;grid-template-columns:80px repeat(7,minmax(110px,1fr));background:var(--border);gap:1px;min-width:850px}
 .ch{background:var(--ink);color:#fff;padding:8px 9px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
@@ -124,12 +104,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .tt.x{background:#d6edff;color:#004da0}.tt.fb{background:#d6e0ff;color:#002da0}
 .tt.threads{background:#ecdaff;color:#4c00a0}.tt.produk{background:#fff0d6;color:#8c4a00}
 .tt.konten{background:#e8ffd6;color:#2a6a00}.tt.edit{background:#d6eeff;color:#004888}
-.tc-del{font-size:8px;color:var(--muted);padding:0 3px;cursor:pointer;margin-left:auto;flex-shrink:0;opacity:0}
-.tc:hover .tc-del{opacity:1}
-@media(hover:none){.tc-del{opacity:.5}}
+.tc-del{font-size:9px;color:var(--muted);padding:0 3px;cursor:pointer;margin-left:auto;flex-shrink:0}
+@media(hover:hover){.tc-del{opacity:0}.tc:hover .tc-del{opacity:1}}
 .add-btn{width:100%;padding:4px;border:1.5px dashed var(--border2);border-radius:5px;background:transparent;color:var(--muted);font-size:8px;cursor:pointer;font-family:inherit;margin-top:auto}
-
-/* PRODUCTS */
 .pt{background:var(--white);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:var(--sh);margin-bottom:14px}
 .pt-h{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid var(--border)}
 .pt-h h3{font-size:13px;font-weight:800}
@@ -144,8 +121,6 @@ tr:last-child td{border-bottom:none}
 .sb.upload{background:#d4fde4;color:#005a20}.sb.live{background:#c8fcd8;color:#003d15}.sb.review{background:#ffe0e0;color:#a00000}
 .sdots{display:flex;gap:2px}
 .sd{width:5px;height:5px;border-radius:50%;background:var(--border)}.sd.done{background:var(--green)}.sd.act{background:var(--amber)}
-
-/* REPORT */
 .rg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
 .rc{background:var(--white);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:var(--sh)}
 .rc-h{padding:10px 12px}
@@ -154,8 +129,6 @@ tr:last-child td{border-bottom:none}
 .rc-b{padding:10px 12px}
 .rs{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border);font-size:11px}
 .rs:last-child{border-bottom:none}.rv{font-weight:700}
-
-/* MODAL */
 .ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;align-items:flex-end;justify-content:center}
 .ovl.on{display:flex}
 .modal{background:var(--white);border-radius:16px 16px 0 0;padding:20px;width:100%;max-width:500px;box-shadow:var(--sh2);animation:slideUp .25s ease;max-height:88vh;overflow-y:auto}
@@ -175,113 +148,80 @@ tr:last-child td{border-bottom:none}
 .btn.pri{background:var(--ink);color:#fff;border-color:var(--ink)}
 .btn.sm{padding:4px 8px;font-size:10px}
 .btn.danger{color:var(--red);border-color:var(--red)}
-
-/* GUIDE */
 .guide-card{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:16px;box-shadow:var(--sh);margin-bottom:12px}
 .guide-card h3{font-size:12px;font-weight:800;margin-bottom:8px}
 .gstep{display:flex;gap:7px;margin-bottom:6px;padding:8px 10px;background:var(--bg);border-radius:7px;align-items:flex-start}
 .gsn{background:var(--ink);color:#fff;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;flex-shrink:0}
 .gstep.blue .gsn{background:var(--najwa)}.gstep.green .gsn{background:var(--green)}
 .gstep p{font-size:11px;color:#333;line-height:1.5;margin:0}
-
-/* BANNER */
 .banner{display:none;position:fixed;top:58px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:7px 16px;border-radius:20px;font-size:11px;font-weight:600;z-index:1000;box-shadow:var(--sh2);white-space:nowrap;pointer-events:none}
 .banner.show{display:block}
-
-@media(max-width:540px){
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .rg{grid-template-columns:1fr}
-}
+#cdialog{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1100;align-items:center;justify-content:center}
+#cdialog.on{display:flex}
+.cdbox{background:#fff;border-radius:14px;padding:24px;width:280px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+@media(max-width:540px){.stats{grid-template-columns:repeat(2,1fr)}.rg{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- ══ SETUP ══ -->
 <div id="setup">
-  <div class="setup-box">
-    <div class="logo">Affiliate <span>Monitor</span></div>
-    <div class="sub">Pilih nama kamu untuk masuk dashboard</div>
-
-    <div class="sc2">
-      <h4>👤 Kamu siapa?</h4>
-      <div class="who-grid">
-        <button class="wb" id="wb-adit"  onclick="pickWho('adit')">👤 Adit</button>
-        <button class="wb" id="wb-najwa" onclick="pickWho('najwa')">👤 Najwa</button>
-        <button class="wb" id="wb-dio"   onclick="pickWho('dio')">👤 Dio</button>
-        <button class="wb" id="wb-owner" onclick="pickWho('owner')">👑 Owner</button>
-      </div>
+<div class="setup-box">
+  <div class="logo">Affiliate <span>Monitor</span></div>
+  <div class="sub">Dashboard tim affiliate — sync realtime</div>
+  <div class="sc2">
+    <h4>👤 Kamu siapa?</h4>
+    <div class="who-grid">
+      <button class="wb" id="wb-adit"  onclick="pickWho('adit')">👤 Adit</button>
+      <button class="wb" id="wb-najwa" onclick="pickWho('najwa')">👤 Najwa</button>
+      <button class="wb" id="wb-dio"   onclick="pickWho('dio')">👤 Dio</button>
+      <button class="wb" id="wb-owner" onclick="pickWho('owner')">👑 Owner</button>
     </div>
-
-    <div class="sc2">
-      <h4>🔗 JSONBin Setup <span style="font-weight:400;color:var(--muted)">(untuk sync)</span></h4>
-      <label class="lbl" style="margin-bottom:6px">Bin ID</label>
-      <input class="inp" id="bin-id" placeholder="65abc123def456" style="margin-bottom:8px">
-      <label class="lbl" style="margin-bottom:6px">API Key</label>
-      <input class="inp" id="bin-key" placeholder="$2b$10$..." type="password">
-      <p style="font-size:10px;color:var(--muted);margin-top:8px;line-height:1.5">Buat akun gratis di <b>jsonbin.io</b> → New Bin → copy Bin ID & API Key. Kosongkan untuk mode demo.</p>
-    </div>
-
-    <button class="start" id="start-btn" onclick="doStart()">Pilih nama dulu ↑</button>
-    <p class="hint">Sync realtime via JSONBin.io — works di semua browser & HP</p>
   </div>
+  <div class="sc2">
+    <h4>🔗 JSONBin.io <span style="font-weight:400;color:var(--muted)">(untuk sync tim)</span></h4>
+    <label class="lbl">Bin ID</label>
+    <input class="inp" id="inp-binid" placeholder="65abc123def456...">
+    <label class="lbl">Access Key</label>
+    <input class="inp" id="inp-binkey" type="password" placeholder="$2b$10$...">
+    <p style="font-size:10px;color:var(--muted);line-height:1.5;margin-top:4px">
+      Buat di <b>jsonbin.io</b> → New Bin → isi <code>{"tasks":[],"products":[]}</code> → copy Bin ID.<br>
+      API Keys → buat key → centang Read + Update → copy key.
+    </p>
+  </div>
+  <button class="start" id="start-btn" onclick="doStart()">Pilih nama dulu ↑</button>
+  <p class="hint">Kosongkan Bin ID untuk mode demo offline</p>
+</div>
 </div>
 
-<!-- ══ APP ══ -->
 <div id="app">
   <div class="hdr">
     <div class="hdr-title">Affiliate <span id="hdr-sub">Monitor</span></div>
     <div class="hdr-r">
       <span class="slbl" id="slbl">—</span>
       <div class="dot" id="sdot"></div>
-      <button class="hbtn" onclick="forceSync()">↻</button>
+      <button class="hbtn" onclick="doSync()">↻</button>
       <button class="hbtn" onclick="doLogout()">Logout</button>
       <button class="hbtn" onclick="doReset()">⚙</button>
     </div>
   </div>
-
   <div class="wnav">
     <button class="wnav-btn" onclick="shiftWeek(-1)">‹ Lalu</button>
     <span class="wnav-lbl" id="wnav-lbl">Minggu Ini</span>
     <button class="wnav-btn" onclick="shiftWeek(1)">Depan ›</button>
   </div>
-
   <div class="stats">
-    <div class="sc">
-      <div class="sc-l">✅ Selesai</div>
-      <div class="sc-v" id="s-done">0</div>
-      <div class="sc-s" id="s-dones">dari 0</div>
-      <div class="sc-bar"><div class="sc-f" id="sf-done" style="background:var(--green);width:0%"></div></div>
-    </div>
-    <div class="sc">
-      <div class="sc-l">🛍️ Produk</div>
-      <div class="sc-v" id="s-prod">0</div>
-      <div class="sc-s">aktif</div>
-      <div class="sc-bar"><div class="sc-f" id="sf-prod" style="background:var(--adit);width:0%"></div></div>
-    </div>
-    <div class="sc">
-      <div class="sc-l">📲 Live</div>
-      <div class="sc-v" id="s-live">0</div>
-      <div class="sc-s">konten</div>
-      <div class="sc-bar"><div class="sc-f" id="sf-live" style="background:var(--najwa);width:0%"></div></div>
-    </div>
-    <div class="sc">
-      <div class="sc-l">🔗 Sebar</div>
-      <div class="sc-v" id="s-share">0</div>
-      <div class="sc-s">Dio done</div>
-      <div class="sc-bar"><div class="sc-f" id="sf-share" style="background:var(--dio);width:0%"></div></div>
-    </div>
+    <div class="sc"><div class="sc-l">✅ Selesai</div><div class="sc-v" id="s-done">0</div><div class="sc-s" id="s-dones">dari 0</div><div class="sc-bar"><div class="sc-f" id="sf-done" style="background:var(--green);width:0%"></div></div></div>
+    <div class="sc"><div class="sc-l">🛍️ Produk</div><div class="sc-v" id="s-prod">0</div><div class="sc-s">aktif</div><div class="sc-bar"><div class="sc-f" id="sf-prod" style="background:var(--adit);width:0%"></div></div></div>
+    <div class="sc"><div class="sc-l">📲 Live</div><div class="sc-v" id="s-live">0</div><div class="sc-s">konten</div><div class="sc-bar"><div class="sc-f" id="sf-live" style="background:var(--najwa);width:0%"></div></div></div>
+    <div class="sc"><div class="sc-l">🔗 Sebar</div><div class="sc-v" id="s-share">0</div><div class="sc-s">Dio done</div><div class="sc-bar"><div class="sc-f" id="sf-share" style="background:var(--dio);width:0%"></div></div></div>
   </div>
-
   <div class="tabs">
     <button class="tab on" id="tb-calendar" onclick="gv('calendar')">📅 Kalender</button>
     <button class="tab" id="tb-products"  onclick="gv('products')">🛍️ Produk</button>
     <button class="tab" id="tb-report"    onclick="gv('report')">📊 Laporan</button>
     <button class="tab" id="tb-install"   onclick="gv('install')">📱 Install</button>
   </div>
-
   <div class="content">
-
-    <!-- CALENDAR -->
     <div class="view on" id="view-calendar">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
         <div class="legend">
@@ -294,113 +234,95 @@ tr:last-child td{border-bottom:none}
       </div>
       <div class="cal-outer"><div id="cal-grid"></div></div>
     </div>
-
-    <!-- PRODUCTS -->
     <div class="view" id="view-products">
       <div class="pt">
         <div class="pt-h"><h3>🛍️ Tracker Produk</h3><button class="btn" onclick="openPM()">+ Produk</button></div>
-        <div style="overflow-x:auto">
-          <table><thead><tr><th>#</th><th>Nama</th><th>PIC</th><th>Checkout</th><th>Datang</th><th>Status</th><th>Progress</th><th></th></tr></thead>
-          <tbody id="prod-body"></tbody></table>
-        </div>
+        <div style="overflow-x:auto"><table><thead><tr><th>#</th><th>Nama</th><th>PIC</th><th>Checkout</th><th>Datang</th><th>Status</th><th>Progress</th><th></th></tr></thead><tbody id="prod-body"></tbody></table></div>
       </div>
     </div>
-
-    <!-- REPORT -->
     <div class="view" id="view-report">
       <div class="rg" id="rep-cards"></div>
       <div class="pt">
         <div class="pt-h"><h3>📊 Rekap Mingguan</h3></div>
-        <div style="overflow-x:auto">
-          <table><thead><tr><th>Divisi</th><th>Total</th><th>Selesai</th><th>Belum</th><th>Progress</th></tr></thead>
-          <tbody id="rep-rows"></tbody></table>
-        </div>
+        <div style="overflow-x:auto"><table><thead><tr><th>Divisi</th><th>Total</th><th>Selesai</th><th>Belum</th><th>Progress</th></tr></thead><tbody id="rep-rows"></tbody></table></div>
       </div>
     </div>
-
-    <!-- INSTALL -->
     <div class="view" id="view-install">
       <div class="guide-card">
+        <h3>🔗 Setup JSONBin.io (sync tim)</h3>
+        <div class="gstep green"><div class="gsn">1</div><p>Buka <b>jsonbin.io</b> → daftar gratis</p></div>
+        <div class="gstep green"><div class="gsn">2</div><p>Klik <b>New Bin</b> → paste <code>{"tasks":[],"products":[]}</code> → Create</p></div>
+        <div class="gstep green"><div class="gsn">3</div><p>Copy <b>Bin ID</b> dari URL (angka setelah /b/)</p></div>
+        <div class="gstep green"><div class="gsn">4</div><p>Klik <b>API Keys</b> → Create Access Key → centang Read + Update → copy key</p></div>
+        <div class="gstep green"><div class="gsn">5</div><p>Bagikan Bin ID & Key yang sama ke semua tim → input saat setup</p></div>
+      </div>
+      <div class="guide-card">
         <h3>🍎 Add to Home Screen — iPhone</h3>
-        <div class="gstep"><div class="gsn">1</div><p>Buka file di <b>Safari</b></p></div>
+        <div class="gstep"><div class="gsn">1</div><p>Buka URL GitHub Pages di <b>Safari</b></p></div>
         <div class="gstep"><div class="gsn">2</div><p>Tap ikon <b>Share ↑</b> → pilih <b>"Add to Home Screen"</b></p></div>
         <div class="gstep"><div class="gsn">3</div><p>Tap <b>Add</b> ✅</p></div>
       </div>
       <div class="guide-card">
         <h3>🤖 Add to Home Screen — Android</h3>
-        <div class="gstep blue"><div class="gsn">1</div><p>Buka file di <b>Chrome</b></p></div>
-        <div class="gstep blue"><div class="gsn">2</div><p>Tap <b>⋮</b> → <b>"Add to Home screen"</b> atau <b>"Install app"</b></p></div>
-        <div class="gstep blue"><div class="gsn">3</div><p>Konfirmasi → ikon muncul ✅</p></div>
-      </div>
-      <div class="guide-card">
-        <h3>📲 Bagikan ke Tim</h3>
-        <div class="gstep green"><div class="gsn">1</div><p>Kirim file <b>affiliate-monitor.html</b> via WhatsApp / Telegram ke semua anggota</p></div>
-        <div class="gstep green"><div class="gsn">2</div><p>Masing-masing buka → pilih nama → isi URL Apps Script yang sama → masuk dashboard</p></div>
-        <div class="gstep green"><div class="gsn">3</div><p>Data tersinkron otomatis setiap 30 detik melalui Google Sheet</p></div>
+        <div class="gstep blue"><div class="gsn">1</div><p>Buka URL GitHub Pages di <b>Chrome</b></p></div>
+        <div class="gstep blue"><div class="gsn">2</div><p>Tap <b>⋮</b> → <b>"Add to Home screen"</b></p></div>
+        <div class="gstep blue"><div class="gsn">3</div><p>Konfirmasi ✅</p></div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- BANNER -->
-<div class="banner" id="banner"></div>
-
-<!-- CONFIRM DIALOG -->
-<div id="confirm-ovl" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1100;align-items:center;justify-content:center">
-  <div style="background:#fff;border-radius:14px;padding:24px;width:280px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.2)">
+<!-- Confirm dialog -->
+<div id="cdialog">
+  <div class="cdbox">
     <div style="font-size:28px;margin-bottom:8px">🗑️</div>
     <div style="font-size:14px;font-weight:700;margin-bottom:6px">Hapus tugas?</div>
-    <div style="font-size:12px;color:var(--muted);margin-bottom:18px" id="confirm-text">Tugas ini akan dihapus permanen.</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:18px" id="cdtext"></div>
     <div style="display:flex;gap:10px">
-      <button onclick="confirmNo()" style="flex:1;padding:10px;border-radius:8px;border:1.5px solid var(--border2);background:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer">Batal</button>
-      <button onclick="confirmYes()" style="flex:1;padding:10px;border-radius:8px;border:none;background:var(--red);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">Hapus</button>
+      <button onclick="cdNo()" style="flex:1;padding:10px;border-radius:8px;border:1.5px solid var(--border2);background:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer">Batal</button>
+      <button onclick="cdYes()" style="flex:1;padding:10px;border-radius:8px;border:none;background:var(--red);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">Hapus</button>
     </div>
   </div>
 </div>
 
-<!-- TASK MODAL -->
+<!-- Task Modal -->
 <div class="ovl" id="tm" onclick="bgClose(event,'tm')">
   <div class="modal">
     <div class="modal-h">Tambah Tugas <div class="dpill" id="tm-pill">—</div></div>
     <div class="fg"><label class="fl2">Divisi</label>
       <select class="fsel" id="tm-div" onchange="upPill()">
-        <option value="adit">Adit</option>
-        <option value="najwa">Najwa</option>
-        <option value="dio">Dio</option>
+        <option value="adit">Adit</option><option value="najwa">Najwa</option><option value="dio">Dio</option>
       </select>
     </div>
     <div class="fg"><label class="fl2">Hari</label>
       <select class="fsel" id="tm-day">
-        <option value="0">Senin</option><option value="1">Selasa</option>
-        <option value="2">Rabu</option><option value="3">Kamis</option>
-        <option value="4">Jumat</option><option value="5">Sabtu</option>
-        <option value="6">Minggu</option>
+        <option value="0">Senin</option><option value="1">Selasa</option><option value="2">Rabu</option>
+        <option value="3">Kamis</option><option value="4">Jumat</option><option value="5">Sabtu</option><option value="6">Minggu</option>
       </select>
     </div>
     <div class="fg"><label class="fl2">Tugas</label><input class="fi2" id="tm-text" placeholder="Deskripsi tugas..."></div>
     <div class="fg"><label class="fl2">Tag</label>
       <div class="tag-row">
-        <div class="to shopee"  onclick="tg(this,'shopee')">Shopee</div>
-        <div class="to tiktok"  onclick="tg(this,'tiktok')">TikTok</div>
-        <div class="to ig"      onclick="tg(this,'ig')">IG</div>
-        <div class="to yt"      onclick="tg(this,'yt')">YouTube</div>
-        <div class="to x"       onclick="tg(this,'x')">X</div>
-        <div class="to fb"      onclick="tg(this,'fb')">Facebook</div>
-        <div class="to threads"  onclick="tg(this,'threads')">Threads</div>
-        <div class="to produk"  onclick="tg(this,'produk')">Produk</div>
-        <div class="to konten"  onclick="tg(this,'konten')">Konten</div>
-        <div class="to edit"    onclick="tg(this,'edit')">Edit</div>
+        <div class="to shopee" onclick="tg(this,'shopee')">Shopee</div>
+        <div class="to tiktok" onclick="tg(this,'tiktok')">TikTok</div>
+        <div class="to ig"     onclick="tg(this,'ig')">IG</div>
+        <div class="to yt"     onclick="tg(this,'yt')">YouTube</div>
+        <div class="to x"      onclick="tg(this,'x')">X</div>
+        <div class="to fb"     onclick="tg(this,'fb')">Facebook</div>
+        <div class="to threads" onclick="tg(this,'threads')">Threads</div>
+        <div class="to produk" onclick="tg(this,'produk')">Produk</div>
+        <div class="to konten" onclick="tg(this,'konten')">Konten</div>
+        <div class="to edit"   onclick="tg(this,'edit')">Edit</div>
       </div>
     </div>
     <div class="m-btns">
-      <button class="btn" onclick="cm('tm')">Batal</button>
+      <button class="btn" onclick="closeModal('tm')">Batal</button>
       <button class="btn pri" onclick="saveTask()">Simpan</button>
     </div>
   </div>
 </div>
 
-<!-- PRODUCT MODAL -->
+<!-- Product Modal -->
 <div class="ovl" id="pm" onclick="bgClose(event,'pm')">
   <div class="modal">
     <div class="modal-h">Tambah Produk</div>
@@ -419,26 +341,26 @@ tr:last-child td{border-bottom:none}
       </select>
     </div>
     <div class="m-btns">
-      <button class="btn" onclick="cm('pm')">Batal</button>
+      <button class="btn" onclick="closeModal('pm')">Batal</button>
       <button class="btn pri" onclick="saveProd()">Simpan</button>
     </div>
   </div>
 </div>
 
+<div class="banner" id="banner"></div>
+
 <script>
-// ═══════════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════════
-var DAYS=['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
-var WKEND=[5,6];
-var DIVS=[
+// ═══ CONSTANTS ═══
+var DAYS = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+var WKEND = [5,6];
+var DIVS = [
   {id:'adit', name:'Adit', role:'Produk & Konten'},
   {id:'najwa',name:'Najwa',role:'Edit & Ops'},
   {id:'dio',  name:'Dio',  role:'Media Sosial'}
 ];
-var STAGES=['riset','checkout','menunggu','datang','konten','editing','upload','live','review'];
-var SL={riset:'Riset',checkout:'Checkout',menunggu:'Menunggu',datang:'Datang',konten:'Konten',editing:'Editing',upload:'Upload',live:'Live',review:'Review'};
-var DEF=[
+var STAGES = ['riset','checkout','menunggu','datang','konten','editing','upload','live','review'];
+var SL = {riset:'Riset',checkout:'Checkout',menunggu:'Menunggu',datang:'Datang',konten:'Konten',editing:'Editing',upload:'Upload',live:'Live',review:'Review'};
+var DEF_TASKS = [
   {id:1,div:'adit',day:0,text:'Riset produk trending minggu ini',tags:['produk'],done:false},
   {id:2,div:'adit',day:0,text:'Ajukan list produk ke Najwa untuk checkout',tags:['produk'],done:false},
   {id:3,div:'adit',day:1,text:'Buat konten produk batch 1',tags:['konten'],done:false},
@@ -457,378 +379,356 @@ var DEF=[
   {id:16,div:'dio',day:3,text:'Sebar link TikTok ke IG (story + reels)',tags:['ig'],done:false},
   {id:17,div:'dio',day:3,text:'Sebar link Shopee ke Threads & Facebook',tags:['threads','fb'],done:false},
   {id:18,div:'dio',day:4,text:'Monitor engagement & balas komentar',tags:['ig','x','threads'],done:false},
-  {id:19,div:'dio',day:4,text:'Laporan reach & engagement ke owner',tags:['ig','fb'],done:false},
+  {id:19,div:'dio',day:4,text:'Laporan reach & engagement ke owner',tags:['ig','fb'],done:false}
 ];
 
-// ═══════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════
-var tasks=[], products=[], selTags=[], curFilt='all', curView='calendar';
-var apiUrl='', binKey='', whoAmI='';
-var syncInt=null, banTmr=null, weekOffset=0;
+// ═══ STATE ═══
+var S = {
+  tasks: [],
+  products: [],
+  selTags: [],
+  filt: 'all',
+  view: 'calendar',
+  who: '',
+  binId: '',
+  binKey: '',
+  weekOff: 0,
+  pendingDel: -1,
+  syncTimer: null,
+  banTimer: null
+};
 
-var TODAY=new Date();
-var todayIdx=(function(){var d=TODAY.getDay();return d===0?6:d-1;})();
+// ═══ DATE ═══
+var TODAY = new Date();
+var todayIdx = (function(){ var d=TODAY.getDay(); return d===0?6:d-1; })();
 
-function getMon(offset){
-  var d=new Date(TODAY);
-  var day=d.getDay();
-  d.setDate(d.getDate()-day+(day===0?-6:1)+(offset||0)*7);
+function getMon(off) {
+  var d = new Date(TODAY);
+  var day = d.getDay();
+  d.setDate(d.getDate() - day + (day===0?-6:1) + (off||0)*7);
   return d;
 }
-var MON=getMon(0);
+var MON = getMon(0);
 
-// ═══════════════════════════════════════════════
-// SETUP — pilih nama
-// ═══════════════════════════════════════════════
-function pickWho(w){
-  whoAmI=w;
-  // Reset semua tombol
-  var btns=document.querySelectorAll('.wb');
-  for(var i=0;i<btns.length;i++){
-    btns[i].className='wb';
-  }
-  // Aktifkan yang dipilih
-  var btn=document.getElementById('wb-'+w);
-  if(btn) btn.className='wb sel-'+w;
-  // Aktifkan tombol start
-  var sb=document.getElementById('start-btn');
-  sb.textContent='Masuk sebagai '+capitalize(w)+' →';
-  sb.className='start ready';
+// ═══ STORAGE ═══
+function ls_set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+function ls_get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function ls_del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+
+// ═══ SETUP ═══
+function pickWho(w) {
+  S.who = w;
+  var btns = document.querySelectorAll('.wb');
+  for(var i=0;i<btns.length;i++) btns[i].className = 'wb';
+  var btn = document.getElementById('wb-'+w);
+  if(btn) btn.className = 'wb sel-'+w;
+  var sb = document.getElementById('start-btn');
+  sb.textContent = 'Masuk sebagai ' + w.charAt(0).toUpperCase()+w.slice(1) + ' →';
+  sb.className = 'start ready';
 }
 
-function capitalize(s){return s.charAt(0).toUpperCase()+s.slice(1);}
-
-function doStart(){
-  if(!whoAmI){alert('Pilih nama dulu!');return;}
-  apiUrl=document.getElementById('url-inp').value.trim();
-  save('aff_who',whoAmI);
-  save('aff_api',apiUrl);
+function doStart() {
+  if(!S.who) return;
+  S.binId  = document.getElementById('inp-binid').value.trim();
+  S.binKey = document.getElementById('inp-binkey').value.trim();
+  ls_set('aff_who', S.who);
+  ls_set('aff_bid', S.binId);
+  ls_set('aff_bkey', S.binKey);
   launch();
 }
 
-// ═══════════════════════════════════════════════
-// AUTO LOGIN
-// ═══════════════════════════════════════════════
-window.onload=function(){
-  var w=load('aff_who');
-  var bId=load('aff_bin');
-  var bKey=load('aff_key');
-  if(w){
-    whoAmI=w;
-    apiUrl=bId||'';
-    binKey=bKey||'';
+// ═══ AUTO LOGIN ═══
+window.onload = function() {
+  var w  = ls_get('aff_who');
+  var bi = ls_get('aff_bid');
+  var bk = ls_get('aff_bkey');
+  if(w) {
+    S.who    = w;
+    S.binId  = bi  || '';
+    S.binKey = bk  || '';
     launch();
   } else {
-    document.getElementById('setup').style.display='flex';
+    document.getElementById('setup').style.display = 'flex';
   }
 };
 
-// ═══════════════════════════════════════════════
-// LAUNCH
-// ═══════════════════════════════════════════════
-function launch(){
-  document.getElementById('setup').style.display='none';
-  document.getElementById('app').style.display='flex';
+// ═══ LAUNCH ═══
+function launch() {
+  document.getElementById('setup').style.display = 'none';
+  document.getElementById('app').style.display   = 'flex';
+  var lbl = {adit:'Adit 👤',najwa:'Najwa 👤',dio:'Dio 👤',owner:'Owner 👑'};
+  document.getElementById('hdr-sub').textContent = lbl[S.who] || S.who;
 
-  var labels={adit:'Adit 👤',najwa:'Najwa 👤',dio:'Dio 👤',owner:'Owner 👑'};
-  document.getElementById('hdr-sub').textContent=labels[whoAmI]||whoAmI;
+  var lt = ls_get('aff_tasks');
+  var lp = ls_get('aff_prods');
+  S.tasks    = lt ? JSON.parse(lt) : JSON.parse(JSON.stringify(DEF_TASKS));
+  S.products = lp ? JSON.parse(lp) : [];
 
-  var lt=load('aff_tasks');
-  var lp=load('aff_prods');
-  tasks=lt?JSON.parse(lt):clone(DEF);
-  products=lp?JSON.parse(lp):[];
-
-  weekOffset=0;MON=getMon(0);
+  S.weekOff = 0;
+  MON = getMon(0);
   updateWeekLabel();
   render();
 
-  if(apiUrl && binKey){
-    fetchSheet();
-    syncInt=setInterval(fetchSheet,10000);
+  if(S.binId && S.binKey) {
+    doFetch();
+    S.syncTimer = setInterval(doFetch, 10000);
   } else {
-    setSyncState('','Demo offline');
+    setSyncState('', 'Demo offline');
   }
 }
 
-function doLogout(){
-  clearInterval(syncInt);
-  del('aff_who');
-  whoAmI='';
-  document.getElementById('app').style.display='none';
-  var btns=document.querySelectorAll('.wb');
-  for(var i=0;i<btns.length;i++) btns[i].className='wb';
-  var sb=document.getElementById('start-btn');
-  sb.textContent='Pilih nama dulu ↑';
-  sb.className='start';
-  var bId=load('aff_bin');
-  var bKey=load('aff_key');
-  if(bId) document.getElementById('bin-id').value=bId;
-  if(bKey) document.getElementById('bin-key').value=bKey;
-  document.getElementById('setup').style.display='flex';
+function doLogout() {
+  clearInterval(S.syncTimer);
+  ls_del('aff_who');
+  S.who = '';
+  document.getElementById('app').style.display = 'none';
+  var btns = document.querySelectorAll('.wb');
+  for(var i=0;i<btns.length;i++) btns[i].className = 'wb';
+  var sb = document.getElementById('start-btn');
+  sb.textContent = 'Pilih nama dulu ↑';
+  sb.className = 'start';
+  var bi = ls_get('aff_bid');
+  var bk = ls_get('aff_bkey');
+  if(bi) document.getElementById('inp-binid').value  = bi;
+  if(bk) document.getElementById('inp-binkey').value = bk;
+  document.getElementById('setup').style.display = 'flex';
   showBanner('👋 Logged out');
 }
 
-function doReset(){
-  if(!confirm('Reset semua konfigurasi?')) return;
-  clearInterval(syncInt);
-  del('aff_who');del('aff_bin');del('aff_key');del('aff_tasks');del('aff_prods');
-  location.reload();
+function doReset() {
+  if(!window.confirm('Reset semua konfigurasi & data lokal?')) return;
+  clearInterval(S.syncTimer);
+  ls_del('aff_who'); ls_del('aff_bid'); ls_del('aff_bkey');
+  ls_del('aff_tasks'); ls_del('aff_prods');
+  window.location.reload();
 }
 
-// ═══════════════════════════════════════════════
-// STORAGE HELPERS
-// ═══════════════════════════════════════════════
-function save(k,v){try{localStorage.setItem(k,v);}catch(e){}}
-function load(k){try{return localStorage.getItem(k);}catch(e){return null;}}
-function del(k){try{localStorage.removeItem(k);}catch(e){}}
-function clone(o){return JSON.parse(JSON.stringify(o));}
-
-// ═══════════════════════════════════════════════
-// SYNC
-// ═══════════════════════════════════════════════
-function setSyncState(s,lbl){
-  document.getElementById('sdot').className='dot'+(s?' '+s:'');
-  document.getElementById('slbl').textContent=lbl||'';
+// ═══ SYNC ═══
+function setSyncState(cls, lbl) {
+  document.getElementById('sdot').className = 'dot' + (cls?' '+cls:'');
+  document.getElementById('slbl').textContent = lbl || '';
 }
 
-function fetchSheet(){
-  if(!apiUrl||!binKey){setSyncState('','Demo offline');return;}
+function doFetch() {
+  if(!S.binId || !S.binKey) { setSyncState('','Demo offline'); return; }
   setSyncState('busy','Syncing...');
-  fetch('https://api.jsonbin.io/v3/b/'+apiUrl+'/latest',{
-    method:'GET',
-    headers:{
-      'X-Master-Key':binKey,
-      'X-Bin-Meta':'false'
-    }
+  var url = 'https://api.jsonbin.io/v3/b/' + S.binId + '/latest';
+  fetch(url, {
+    method: 'GET',
+    headers: { 'X-Master-Key': S.binKey, 'X-Bin-Meta': 'false' }
   })
-  .then(function(r){
-    if(!r.ok) throw new Error('HTTP '+r.status);
+  .then(function(r) {
+    if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   })
-  .then(function(data){
-    var rec=data.record||data;
-    if(rec.tasks&&rec.tasks.length>0){
-      tasks=rec.tasks;
-      save('aff_tasks',JSON.stringify(tasks));
+  .then(function(data) {
+    var rec = data.record || data;
+    if(rec.tasks && rec.tasks.length > 0) {
+      S.tasks = rec.tasks;
+      ls_set('aff_tasks', JSON.stringify(S.tasks));
     }
-    if(rec.products&&rec.products.length>0){
-      products=rec.products;
-      save('aff_prods',JSON.stringify(products));
+    if(rec.products && rec.products.length > 0) {
+      S.products = rec.products;
+      ls_set('aff_prods', JSON.stringify(S.products));
     }
-    var t=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-    setSyncState('ok',t);
+    var t = new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+    setSyncState('ok', t);
     render();
   })
-  .catch(function(err){
-    setSyncState('err','Gagal');
-    showBanner('❌ Sync gagal: '+err.message);
+  .catch(function(err) {
+    setSyncState('err', 'Gagal');
+    showBanner('❌ Sync gagal: ' + err.message);
   });
 }
 
-function pushSheet(){
-  if(!apiUrl||!binKey) return;
+function doPush() {
+  if(!S.binId || !S.binKey) return;
   setSyncState('busy','Menyimpan...');
-  var payload={tasks:tasks,products:products};
-  fetch('https://api.jsonbin.io/v3/b/'+apiUrl,{
-    method:'PUT',
-    headers:{
-      'Content-Type':'application/json',
-      'X-Master-Key':binKey
-    },
-    body:JSON.stringify(payload)
+  var url = 'https://api.jsonbin.io/v3/b/' + S.binId;
+  fetch(url, {
+    method: 'PUT',
+    headers: { 'Content-Type':'application/json', 'X-Master-Key': S.binKey },
+    body: JSON.stringify({ tasks: S.tasks, products: S.products })
   })
-  .then(function(r){
-    if(!r.ok) throw new Error('HTTP '+r.status);
+  .then(function(r) {
+    if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   })
-  .then(function(){
-    var t=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-    setSyncState('ok',t);
+  .then(function() {
+    var t = new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+    setSyncState('ok', t);
     showBanner('✅ Tersimpan!');
-    setTimeout(fetchSheet,1500);
+    setTimeout(doFetch, 2000);
   })
-  .catch(function(err){
+  .catch(function(err) {
     setSyncState('err','Gagal simpan');
-    showBanner('❌ Gagal simpan: '+err.message);
+    showBanner('❌ Gagal simpan: ' + err.message);
   });
 }
 
-function forceSync(){
-  if(apiUrl&&binKey) fetchSheet();
-  else showBanner('⚠️ Demo mode — isi Bin ID & API Key dulu');
+function doSync() {
+  if(S.binId && S.binKey) doFetch();
+  else showBanner('⚠️ Demo mode — isi Bin ID & Key dulu');
 }
 
-function forceSync(){if(apiUrl)fetchSheet();else showBanner('⚠️ Demo mode — isi URL dulu');}
+// ═══ RENDER ═══
+function render() { updateStats(); buildCal(); renderProducts(); if(S.view==='report') renderReport(); }
 
-// ═══════════════════════════════════════════════
-// RENDER
-// ═══════════════════════════════════════════════
-function render(){updateStats();buildCal();renderProducts();if(curView==='report')renderReport();}
-
-function updateStats(){
-  var tot=tasks.length,dn=tasks.filter(function(t){return t.done;}).length;
-  var pct=tot?Math.round(dn/tot*100):0;
-  document.getElementById('s-done').textContent=dn;
-  document.getElementById('s-dones').textContent='dari '+tot;
-  document.getElementById('sf-done').style.width=pct+'%';
-  var pl=products.length;
-  document.getElementById('s-prod').textContent=pl;
-  document.getElementById('sf-prod').style.width=Math.min(100,pl*12)+'%';
-  var live=products.filter(function(p){return p.status==='live'||p.status==='upload';}).length;
-  document.getElementById('s-live').textContent=live;
-  document.getElementById('sf-live').style.width=(pl?Math.round(live/pl*100):0)+'%';
-  var dA=tasks.filter(function(t){return t.div==='dio';}).length;
-  var dD=tasks.filter(function(t){return t.div==='dio'&&t.done;}).length;
-  document.getElementById('s-share').textContent=dD;
-  document.getElementById('sf-share').style.width=(dA?Math.round(dD/dA*100):0)+'%';
-}
-
-// ═══════════════════════════════════════════════
-// WEEK NAV
-// ═══════════════════════════════════════════════
-function shiftWeek(dir){
-  weekOffset+=dir;MON=getMon(weekOffset);
-  updateWeekLabel();buildCal();
-}
-function updateWeekLabel(){
-  var sun=new Date(MON);sun.setDate(MON.getDate()+6);
-  var fmt=function(d){return d.toLocaleDateString('id-ID',{day:'numeric',month:'short'});};
-  var lbl=weekOffset===0?'Minggu Ini':weekOffset===1?'Minggu Depan':weekOffset===-1?'Minggu Lalu':fmt(MON)+' — '+fmt(sun);
-  document.getElementById('wnav-lbl').textContent=lbl;
-}
-
-// ═══════════════════════════════════════════════
-// CALENDAR
-// ═══════════════════════════════════════════════
-function buildCal(){
-  var divs=curFilt==='all'?DIVS:DIVS.filter(function(d){return d.id===curFilt;});
-  var h='<div class="cal-grid">';
-  h+='<div class="ch corner">Divisi</div>';
-  for(var i=0;i<7;i++){
-    var dt=new Date(MON);dt.setDate(MON.getDate()+i);
-    var isTd=(weekOffset===0&&i===todayIdx);
-    var isWE=WKEND.indexOf(i)>=0;
-    h+='<div class="ch'+(isTd?' td-h':isWE?' we-h':'')+'"><span class="dn">'+dt.getDate()+'</span>'+DAYS[i]+'</div>';
-  }
-  for(var di=0;di<divs.length;di++){
-    var div=divs[di];
-    h+='<div class="dlbl '+div.id+'"><div class="dav '+div.id+'">'+div.name[0]+'</div><div class="dname">'+div.name+'</div><div class="drole">'+div.role+'</div></div>';
-    for(var ci=0;ci<7;ci++){
-      var isWE2=WKEND.indexOf(ci)>=0;
-      var dayTasks=tasks.filter(function(t){return t.div===div.id&&t.day===ci;});
-      h+='<div class="dcell'+(isWE2?' we':'')+'">';
-      for(var ti=0;ti<dayTasks.length;ti++) h+=chip(dayTasks[ti]);
-      h+='<button class="add-btn" onclick="openTM(\''+div.id+'\','+ci+')">+ tugas</button></div>';
+function updateStats() {
+  var tot = S.tasks.length;
+  var dn  = 0;
+  for(var i=0;i<S.tasks.length;i++) if(S.tasks[i].done) dn++;
+  var pct = tot ? Math.round(dn/tot*100) : 0;
+  document.getElementById('s-done').textContent  = dn;
+  document.getElementById('s-dones').textContent = 'dari '+tot;
+  document.getElementById('sf-done').style.width = pct+'%';
+  var pl = S.products.length;
+  document.getElementById('s-prod').textContent  = pl;
+  document.getElementById('sf-prod').style.width = Math.min(100,pl*12)+'%';
+  var live = 0;
+  for(var i=0;i<S.products.length;i++) if(S.products[i].status==='live'||S.products[i].status==='upload') live++;
+  document.getElementById('s-live').textContent  = live;
+  document.getElementById('sf-live').style.width = (pl?Math.round(live/pl*100):0)+'%';
+  var dA=0, dD=0;
+  for(var i=0;i<S.tasks.length;i++){
+    if(S.tasks[i].div==='dio'){ dA++;
+      if(S.tasks[i].done) dD++;
     }
   }
-  h+='</div>';
-  document.getElementById('cal-grid').innerHTML=h;
+  document.getElementById('s-share').textContent  = dD;
+  document.getElementById('sf-share').style.width = (dA?Math.round(dD/dA*100):0)+'%';
 }
 
-function chip(t){
-  var tags=(t.tags||[]).map(function(g){return'<span class="tt '+g+'">'+g+'</span>';}).join('');
-  return'<div class="tc '+t.div+(t.done?' done':'')+'" id="tc-'+t.id+'" onclick="tog('+t.id+')">'
+// ═══ WEEK ═══
+function shiftWeek(dir) {
+  S.weekOff += dir;
+  MON = getMon(S.weekOff);
+  updateWeekLabel();
+  buildCal();
+}
+function updateWeekLabel() {
+  var sun = new Date(MON); sun.setDate(MON.getDate()+6);
+  var fmt = function(d){ return d.toLocaleDateString('id-ID',{day:'numeric',month:'short'}); };
+  var lbl = S.weekOff===0?'Minggu Ini':S.weekOff===1?'Minggu Depan':S.weekOff===-1?'Minggu Lalu':fmt(MON)+' — '+fmt(sun);
+  document.getElementById('wnav-lbl').textContent = lbl;
+}
+
+// ═══ CALENDAR ═══
+function buildCal() {
+  var divs = S.filt==='all' ? DIVS : DIVS.filter(function(d){ return d.id===S.filt; });
+  var h = '<div class="cal-grid">';
+  h += '<div class="ch corner">Divisi</div>';
+  for(var i=0;i<7;i++) {
+    var dt = new Date(MON); dt.setDate(MON.getDate()+i);
+    var isTd = (S.weekOff===0 && i===todayIdx);
+    var isWE = WKEND.indexOf(i) >= 0;
+    h += '<div class="ch'+(isTd?' td-h':isWE?' we-h':'')+'"><span class="dn">'+dt.getDate()+'</span>'+DAYS[i]+'</div>';
+  }
+  for(var di=0;di<divs.length;di++) {
+    var dv = divs[di];
+    h += '<div class="dlbl '+dv.id+'"><div class="dav '+dv.id+'">'+dv.name[0]+'</div><div class="dname">'+dv.name+'</div><div class="drole">'+dv.role+'</div></div>';
+    for(var ci=0;ci<7;ci++) {
+      var isWE2 = WKEND.indexOf(ci) >= 0;
+      h += '<div class="dcell'+(isWE2?' we':'')+'">';
+      for(var ti=0;ti<S.tasks.length;ti++) {
+        if(S.tasks[ti].div===dv.id && S.tasks[ti].day===ci) h += chip(S.tasks[ti]);
+      }
+      h += '<button class="add-btn" onclick="openTM(\''+dv.id+'\','+ci+')">+ tugas</button></div>';
+    }
+  }
+  h += '</div>';
+  document.getElementById('cal-grid').innerHTML = h;
+}
+
+function chip(t) {
+  var tags = '';
+  for(var i=0;i<(t.tags||[]).length;i++) tags += '<span class="tt '+t.tags[i]+'">'+t.tags[i]+'</span>';
+  return '<div class="tc '+t.div+(t.done?' done':'')+'" onclick="togTask('+t.id+')">'
     +'<div class="chk">'+(t.done?'✓':'')+'</div>'
     +'<div class="tc-b"><div class="tc-t">'+esc(t.text)+'</div><div class="tc-tags">'+tags+'</div></div>'
-    +'<div class="tc-del" onclick="event.stopPropagation();delT('+t.id+')">✕</div>'
+    +'<div class="tc-del" onclick="event.stopPropagation();askDel('+t.id+')">✕</div>'
     +'</div>';
 }
 
-function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-function tog(id){
-  var t=null;
-  for(var i=0;i<tasks.length;i++){if(tasks[i].id===id){t=tasks[i];break;}}
-  if(!t)return;
-  t.done=!t.done;
-  save('aff_tasks',JSON.stringify(tasks));
-  updateStats();buildCal();if(curView==='report')renderReport();
-  pushSheet();
-  showBanner(t.done?'✅ Task selesai!':'↩️ Task dibuka kembali');
+function togTask(id) {
+  for(var i=0;i<S.tasks.length;i++){
+    if(S.tasks[i].id===id){
+      S.tasks[i].done = !S.tasks[i].done;
+      break;
+    }
+  }
+  ls_set('aff_tasks', JSON.stringify(S.tasks));
+  updateStats(); buildCal(); if(S.view==='report') renderReport();
+  doPush();
+  showBanner(S.tasks[i]&&S.tasks[i].done ? '✅ Task selesai!' : '↩️ Task dibuka kembali');
 }
 
-var pendingDelId=null;
-function delT(id){
-  pendingDelId=id;
-  var t=tasks.filter(function(x){return x.id===id;})[0];
-  document.getElementById('confirm-text').textContent=t?'"'+t.text+'"':'Tugas ini akan dihapus permanen.';
-  var ovl=document.getElementById('confirm-ovl');
-  ovl.style.display='flex';
+// ═══ DELETE TASK ═══
+function askDel(id) {
+  S.pendingDel = id;
+  var t = null;
+  for(var i=0;i<S.tasks.length;i++) if(S.tasks[i].id===id){ t=S.tasks[i]; break; }
+  document.getElementById('cdtext').textContent = t ? '"'+t.text+'"' : 'Tugas ini akan dihapus.';
+  document.getElementById('cdialog').className = 'on';
 }
-function confirmYes(){
-  document.getElementById('confirm-ovl').style.display='none';
-  if(pendingDelId===null)return;
-  tasks=tasks.filter(function(x){return x.id!==pendingDelId;});
-  pendingDelId=null;
-  save('aff_tasks',JSON.stringify(tasks));
-  updateStats();buildCal();pushSheet();
+function cdYes() {
+  document.getElementById('cdialog').className = '';
+  if(S.pendingDel < 0) return;
+  var newTasks = [];
+  for(var i=0;i<S.tasks.length;i++) if(S.tasks[i].id !== S.pendingDel) newTasks.push(S.tasks[i]);
+  S.tasks = newTasks;
+  S.pendingDel = -1;
+  ls_set('aff_tasks', JSON.stringify(S.tasks));
+  updateStats(); buildCal(); doPush();
   showBanner('🗑️ Tugas dihapus');
 }
-function confirmNo(){
-  document.getElementById('confirm-ovl').style.display='none';
-  pendingDelId=null;
+function cdNo() {
+  document.getElementById('cdialog').className = '';
+  S.pendingDel = -1;
 }
 
-// ═══════════════════════════════════════════════
-// PRODUCTS
-// ═══════════════════════════════════════════════
-function renderProducts(){
-  var tb=document.getElementById('prod-body');
-  if(!products.length){
-    tb.innerHTML='<tr><td colspan="8" style="text-align:center;padding:22px;color:var(--muted)">Belum ada produk.</td></tr>';
-    return;
-  }
-  var html='';
-  for(var i=0;i<products.length;i++){
-    var p=products[i];
-    var si=STAGES.indexOf(p.status);
-    var dots='';
-    for(var j=0;j<STAGES.length;j++) dots+='<div class="sd'+(j<si?' done':j===si?' act':'')+'"></div>';
-    var opts='';
-    for(var j=0;j<STAGES.length;j++) opts+='<option value="'+STAGES[j]+'"'+(STAGES[j]===p.status?' selected':'')+'>'+SL[STAGES[j]]+'</option>';
-    html+='<tr><td>'+(i+1)+'</td><td style="font-weight:700">'+esc(p.name)+'</td><td>'+p.pic+'</td>'
+// ═══ PRODUCTS ═══
+function renderProducts() {
+  var tb = document.getElementById('prod-body');
+  if(!S.products.length){ tb.innerHTML='<tr><td colspan="8" style="text-align:center;padding:22px;color:var(--muted)">Belum ada produk.</td></tr>'; return; }
+  var html = '';
+  for(var i=0;i<S.products.length;i++){
+    var p = S.products[i];
+    var si = STAGES.indexOf(p.status);
+    var dots='', opts='';
+    for(var j=0;j<STAGES.length;j++) dots += '<div class="sd'+(j<si?' done':j===si?' act':'')+'"></div>';
+    for(var j=0;j<STAGES.length;j++) opts += '<option value="'+STAGES[j]+'"'+(STAGES[j]===p.status?' selected':'')+'>'+SL[STAGES[j]]+'</option>';
+    html += '<tr><td>'+(i+1)+'</td><td style="font-weight:700">'+esc(p.name)+'</td><td>'+esc(p.pic)+'</td>'
       +'<td>'+(p.checkout||'—')+'</td><td>'+(p.arrive||'—')+'</td>'
       +'<td><span class="sb '+p.status+'">'+(SL[p.status]||p.status)+'</span></td>'
       +'<td><div class="sdots">'+dots+'</div></td>'
       +'<td style="white-space:nowrap">'
-      +'<select style="font-size:10px;padding:3px 5px;border:1px solid var(--border);border-radius:5px;background:var(--bg);font-family:inherit" onchange="updP('+i+',this.value)">'+opts+'</select>'
-      +' <button class="btn sm danger" onclick="delP('+i+')">✕</button>'
+      +'<select style="font-size:10px;padding:3px 5px;border:1px solid var(--border);border-radius:5px;background:var(--bg);font-family:inherit" onchange="updProd('+i+',this.value)">'+opts+'</select>'
+      +' <button class="btn sm danger" onclick="delProd('+i+')">✕</button>'
       +'</td></tr>';
   }
-  tb.innerHTML=html;
+  tb.innerHTML = html;
 }
+function updProd(i,s){ S.products[i].status=s; ls_set('aff_prods',JSON.stringify(S.products)); renderProducts(); updateStats(); doPush(); showBanner('✅ Status diupdate'); }
+function delProd(i){ S.products.splice(i,1); ls_set('aff_prods',JSON.stringify(S.products)); renderProducts(); updateStats(); doPush(); }
 
-function updP(i,s){
-  products[i].status=s;
-  save('aff_prods',JSON.stringify(products));
-  renderProducts();updateStats();pushSheet();showBanner('✅ Status diupdate');
-}
-function delP(i){
-  if(!confirm('Hapus produk?'))return;
-  products.splice(i,1);
-  save('aff_prods',JSON.stringify(products));
-  renderProducts();updateStats();pushSheet();
-}
-
-// ═══════════════════════════════════════════════
-// REPORT
-// ═══════════════════════════════════════════════
-function renderReport(){
+// ═══ REPORT ═══
+function renderReport() {
   var cards='',rows='';
   for(var i=0;i<DIVS.length;i++){
-    var d=DIVS[i];
-    var all=tasks.filter(function(t){return t.div===d.id;});
-    var dn=all.filter(function(t){return t.done;}).length;
-    var pct=all.length?Math.round(dn/all.length*100):0;
-    cards+='<div class="rc"><div class="rc-h '+d.id+'"><div class="rn">'+d.name+'</div><div class="rr">'+d.role+'</div></div>'
+    var d=DIVS[i], all=[], dn=0;
+    for(var j=0;j<S.tasks.length;j++) if(S.tasks[j].div===d.id){ all.push(S.tasks[j]); if(S.tasks[j].done) dn++; }
+    var pct = all.length ? Math.round(dn/all.length*100) : 0;
+    cards += '<div class="rc"><div class="rc-h '+d.id+'"><div class="rn">'+d.name+'</div><div class="rr">'+d.role+'</div></div>'
       +'<div class="rc-b">'
       +'<div class="rs"><span>Total</span><span class="rv">'+all.length+'</span></div>'
       +'<div class="rs"><span>Selesai</span><span class="rv" style="color:var(--green)">'+dn+'</span></div>'
       +'<div class="rs"><span>Belum</span><span class="rv" style="color:var(--red)">'+(all.length-dn)+'</span></div>'
       +'<div class="rs"><span>%</span><span class="rv">'+pct+'%</span></div>'
       +'</div></div>';
-    rows+='<tr><td><b style="color:var(--'+d.id+')">'+d.name+'</b></td><td>'+all.length+'</td>'
+    rows += '<tr><td><b style="color:var(--'+d.id+')">'+d.name+'</b></td><td>'+all.length+'</td>'
       +'<td style="color:var(--green);font-weight:700">'+dn+'</td>'
       +'<td style="color:var(--red)">'+(all.length-dn)+'</td>'
       +'<td><div style="display:flex;align-items:center;gap:5px">'
@@ -836,46 +736,47 @@ function renderReport(){
       +'<div style="width:'+pct+'%;height:100%;background:var(--'+d.id+');border-radius:4px"></div></div>'
       +'<b style="font-size:10px">'+pct+'%</b></div></td></tr>';
   }
-  document.getElementById('rep-cards').innerHTML=cards;
-  document.getElementById('rep-rows').innerHTML=rows;
+  document.getElementById('rep-cards').innerHTML = cards;
+  document.getElementById('rep-rows').innerHTML  = rows;
 }
 
-// ═══════════════════════════════════════════════
-// MODALS
-// ═══════════════════════════════════════════════
-function bgClose(e,id){if(e.target===e.currentTarget)cm(id);}
+// ═══ MODALS ═══
+function bgClose(e,id){ if(e.target===e.currentTarget) closeModal(id); }
+function closeModal(id){ document.getElementById(id).classList.remove('on'); }
 
+var selTags = [];
 function openTM(div,day){
-  div=div||'adit';day=day===undefined?0:+day;
-  document.getElementById('tm-div').value=div;
-  document.getElementById('tm-day').value=day;
-  document.getElementById('tm-text').value='';
-  selTags=[];
-  var tags=document.querySelectorAll('.to');
+  div = div||'adit'; day = day===undefined?0:+day;
+  document.getElementById('tm-div').value = div;
+  document.getElementById('tm-day').value = day;
+  document.getElementById('tm-text').value = '';
+  selTags = [];
+  var tags = document.querySelectorAll('.to');
   for(var i=0;i<tags.length;i++) tags[i].classList.remove('sel');
   upPill();
   document.getElementById('tm').classList.add('on');
-  setTimeout(function(){document.getElementById('tm-text').focus();},300);
+  setTimeout(function(){ document.getElementById('tm-text').focus(); }, 300);
 }
 function upPill(){
-  var d=document.getElementById('tm-div').value;
-  var p=document.getElementById('tm-pill');
-  p.textContent={adit:'Adit',najwa:'Najwa',dio:'Dio'}[d]||d;
-  p.className='dpill '+d;
+  var d = document.getElementById('tm-div').value;
+  var p = document.getElementById('tm-pill');
+  p.textContent = {adit:'Adit',najwa:'Najwa',dio:'Dio'}[d]||d;
+  p.className = 'dpill '+d;
 }
 function tg(el,tag){
   el.classList.toggle('sel');
-  var idx=selTags.indexOf(tag);
+  var idx = selTags.indexOf(tag);
   if(idx>=0) selTags.splice(idx,1); else selTags.push(tag);
 }
 function saveTask(){
-  var txt=document.getElementById('tm-text').value.trim();
+  var txt = document.getElementById('tm-text').value.trim();
   if(!txt) return;
-  var nid=1;
-  for(var i=0;i<tasks.length;i++) if(tasks[i].id>=nid) nid=tasks[i].id+1;
-  tasks.push({id:nid,div:document.getElementById('tm-div').value,day:+document.getElementById('tm-day').value,text:txt,tags:selTags.slice(),done:false});
-  save('aff_tasks',JSON.stringify(tasks));
-  cm('tm');updateStats();buildCal();pushSheet();showBanner('✅ Tugas ditambahkan!');
+  var nid = 1;
+  for(var i=0;i<S.tasks.length;i++) if(S.tasks[i].id>=nid) nid=S.tasks[i].id+1;
+  S.tasks.push({id:nid,div:document.getElementById('tm-div').value,day:+document.getElementById('tm-day').value,text:txt,tags:selTags.slice(),done:false});
+  ls_set('aff_tasks',JSON.stringify(S.tasks));
+  closeModal('tm'); updateStats(); buildCal(); doPush();
+  showBanner('✅ Tugas ditambahkan!');
 }
 
 function openPM(){
@@ -886,19 +787,16 @@ function openPM(){
   document.getElementById('pm').classList.add('on');
 }
 function saveProd(){
-  var n=document.getElementById('pm-name').value.trim();
-  if(!n) return;
-  products.push({name:n,pic:document.getElementById('pm-pic').value,checkout:document.getElementById('pm-co').value,arrive:document.getElementById('pm-arr').value,status:document.getElementById('pm-st').value});
-  save('aff_prods',JSON.stringify(products));
-  cm('pm');renderProducts();updateStats();pushSheet();showBanner('✅ Produk ditambahkan!');
+  var n=document.getElementById('pm-name').value.trim(); if(!n) return;
+  S.products.push({name:n,pic:document.getElementById('pm-pic').value,checkout:document.getElementById('pm-co').value,arrive:document.getElementById('pm-arr').value,status:document.getElementById('pm-st').value});
+  ls_set('aff_prods',JSON.stringify(S.products));
+  closeModal('pm'); renderProducts(); updateStats(); doPush();
+  showBanner('✅ Produk ditambahkan!');
 }
-function cm(id){document.getElementById(id).classList.remove('on');}
 
-// ═══════════════════════════════════════════════
-// NAV
-// ═══════════════════════════════════════════════
+// ═══ NAV ═══
 function gv(v){
-  curView=v;
+  S.view=v;
   var views=document.querySelectorAll('.view');
   for(var i=0;i<views.length;i++) views[i].classList.remove('on');
   document.getElementById('view-'+v).classList.add('on');
@@ -908,20 +806,18 @@ function gv(v){
   if(v==='report') renderReport();
 }
 function fd(d){
-  curFilt=d;
+  S.filt=d;
   var lis=document.querySelectorAll('.li');
-  for(var i=0;i<lis.length;i++) lis[i].classList.toggle('on',lis[i].getAttribute('data-d')===d);
+  for(var i=0;i<lis.length;i++) lis[i].classList.toggle('on', lis[i].getAttribute('data-d')===d);
   buildCal();
 }
 
-// ═══════════════════════════════════════════════
-// BANNER
-// ═══════════════════════════════════════════════
+// ═══ BANNER ═══
 function showBanner(msg){
   var b=document.getElementById('banner');
-  b.textContent=msg;b.classList.add('show');
-  if(banTmr) clearTimeout(banTmr);
-  banTmr=setTimeout(function(){b.classList.remove('show');},2500);
+  b.textContent=msg; b.classList.add('show');
+  if(S.banTimer) clearTimeout(S.banTimer);
+  S.banTimer=setTimeout(function(){ b.classList.remove('show'); },2500);
 }
 </script>
 </body>
