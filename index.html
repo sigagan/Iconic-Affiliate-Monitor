@@ -413,7 +413,7 @@ function setSyncState(cls, lbl) {
 
 function doFetch() {
   setSyncState('busy', 'Syncing...');
-  sbFetch('/rest/v1/appdata?select=key,value')
+  sbGet()
   .then(function(r) {
     if (!r.ok) { throw new Error('HTTP ' + r.status); }
     return r.json();
@@ -423,17 +423,11 @@ function doFetch() {
     for (i = 0; i < rows.length; i++) {
       if (rows[i].key === 'tasks') {
         t = JSON.parse(rows[i].value);
-        if (t && t.length > 0) {
-          tasks = t;
-          lsSet('aff_tasks', rows[i].value);
-        }
+        if (t && t.length > 0) { tasks = t; lsSet('aff_tasks', rows[i].value); }
       }
       if (rows[i].key === 'products') {
         p = JSON.parse(rows[i].value);
-        if (p) {
-          products = p;
-          lsSet('aff_prods', rows[i].value);
-        }
+        if (p) { products = p; lsSet('aff_prods', rows[i].value); }
       }
     }
     var ts = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
@@ -448,11 +442,9 @@ function doFetch() {
 
 function doPush() {
   setSyncState('busy', 'Menyimpan...');
-  var tVal = JSON.stringify(tasks);
-  var pVal = JSON.stringify(products);
-  sbPost('/rest/v1/appdata', {key: 'tasks', value: tVal})
+  sbUpsert('tasks', JSON.stringify(tasks))
   .then(function() {
-    return sbPost('/rest/v1/appdata', {key: 'products', value: pVal});
+    return sbUpsert('products', JSON.stringify(products));
   })
   .then(function() {
     var ts = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
