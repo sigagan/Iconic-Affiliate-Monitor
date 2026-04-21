@@ -180,12 +180,10 @@ tr:last-child td{border-bottom:none}
   <div class="sc2">
     <h4>🔗 JSONBin.io <span style="font-weight:400;color:var(--muted)">(untuk sync tim)</span></h4>
     <label class="lbl">Bin ID</label>
-    <input class="inp" id="inp-binid" placeholder="65abc123def456...">
-    <label class="lbl">Access Key</label>
-    <input class="inp" id="inp-binkey" type="password" placeholder="$2b$10$...">
-    <p style="font-size:10px;color:var(--muted);line-height:1.5;margin-top:4px">
-      Buat di <b>jsonbin.io</b> → New Bin → isi <code>{"tasks":[],"products":[]}</code> → copy Bin ID.<br>
-      API Keys → buat key → centang Read + Update → copy key.
+    <input class="inp" id="inp-binid" placeholder="6732a1f4acd3cb34a8b2e1d9">
+    <p style="font-size:10px;color:var(--muted);line-height:1.6;margin-top:4px">
+      Buat di <b>jsonbin.io</b> → New Bin → isi <code>{"tasks":[],"products":[]}</code> → <b>set PUBLIC</b> → copy Bin ID.<br>
+      Tidak perlu API Key untuk public bin.
     </p>
   </div>
   <button class="start" id="start-btn" onclick="doStart()">Pilih nama dulu ↑</button>
@@ -430,10 +428,10 @@ function pickWho(w) {
 function doStart() {
   if(!S.who) return;
   S.binId  = document.getElementById('inp-binid').value.trim();
-  S.binKey = document.getElementById('inp-binkey').value.trim();
+  S.binKey = '';
   ls_set('aff_who', S.who);
   ls_set('aff_bid', S.binId);
-  ls_set('aff_bkey', S.binKey);
+  ls_del('aff_bkey');
   launch();
 }
 
@@ -469,7 +467,7 @@ function launch() {
   updateWeekLabel();
   render();
 
-  if(S.binId && S.binKey) {
+  if(S.binId) {
     doFetch();
     S.syncTimer = setInterval(doFetch, 10000);
   } else {
@@ -510,13 +508,10 @@ function setSyncState(cls, lbl) {
 }
 
 function doFetch() {
-  if(!S.binId || !S.binKey) { setSyncState('','Demo offline'); return; }
+  if(!S.binId) { setSyncState('','Demo offline'); return; }
   setSyncState('busy','Syncing...');
   var url = 'https://api.jsonbin.io/v3/b/' + S.binId + '/latest';
-  fetch(url, {
-    method: 'GET',
-    headers: { 'X-Master-Key': S.binKey, 'X-Bin-Meta': 'false' }
-  })
+  fetch(url, { method:'GET', headers:{'X-Bin-Meta':'false'} })
   .then(function(r) {
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
@@ -542,12 +537,12 @@ function doFetch() {
 }
 
 function doPush() {
-  if(!S.binId || !S.binKey) return;
+  if(!S.binId) return;
   setSyncState('busy','Menyimpan...');
   var url = 'https://api.jsonbin.io/v3/b/' + S.binId;
   fetch(url, {
     method: 'PUT',
-    headers: { 'Content-Type':'application/json', 'X-Master-Key': S.binKey },
+    headers: { 'Content-Type':'application/json' },
     body: JSON.stringify({ tasks: S.tasks, products: S.products })
   })
   .then(function(r) {
@@ -567,8 +562,8 @@ function doPush() {
 }
 
 function doSync() {
-  if(S.binId && S.binKey) doFetch();
-  else showBanner('⚠️ Demo mode — isi Bin ID & Key dulu');
+  if(S.binId) doFetch();
+  else showBanner('⚠️ Demo mode — isi Bin ID dulu');
 }
 
 // ═══ RENDER ═══
