@@ -178,13 +178,8 @@ tr:last-child td{border-bottom:none}
     </div>
   </div>
   <div class="sc2">
-    <h4>🔗 JSONBin.io <span style="font-weight:400;color:var(--muted)">(untuk sync tim)</span></h4>
-    <label class="lbl">Bin ID</label>
-    <input class="inp" id="inp-binid" placeholder="6732a1f4acd3cb34a8b2e1d9">
-    <p style="font-size:10px;color:var(--muted);line-height:1.6;margin-top:4px">
-      Buat di <b>jsonbin.io</b> → New Bin → isi <code>{"tasks":[],"products":[]}</code> → <b>set PUBLIC</b> → copy Bin ID.<br>
-      Tidak perlu API Key untuk public bin.
-    </p>
+    <h4>🔗 Sync Tim <span style="font-weight:400;color:var(--muted)">(via Supabase)</span></h4>
+    <p style="font-size:10px;color:var(--muted);line-height:1.6;margin-bottom:6px">Sudah dikonfigurasi otomatis. Langsung pilih nama dan masuk! 🚀</p>
   </div>
   <button class="start" id="start-btn" onclick="doStart()">Pilih nama dulu ↑</button>
   <p class="hint">Kosongkan Bin ID untuk mode demo offline</p>
@@ -348,7 +343,10 @@ tr:last-child td{border-bottom:none}
 <div class="banner" id="banner"></div>
 
 <script>
-// ═══ CONSTANTS ═══
+// ═══ SUPABASE CONFIG ═══
+var SB_URL = 'https://knvmvdjgsdikoglhcaxr.supabase.co';
+var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtudm12ZGpnc2Rpa29nbGhjYXhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NTM4MTksImV4cCI6MjA5MjMyOTgxOX0.QHnaq09tGBcfb5UwyrQFTMTQbimxyRGriD-_mPxntB8';
+var SB_HDR = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' };
 var DAYS = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
 var WKEND = [5,6];
 var DIVS = [
@@ -427,11 +425,10 @@ function pickWho(w) {
 
 function doStart() {
   if(!S.who) return;
-  S.binId  = document.getElementById('inp-binid').value.trim();
+  S.binId  = 'supabase';
   S.binKey = '';
   ls_set('aff_who', S.who);
   ls_set('aff_bid', S.binId);
-  ls_del('aff_bkey');
   launch();
 }
 
@@ -467,12 +464,8 @@ function launch() {
   updateWeekLabel();
   render();
 
-  if(S.binId) {
-    doFetch();
-    S.syncTimer = setInterval(doFetch, 10000);
-  } else {
-    setSyncState('', 'Demo offline');
-  }
+  doFetch();
+  S.syncTimer = setInterval(doFetch, 10000);
 }
 
 function doLogout() {
@@ -508,52 +501,55 @@ function setSyncState(cls, lbl) {
 }
 
 function doFetch() {
-  if(!S.binId) { setSyncState('','Demo offline'); return; }
   setSyncState('busy','Syncing...');
-  var url = 'https://api.jsonbin.io/v3/b/' + S.binId + '/latest';
-  fetch(url, { method:'GET', headers:{'X-Bin-Meta':'false'} })
+  fetch(SB_URL + '/rest/v1/appdata?select=key,value', {
+    method: 'GET',
+    headers: SB_HDR
+  })
   .then(function(r) {
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   })
-  .then(function(data) {
-    var rec = data.record || data;
-    if(rec.tasks && rec.tasks.length > 0) {
-      S.tasks = rec.tasks;
-      ls_set('aff_tasks', JSON.stringify(S.tasks));
-    }
-    if(rec.products && rec.products.length > 0) {
-      S.products = rec.products;
-      ls_set('aff_prods', JSON.stringify(S.products));
+  .then(function(rows) {
+    for(var i=0;i<rows.length;i++) {
+      if(rows[i].key === 'tasks') {
+        var t = JSON.parse(rows[i].value);
+        if(t && t.length > 0) { S.tasks = t; ls_set('aff_tasks', rows[i].value); }
+      }
+      if(rows[i].key === 'products') {
+        var p = JSON.parse(rows[i].value);
+        if(p && p.length >= 0) { S.products = p; ls_set('aff_prods', rows[i].value); }
+      }
     }
     var t = new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
     setSyncState('ok', t);
     render();
   })
   .catch(function(err) {
-    setSyncState('err', 'Gagal');
+    setSyncState('err','Gagal');
     showBanner('❌ Sync gagal: ' + err.message);
   });
 }
 
+function sbUpsert(key, value) {
+  return fetch(SB_URL + '/rest/v1/appdata', {
+    method: 'POST',
+    headers: Object.assign({}, SB_HDR, { 'Prefer': 'resolution=merge-duplicates,return=minimal' }),
+    body: JSON.stringify({ key: key, value: JSON.stringify(value) })
+  });
+}
+
 function doPush() {
-  if(!S.binId) return;
   setSyncState('busy','Menyimpan...');
-  var url = 'https://api.jsonbin.io/v3/b/' + S.binId;
-  fetch(url, {
-    method: 'PUT',
-    headers: { 'Content-Type':'application/json' },
-    body: JSON.stringify({ tasks: S.tasks, products: S.products })
-  })
-  .then(function(r) {
-    if(!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  })
+  Promise.all([
+    sbUpsert('tasks', S.tasks),
+    sbUpsert('products', S.products)
+  ])
   .then(function() {
     var t = new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
     setSyncState('ok', t);
     showBanner('✅ Tersimpan!');
-    setTimeout(doFetch, 2000);
+    setTimeout(doFetch, 1500);
   })
   .catch(function(err) {
     setSyncState('err','Gagal simpan');
@@ -562,8 +558,7 @@ function doPush() {
 }
 
 function doSync() {
-  if(S.binId) doFetch();
-  else showBanner('⚠️ Demo mode — isi Bin ID dulu');
+  doFetch();
 }
 
 // ═══ RENDER ═══
