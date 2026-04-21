@@ -464,7 +464,7 @@ var DEF=[
 // STATE
 // ═══════════════════════════════════════════════
 var tasks=[], products=[], selTags=[], curFilt='all', curView='calendar';
-var apiUrl='', apiKey='', whoAmI='';
+var apiUrl='', binKey='', whoAmI='';
 var syncInt=null, banTmr=null, weekOffset=0;
 
 var TODAY=new Date();
@@ -512,12 +512,12 @@ function doStart(){
 // ═══════════════════════════════════════════════
 window.onload=function(){
   var w=load('aff_who');
-  var binId=load('aff_bin');
-  var binKey=load('aff_key');
+  var bId=load('aff_bin');
+  var bKey=load('aff_key');
   if(w){
     whoAmI=w;
-    apiUrl=binId||'';
-    apiKey=binKey||'';
+    apiUrl=bId||'';
+    binKey=bKey||'';
     launch();
   } else {
     document.getElementById('setup').style.display='flex';
@@ -543,7 +543,7 @@ function launch(){
   updateWeekLabel();
   render();
 
-  if(apiUrl && apiKey){
+  if(apiUrl && binKey){
     fetchSheet();
     syncInt=setInterval(fetchSheet,10000);
   } else {
@@ -561,10 +561,10 @@ function doLogout(){
   var sb=document.getElementById('start-btn');
   sb.textContent='Pilih nama dulu ↑';
   sb.className='start';
-  var binId=load('aff_bin');
-  var binKey=load('aff_key');
-  if(binId) document.getElementById('bin-id').value=binId;
-  if(binKey) document.getElementById('bin-key').value=binKey;
+  var bId=load('aff_bin');
+  var bKey=load('aff_key');
+  if(bId) document.getElementById('bin-id').value=bId;
+  if(bKey) document.getElementById('bin-key').value=bKey;
   document.getElementById('setup').style.display='flex';
   showBanner('👋 Logged out');
 }
@@ -593,12 +593,12 @@ function setSyncState(s,lbl){
 }
 
 function fetchSheet(){
-  if(!apiUrl||!apiKey){setSyncState('','Demo offline');return;}
+  if(!apiUrl||!binKey){setSyncState('','Demo offline');return;}
   setSyncState('busy','Syncing...');
   fetch('https://api.jsonbin.io/v3/b/'+apiUrl+'/latest',{
     method:'GET',
     headers:{
-      'X-Master-Key':apiKey,
+      'X-Master-Key':binKey,
       'X-Bin-Meta':'false'
     }
   })
@@ -627,14 +627,14 @@ function fetchSheet(){
 }
 
 function pushSheet(){
-  if(!apiUrl||!apiKey) return;
+  if(!apiUrl||!binKey) return;
   setSyncState('busy','Menyimpan...');
   var payload={tasks:tasks,products:products};
   fetch('https://api.jsonbin.io/v3/b/'+apiUrl,{
     method:'PUT',
     headers:{
       'Content-Type':'application/json',
-      'X-Master-Key':apiKey
+      'X-Master-Key':binKey
     },
     body:JSON.stringify(payload)
   })
@@ -655,7 +655,7 @@ function pushSheet(){
 }
 
 function forceSync(){
-  if(apiUrl&&apiKey) fetchSheet();
+  if(apiUrl&&binKey) fetchSheet();
   else showBanner('⚠️ Demo mode — isi Bin ID & API Key dulu');
 }
 
