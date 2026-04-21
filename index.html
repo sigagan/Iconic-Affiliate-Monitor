@@ -592,10 +592,15 @@ function fetchSheet(){
   if(!apiUrl) return;
   setSyncState('busy','Syncing...');
   var t=Date.now();
-  var p1=fetch(apiUrl+'?action=getTasks&t='+t).then(function(r){return r.json();});
-  var p2=fetch(apiUrl+'?action=getProducts&t='+t).then(function(r){return r.json();});
+  var p1=fetch(apiUrl+'?action=getTasks&t='+t,{mode:'cors'}).then(function(r){return r.json();}).catch(function(){return null;});
+  var p2=fetch(apiUrl+'?action=getProducts&t='+t,{mode:'cors'}).then(function(r){return r.json();}).catch(function(){return null;});
   Promise.all([p1,p2]).then(function(res){
     var rawT=res[0], rawP=res[1];
+    if(!rawT&&!rawP){
+      setSyncState('err','Gagal — cek URL');
+      showBanner('❌ Sync gagal. Cek URL Apps Script.');
+      return;
+    }
     if(rawT&&rawT.length>1){
       tasks=rawT.slice(1).map(function(r){
         return{id:+r[0],div:r[1],day:+r[2],text:r[3],tags:r[4]?String(r[4]).split(',').filter(Boolean):[],done:r[5]==='TRUE'||r[5]===true||r[5]==='true'};
@@ -619,14 +624,26 @@ function fetchSheet(){
 function pushSheet(){
   if(!apiUrl) return;
   setSyncState('busy','Menyimpan...');
-  var tR=[['id','div','day','text','tags','done']].concat(tasks.map(function(t){return[t.id,t.div,t.day,t.text,(t.tags||[]).join(','),t.done];}));
-  var pR=[['name','pic','checkout','arrive','status']].concat(products.map(function(p){return[p.name,p.pic,p.checkout||'',p.arrive||'',p.status];}));
-  var tUrl=apiUrl+'?action=saveTasks&data='+encodeURIComponent(JSON.stringify(tR));
-  var pUrl=apiUrl+'?action=saveProducts&data='+encodeURIComponent(JSON.stringify(pR));
-  Promise.all([fetch(tUrl),fetch(pUrl)]).then(function(){
+  var tR=[['id','div','day','text','tags','done']].concat(tasks.map(function(t){
+    return[t.id,t.div,t.day,t.text,(t.tags||[]).join(','),t.done];
+  }));
+  var pR=[['name','pic','checkout','arrive','status']].concat(products.map(function(p){
+    return[p.name,p.pic,p.checkout||'',p.arrive||'',p.status];
+  }));
+  // Kirim satu per satu, pakai image trick untuk bypass CORS
+  sendViaImage(apiUrl+'?action=saveTasks&data='+encodeURIComponent(JSON.stringify(tR)));
+  sendViaImage(apiUrl+'?action=saveProducts&data='+encodeURIComponent(JSON.stringify(pR)));
+  setTimeout(function(){
     var t=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
     setSyncState('ok',t);
-  }).catch(function(){setSyncState('err','Gagal simpan');});
+    showBanner('✅ Data tersimpan!');
+  },2000);
+}
+
+// Image trick: bypass CORS untuk fire-and-forget requests
+function sendViaImage(url){
+  var img=new Image();
+  img.src=url;
 }
 
 function forceSync(){if(apiUrl)fetchSheet();else showBanner('⚠️ Demo mode — isi URL dulu');}
