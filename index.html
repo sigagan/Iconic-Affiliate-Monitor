@@ -589,61 +589,85 @@ function setSyncState(s,lbl){
 }
 
 function fetchSheet(){
-  if(!apiUrl) return;
+  if(!apiUrl){setSyncState('','Demo offline');return;}
   setSyncState('busy','Syncing...');
-  var t=Date.now();
-  var p1=fetch(apiUrl+'?action=getTasks&t='+t,{mode:'cors'}).then(function(r){return r.json();}).catch(function(){return null;});
-  var p2=fetch(apiUrl+'?action=getProducts&t='+t,{mode:'cors'}).then(function(r){return r.json();}).catch(function(){return null;});
-  Promise.all([p1,p2]).then(function(res){
-    var rawT=res[0], rawP=res[1];
-    if(!rawT&&!rawP){
-      setSyncState('err','Gagal — cek URL');
-      showBanner('❌ Sync gagal. Cek URL Apps Script.');
-      return;
-    }
+  var ts=Date.now();
+  // Pakai no-cors tidak bisa baca response, pakai cors mode
+  fetch(apiUrl+'?action=getTasks&t='+ts,{
+    method:'GET',
+    cache:'no-store',
+    headers:{'Cache-Control':'no-cache'}
+  })
+  .then(function(r){return r.json();})
+  .then(function(rawT){
     if(rawT&&rawT.length>1){
       tasks=rawT.slice(1).map(function(r){
-        return{id:+r[0],div:r[1],day:+r[2],text:r[3],tags:r[4]?String(r[4]).split(',').filter(Boolean):[],done:r[5]==='TRUE'||r[5]===true||r[5]==='true'};
+        return{
+          id:+r[0],div:String(r[1]),day:+r[2],text:String(r[3]),
+          tags:r[4]?String(r[4]).split(',').filter(Boolean):[],
+          done:r[5]==='TRUE'||r[5]===true||r[5]==='true'||r[5]==='1'
+        };
       });
       save('aff_tasks',JSON.stringify(tasks));
     }
+    // Fetch products setelah tasks berhasil
+    return fetch(apiUrl+'?action=getProducts&t='+(ts+1),{
+      method:'GET',
+      cache:'no-store',
+      headers:{'Cache-Control':'no-cache'}
+    });
+  })
+  .then(function(r){return r.json();})
+  .then(function(rawP){
     if(rawP&&rawP.length>1){
       products=rawP.slice(1).map(function(r){
-        return{name:r[0],pic:r[1],checkout:r[2]||'',arrive:r[3]||'',status:r[4]||'riset'};
+        return{name:String(r[0]),pic:String(r[1]),checkout:r[2]||'',arrive:r[3]||'',status:r[4]||'riset'};
       });
       save('aff_prods',JSON.stringify(products));
     }
-    var t2=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-    setSyncState('ok',t2);
+    var t=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+    setSyncState('ok',t);
     render();
-  }).catch(function(e){
+  })
+  .catch(function(err){
     setSyncState('err','Gagal');
+    showBanner('❌ Sync gagal: '+err.message);
   });
 }
 
 function pushSheet(){
   if(!apiUrl) return;
   setSyncState('busy','Menyimpan...');
-  var tR=[['id','div','day','text','tags','done']].concat(tasks.map(function(t){
-    return[t.id,t.div,t.day,t.text,(t.tags||[]).join(','),t.done];
-  }));
-  var pR=[['name','pic','checkout','arrive','status']].concat(products.map(function(p){
-    return[p.name,p.pic,p.checkout||'',p.arrive||'',p.status];
-  }));
-  // Kirim satu per satu, pakai image trick untuk bypass CORS
-  sendViaImage(apiUrl+'?action=saveTasks&data='+encodeURIComponent(JSON.stringify(tR)));
-  sendViaImage(apiUrl+'?action=saveProducts&data='+encodeURIComponent(JSON.stringify(pR)));
-  setTimeout(function(){
+  var tR=[['id','div','day','text','tags','done']].concat(
+    tasks.map(function(t){
+      return[t.id,t.div,t.day,t.text,(t.tags||[]).join(','),t.done?'TRUE':'FALSE'];
+    })
+  );
+  var pR=[['name','pic','checkout','arrive','status']].concat(
+    products.map(function(p){
+      return[p.name,p.pic,p.checkout||'',p.arrive||'',p.status];
+    })
+  );
+  var tUrl=apiUrl+'?action=saveTasks&t='+Date.now()+'&data='+encodeURIComponent(JSON.stringify(tR));
+  var pUrl=apiUrl+'?action=saveProducts&t='+Date.now()+'&data='+encodeURIComponent(JSON.stringify(pR));
+
+  fetch(tUrl,{method:'GET',cache:'no-store'})
+  .then(function(r){return r.json();})
+  .then(function(){
+    return fetch(pUrl,{method:'GET',cache:'no-store'});
+  })
+  .then(function(r){return r.json();})
+  .then(function(){
     var t=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
     setSyncState('ok',t);
-    showBanner('✅ Data tersimpan!');
-  },2000);
-}
-
-// Image trick: bypass CORS untuk fire-and-forget requests
-function sendViaImage(url){
-  var img=new Image();
-  img.src=url;
+    showBanner('✅ Tersimpan & tersinkron!');
+    // Langsung fetch ulang untuk konfirmasi data tersimpan
+    setTimeout(fetchSheet,1500);
+  })
+  .catch(function(err){
+    setSyncState('err','Gagal simpan');
+    showBanner('❌ Gagal simpan: '+err.message);
+  });
 }
 
 function forceSync(){if(apiUrl)fetchSheet();else showBanner('⚠️ Demo mode — isi URL dulu');}
