@@ -3,372 +3,295 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="AffMonitor">
-<meta name="theme-color" content="#18181b">
+<meta name="theme-color" content="#1a1a2e">
 <title>Affiliate Monitor</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#f0efe8;--white:#fff;--ink:#18181b;--muted:#71717a;
-  --border:#e4e4d8;--border2:#c8c8b8;
-  --adit:#dc4a0a;--adit-l:#fff3ee;--adit-m:#fcd3bb;
-  --najwa:#1666e0;--najwa-l:#eff4ff;--najwa-m:#bdd1fb;
-  --dio:#7c22e0;--dio-l:#f3eeff;--dio-m:#d5bafc;
-  --green:#16a34a;--amber:#d97706;--red:#dc2626;
-  --sh:0 1px 8px rgba(0,0,0,.07);--sh2:0 4px 24px rgba(0,0,0,.11)
+  --ink:#1a1a2e;--bg:#f5f5f0;--white:#ffffff;--muted:#888;
+  --border:#ddd;--adit:#e05a00;--najwa:#1a6fd4;--dio:#7b2fd4;
+  --green:#22a85a;--red:#e03030;--amber:#e09000;
+  --adit-bg:#fff4ef;--najwa-bg:#eff5ff;--dio-bg:#f5efff
 }
-html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);font-size:13px}
-#setup{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
-.setup-box{background:var(--white);border-radius:16px;padding:28px;width:100%;max-width:420px;box-shadow:var(--sh2)}
-.logo{font-size:22px;font-weight:800;margin-bottom:2px}.logo span{color:var(--adit)}
-.sub{font-size:12px;color:var(--muted);margin-bottom:22px}
-.sc2{background:var(--bg);border-radius:10px;padding:14px;margin-bottom:10px}
-.sc2 h4{font-size:12px;font-weight:700;margin-bottom:8px}
-.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.wb{padding:14px 8px;border-radius:10px;border:2px solid var(--border);background:var(--white);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;text-align:center;width:100%}
-.wb.sel-adit{background:var(--adit);color:#fff;border-color:var(--adit)}
-.wb.sel-najwa{background:var(--najwa);color:#fff;border-color:var(--najwa)}
-.wb.sel-dio{background:var(--dio);color:#fff;border-color:var(--dio)}
-.wb.sel-owner{background:var(--ink);color:#fff;border-color:var(--ink)}
-.start{width:100%;padding:14px;border-radius:10px;border:none;background:#ccc;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:not-allowed;margin-top:8px}
-.start.ready{background:var(--ink);cursor:pointer}
-.hint{font-size:10px;color:var(--muted);text-align:center;margin-top:8px}
-#app{display:none;height:100vh;flex-direction:column;overflow:hidden}
-.hdr{background:var(--ink);color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.hdr-title{font-size:14px;font-weight:800}
-.hdr-title span{color:#999;font-weight:400;font-size:11px}
-.hdr-r{display:flex;align-items:center;gap:6px}
-.dot{width:7px;height:7px;border-radius:50%;background:#555;flex-shrink:0}
-.dot.ok{background:var(--green)}.dot.busy{background:var(--amber);animation:pulse 1s infinite}.dot.err{background:var(--red)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.slbl{font-size:9px;color:#888}
-.hbtn{padding:5px 9px;border-radius:6px;border:1px solid #333;background:transparent;color:#ccc;font-family:inherit;font-size:10px;font-weight:600;cursor:pointer}
-.wnav{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;flex-shrink:0;background:var(--white);border-bottom:1px solid var(--border)}
-.wnav-lbl{font-size:11px;font-weight:700}
-.wnav-btn{padding:5px 12px;border-radius:6px;border:1.5px solid var(--border2);background:var(--bg);font-family:inherit;font-size:11px;font-weight:600;cursor:pointer}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 12px;flex-shrink:0}
-.sc{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:9px;box-shadow:var(--sh)}
-.sc-l{font-size:7px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:2px}
-.sc-v{font-size:18px;font-weight:800;line-height:1}
-.sc-s{font-size:8px;color:var(--muted);margin-top:1px}
-.sc-bar{margin-top:5px;height:2px;background:var(--border);border-radius:2px;overflow:hidden}
-.sc-f{height:100%;border-radius:2px;transition:width .5s}
-.tabs{display:flex;gap:2px;padding:0 12px 8px;overflow-x:auto;flex-shrink:0;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tab{padding:6px 13px;border-radius:6px;border:none;background:transparent;color:var(--muted);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0}
-.tab.on{background:var(--ink);color:#fff}
-.content{flex:1;overflow-y:auto;padding:0 12px 80px;-webkit-overflow-scrolling:touch}
-.view{display:none}.view.on{display:block}
-.legend{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
-.li{display:flex;align-items:center;gap:3px;padding:4px 9px;border-radius:20px;border:1.5px solid var(--border2);font-size:9px;font-weight:700;cursor:pointer;text-transform:uppercase}
-.li.on.all{background:var(--ink);color:#fff;border-color:var(--ink)}
-.li.on.adit{background:var(--adit);color:#fff;border-color:var(--adit)}
-.li.on.najwa{background:var(--najwa);color:#fff;border-color:var(--najwa)}
-.li.on.dio{background:var(--dio);color:#fff;border-color:var(--dio)}
-.sw{width:5px;height:5px;border-radius:50%}
-.cal-outer{overflow-x:auto;border-radius:10px;border:1.5px solid var(--border);box-shadow:var(--sh2)}
-.cal-grid{display:grid;grid-template-columns:80px repeat(7,minmax(110px,1fr));background:var(--border);gap:1px;min-width:850px}
-.ch{background:var(--ink);color:#fff;padding:8px 9px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
-.ch.corner{background:#141418;font-size:7px;display:flex;align-items:flex-end;padding-bottom:9px}
-.ch .dn{font-size:16px;font-weight:800;display:block;line-height:1;margin-bottom:1px}
-.ch.td-h{background:var(--adit)}.ch.we-h{background:#2c2c30}
-.dlbl{background:var(--white);padding:8px 7px;display:flex;flex-direction:column;justify-content:center;border-left:3px solid transparent}
-.dlbl.adit{border-left-color:var(--adit)}.dlbl.najwa{border-left-color:var(--najwa)}.dlbl.dio{border-left-color:var(--dio)}
-.dav{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;margin-bottom:3px}
-.dav.adit{background:var(--adit-l);color:var(--adit)}.dav.najwa{background:var(--najwa-l);color:var(--najwa)}.dav.dio{background:var(--dio-l);color:var(--dio)}
-.dname{font-size:10px;font-weight:700}.drole{font-size:7px;text-transform:uppercase;color:var(--muted);margin-top:1px}
-.dcell{background:var(--white);padding:6px;min-height:90px;display:flex;flex-direction:column;gap:3px}
-.dcell.we{background:#f7f7f3}
-.tc{display:flex;align-items:flex-start;gap:3px;padding:4px 5px;border-radius:5px;border:1px solid transparent;cursor:pointer;user-select:none}
-.tc.adit{background:var(--adit-l);border-color:var(--adit-m)}.tc.najwa{background:var(--najwa-l);border-color:var(--najwa-m)}.tc.dio{background:var(--dio-l);border-color:var(--dio-m)}
-.tc.done{opacity:.4}.tc.done .tc-t{text-decoration:line-through}
-.chk{width:12px;height:12px;border-radius:3px;border:1.5px solid currentColor;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:800}
-.tc.adit .chk{color:var(--adit)}.tc.najwa .chk{color:var(--najwa)}.tc.dio .chk{color:var(--dio)}
-.tc.done.adit .chk{background:var(--adit);color:#fff;border-color:var(--adit)}
-.tc.done.najwa .chk{background:var(--najwa);color:#fff;border-color:var(--najwa)}
-.tc.done.dio .chk{background:var(--dio);color:#fff;border-color:var(--dio)}
-.tc-b{flex:1;min-width:0}
-.tc-t{font-size:9px;font-weight:500;line-height:1.3;color:var(--ink)}
-.tc-tags{display:flex;gap:2px;flex-wrap:wrap;margin-top:2px}
-.tt{font-size:6px;font-weight:700;text-transform:uppercase;padding:1px 3px;border-radius:3px}
-.tt.shopee{background:#ffe4cc;color:#b84400}.tt.tiktok{background:#d4fde4;color:#006830}
-.tt.ig{background:#ffd6eb;color:#9c0060}.tt.yt{background:#ffd6d6;color:#9c0000}
-.tt.x{background:#d6edff;color:#004da0}.tt.fb{background:#d6e0ff;color:#002da0}
-.tt.threads{background:#ecdaff;color:#4c00a0}.tt.produk{background:#fff0d6;color:#8c4a00}
-.tt.konten{background:#e8ffd6;color:#2a6a00}.tt.edit{background:#d6eeff;color:#004888}
-.tc-del{font-size:9px;color:var(--muted);padding:0 3px;cursor:pointer;margin-left:auto;flex-shrink:0}
-.add-btn{width:100%;padding:4px;border:1.5px dashed var(--border2);border-radius:5px;background:transparent;color:var(--muted);font-size:8px;cursor:pointer;font-family:inherit;margin-top:auto}
-.pt{background:var(--white);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:var(--sh);margin-bottom:14px}
-.pt-h{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid var(--border)}
-.pt-h h3{font-size:13px;font-weight:800}
-table{width:100%;border-collapse:collapse}
-th{background:var(--bg);padding:6px 9px;text-align:left;font-size:7px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}
-td{padding:7px 9px;border-bottom:1px solid var(--border);font-size:11px;vertical-align:middle}
-tr:last-child td{border-bottom:none}
-.sb{display:inline-flex;padding:2px 6px;border-radius:20px;font-size:8px;font-weight:700;text-transform:uppercase}
-.sb.riset{background:#fff3e0;color:#b05500}.sb.checkout{background:#e0f0ff;color:#005bb0}
-.sb.menunggu{background:#fff0eb;color:#c43000}.sb.datang{background:#edfff5;color:#006830}
-.sb.konten{background:var(--dio-l);color:var(--dio)}.sb.editing{background:var(--najwa-l);color:var(--najwa)}
-.sb.upload{background:#d4fde4;color:#005a20}.sb.live{background:#c8fcd8;color:#003d15}.sb.review{background:#ffe0e0;color:#a00000}
-.sdots{display:flex;gap:2px}
-.sd{width:5px;height:5px;border-radius:50%;background:var(--border)}.sd.done{background:var(--green)}.sd.act{background:var(--amber)}
-.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
-.rc{background:var(--white);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:var(--sh)}
-.rc-h{padding:10px 12px}
-.rc-h.adit{background:var(--adit)}.rc-h.najwa{background:var(--najwa)}.rc-h.dio{background:var(--dio)}
-.rn{font-size:13px;font-weight:800;color:#fff}.rr{font-size:7px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-top:1px}
-.rc-b{padding:10px 12px}
-.rs{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border);font-size:11px}
-.rs:last-child{border-bottom:none}.rv{font-weight:700}
-.ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;align-items:flex-end;justify-content:center}
-.ovl.on{display:flex}
-.modal{background:var(--white);border-radius:16px 16px 0 0;padding:20px;width:100%;max-width:500px;box-shadow:var(--sh2);animation:slideUp .25s ease;max-height:88vh;overflow-y:auto}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-h{font-size:15px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.dpill{font-size:8px;padding:2px 6px;border-radius:4px;text-transform:uppercase;font-weight:700}
-.dpill.adit{background:var(--adit-l);color:var(--adit)}.dpill.najwa{background:var(--najwa-l);color:var(--najwa)}.dpill.dio{background:var(--dio-l);color:var(--dio)}
-.fg{margin-bottom:11px}
-.fl2{display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
-.fi2,.fsel{width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--bg);outline:none}
-.fi2:focus,.fsel:focus{border-color:var(--ink);background:var(--white)}
-.tag-row{display:flex;gap:4px;flex-wrap:wrap}
-.to{padding:3px 7px;border-radius:4px;font-size:9px;font-weight:700;text-transform:uppercase;cursor:pointer;border:1.5px solid transparent}
-.to.sel{border-color:var(--ink)!important}
-.m-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
-.btn{display:inline-flex;align-items:center;gap:4px;padding:7px 13px;border-radius:7px;border:1.5px solid var(--border2);background:var(--white);color:var(--ink);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
-.btn.pri{background:var(--ink);color:#fff;border-color:var(--ink)}
-.btn.sm{padding:4px 8px;font-size:10px}
-.btn.danger{color:var(--red);border-color:var(--red)}
-.guide-card{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:16px;box-shadow:var(--sh);margin-bottom:12px}
-.guide-card h3{font-size:12px;font-weight:800;margin-bottom:8px}
-.gstep{display:flex;gap:7px;margin-bottom:6px;padding:8px 10px;background:var(--bg);border-radius:7px;align-items:flex-start}
-.gsn{background:var(--ink);color:#fff;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;flex-shrink:0}
-.gstep.blue .gsn{background:var(--najwa)}
-.gstep p{font-size:11px;color:#333;line-height:1.5;margin:0}
-.banner{display:none;position:fixed;top:58px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:7px 16px;border-radius:20px;font-size:11px;font-weight:600;z-index:1000;box-shadow:var(--sh2);white-space:nowrap;pointer-events:none}
-.banner.show{display:block}
-#cdialog{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1100;align-items:center;justify-content:center}
-#cdialog.on{display:flex}
-.cdbox{background:#fff;border-radius:14px;padding:24px;width:280px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.2)}
-@media(max-width:540px){.stats{grid-template-columns:repeat(2,1fr)}.rg{grid-template-columns:1fr}}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+
+/* SETUP */
+#pg-setup{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px}
+.setup-card{background:var(--white);border-radius:16px;padding:24px;width:100%;max-width:380px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.setup-logo{font-size:24px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.setup-logo span{color:var(--adit)}
+.setup-sub{font-size:12px;color:var(--muted);margin-bottom:24px}
+.setup-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
+.who-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.who-btn{padding:16px 8px;border-radius:10px;border:2px solid var(--border);background:var(--white);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;text-align:center}
+.who-btn.on-adit{background:var(--adit);color:#fff;border-color:var(--adit)}
+.who-btn.on-najwa{background:var(--najwa);color:#fff;border-color:var(--najwa)}
+.who-btn.on-dio{background:var(--dio);color:#fff;border-color:var(--dio)}
+.who-btn.on-owner{background:var(--ink);color:#fff;border-color:var(--ink)}
+.setup-enter{width:100%;padding:14px;border-radius:10px;border:none;background:var(--border);color:#999;font-family:inherit;font-size:15px;font-weight:700;cursor:not-allowed}
+.setup-enter.ok{background:var(--ink);color:#fff;cursor:pointer}
+
+/* APP */
+#pg-app{display:none;flex-direction:column;height:100vh}
+
+/* HEADER */
+.hdr{background:var(--ink);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.hdr-left{font-size:15px;font-weight:800}
+.hdr-left span{font-weight:400;font-size:11px;color:#aaa;margin-left:6px}
+.hdr-right{display:flex;align-items:center;gap:8px}
+.sync-info{display:flex;align-items:center;gap:5px}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:#555}
+.sync-dot.ok{background:var(--green)}.sync-dot.busy{background:var(--amber)}.sync-dot.err{background:var(--red)}
+.sync-time{font-size:9px;color:#aaa}
+.hbtn{padding:5px 10px;border-radius:6px;border:1px solid #444;background:transparent;color:#ccc;font-family:inherit;font-size:10px;font-weight:600;cursor:pointer}
+
+/* WEEK NAV */
+.wnav{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:var(--white);border-bottom:1px solid var(--border);flex-shrink:0}
+.wnav-btn{padding:6px 14px;border-radius:6px;border:1.5px solid var(--border);background:var(--bg);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer}
+.wnav-lbl{font-size:12px;font-weight:700;color:var(--ink)}
+
+/* TABS */
+.tabs{display:flex;border-bottom:2px solid var(--border);flex-shrink:0;background:var(--white)}
+.tab-btn{flex:1;padding:10px 4px;border:none;background:transparent;font-family:inherit;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px}
+.tab-btn.on{color:var(--ink);border-bottom-color:var(--ink)}
+
+/* CONTENT */
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.page{display:none;padding:12px 16px 80px}
+.page.on{display:block}
+
+/* PERSON SECTION */
+.person-block{margin-bottom:16px;border-radius:12px;overflow:hidden;border:1.5px solid var(--border)}
+.person-head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border)}
+.person-head.adit{background:var(--adit-bg);border-left:4px solid var(--adit)}
+.person-head.najwa{background:var(--najwa-bg);border-left:4px solid var(--najwa)}
+.person-head.dio{background:var(--dio-bg);border-left:4px solid var(--dio)}
+.person-name{font-size:14px;font-weight:700}
+.person-name.adit{color:var(--adit)}.person-name.najwa{color:var(--najwa)}.person-name.dio{color:var(--dio)}
+.person-meta{font-size:11px;color:var(--muted)}
+.task-list{background:var(--white)}
+.task-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer}
+.task-item:last-child{border-bottom:none}
+.task-item:active{background:var(--bg)}
+.task-cb{width:20px;height:20px;border-radius:5px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+.task-item.done .task-cb{background:var(--green);border-color:var(--green);color:#fff}
+.task-item.done .task-text{text-decoration:line-through;color:var(--muted)}
+.task-text{flex:1;font-size:13px;line-height:1.4}
+.task-del{width:28px;height:28px;border-radius:6px;border:none;background:transparent;color:var(--muted);font-size:16px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.task-del:active{background:#fee;color:var(--red)}
+.add-task-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg)}
+.add-task-inp{flex:1;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;background:var(--white);outline:none}
+.add-task-inp:focus{border-color:var(--ink)}
+.add-task-btn{padding:8px 12px;border-radius:8px;border:none;background:var(--ink);color:#fff;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0}
+
+/* PRODUCTS */
+.prod-card{background:var(--white);border-radius:12px;border:1.5px solid var(--border);margin-bottom:10px;overflow:hidden}
+.prod-head{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.prod-name{font-size:14px;font-weight:700}
+.prod-pic{font-size:11px;color:var(--muted);margin-top:2px}
+.prod-body{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.prod-status{padding:4px 10px;border:1.5px solid var(--border);border-radius:20px;font-family:inherit;font-size:11px;font-weight:600;background:var(--bg);cursor:pointer;flex:1}
+.prod-del{width:32px;height:32px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);color:var(--muted);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.prod-del:active{background:#fee;color:var(--red);border-color:var(--red)}
+.status-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;text-transform:uppercase}
+.s-riset{background:#fff3e0;color:#b05500}.s-checkout{background:#e0f0ff;color:#005bb0}
+.s-menunggu{background:#fff0eb;color:#c43000}.s-datang{background:#edfff5;color:#006830}
+.s-konten{background:#f5efff;color:#5500b0}.s-editing{background:#eff5ff;color:#004db0}
+.s-upload{background:#d4fde4;color:#005a20}.s-live{background:#c8fcd8;color:#003d15}.s-review{background:#ffe0e0;color:#a00000}
+
+/* ADD PROD FORM */
+.add-prod-form{background:var(--white);border-radius:12px;border:1.5px solid var(--border);padding:14px;margin-bottom:16px}
+.add-prod-form h4{font-size:13px;font-weight:700;margin-bottom:12px}
+.form-row{margin-bottom:10px}
+.form-lbl{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.form-inp,.form-sel{width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--bg);outline:none}
+.form-inp:focus,.form-sel:focus{border-color:var(--ink);background:var(--white)}
+.form-btn{width:100%;padding:12px;border-radius:8px;border:none;background:var(--ink);color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px}
+
+/* REPORT */
+.report-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.report-card{background:var(--white);border-radius:12px;border:1.5px solid var(--border);overflow:hidden}
+.report-card-head{padding:10px 12px;color:#fff;font-weight:800;font-size:14px}
+.report-card-head.adit{background:var(--adit)}.report-card-head.najwa{background:var(--najwa)}.report-card-head.dio{background:var(--dio)}
+.report-card-body{padding:10px 12px}
+.report-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:1px solid var(--border)}
+.report-row:last-child{border-bottom:none}
+.report-val{font-weight:700}
+.prog-bar{height:6px;background:var(--border);border-radius:6px;overflow:hidden;margin-top:8px}
+.prog-fill{height:100%;border-radius:6px;transition:width .4s}
+
+/* CONFIRM DIALOG */
+#confirm-dialog{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center}
+#confirm-dialog.show{display:flex}
+.confirm-box{background:#fff;border-radius:14px;padding:24px;width:280px;text-align:center}
+.confirm-box h4{font-size:16px;font-weight:700;margin-bottom:8px}
+.confirm-box p{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.5}
+.confirm-btns{display:flex;gap:10px}
+.confirm-no{flex:1;padding:10px;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.confirm-yes{flex:1;padding:10px;border-radius:8px;border:none;background:var(--red);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
+
+/* TOAST */
+.toast{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 20px;border-radius:24px;font-size:13px;font-weight:600;z-index:1000;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.toast.show{display:block}
+
+@media(max-width:480px){.report-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<div id="setup">
-<div class="setup-box">
-  <div class="logo">Affiliate <span>Monitor</span></div>
-  <div class="sub">Dashboard tim affiliate</div>
-  <div class="sc2">
-    <h4>Kamu siapa?</h4>
-    <div class="who-grid">
-      <button class="wb" id="wb-adit">Adit</button>
-      <button class="wb" id="wb-najwa">Najwa</button>
-      <button class="wb" id="wb-dio">Dio</button>
-      <button class="wb" id="wb-owner">Owner</button>
+<!-- SETUP -->
+<div id="pg-setup">
+  <div class="setup-card">
+    <div class="setup-logo">Affiliate <span>Monitor</span></div>
+    <div class="setup-sub">Dashboard tim affiliate — pilih nama untuk masuk</div>
+    <div class="setup-label">Kamu siapa?</div>
+    <div class="who-btns">
+      <button class="who-btn" id="wb-adit">👤 Adit</button>
+      <button class="who-btn" id="wb-najwa">👤 Najwa</button>
+      <button class="who-btn" id="wb-dio">👤 Dio</button>
+      <button class="who-btn" id="wb-owner">👑 Owner</button>
     </div>
+    <button class="setup-enter" id="setup-enter">Pilih nama dulu ↑</button>
   </div>
-  <button class="start" id="start-btn">Pilih nama dulu</button>
-  <p class="hint">Sync otomatis via Supabase</p>
-</div>
 </div>
 
-<div id="app">
+<!-- APP -->
+<div id="pg-app">
   <div class="hdr">
-    <div class="hdr-title">Affiliate <span id="hdr-sub">Monitor</span></div>
-    <div class="hdr-r">
-      <span class="slbl" id="slbl"></span>
-      <div class="dot" id="sdot"></div>
-      <button class="hbtn" id="btn-sync">Sync</button>
-      <button class="hbtn" id="btn-logout">Logout</button>
-      <button class="hbtn" id="btn-reset">Reset</button>
+    <div class="hdr-left">AffMonitor <span id="hdr-who"></span></div>
+    <div class="hdr-right">
+      <div class="sync-info">
+        <div class="sync-dot" id="sync-dot"></div>
+        <span class="sync-time" id="sync-time">—</span>
+      </div>
+      <button class="hbtn" id="btn-sync">↻ Sync</button>
+      <button class="hbtn" id="btn-logout">Keluar</button>
     </div>
   </div>
+
   <div class="wnav">
-    <button class="wnav-btn" id="btn-prev">Lalu</button>
+    <button class="wnav-btn" id="btn-prev">‹ Lalu</button>
     <span class="wnav-lbl" id="wnav-lbl">Minggu Ini</span>
-    <button class="wnav-btn" id="btn-next">Depan</button>
+    <button class="wnav-btn" id="btn-next">Depan ›</button>
   </div>
-  <div class="stats">
-    <div class="sc"><div class="sc-l">Selesai</div><div class="sc-v" id="s-done">0</div><div class="sc-s" id="s-dones">dari 0</div><div class="sc-bar"><div class="sc-f" id="sf-done" style="background:var(--green);width:0%"></div></div></div>
-    <div class="sc"><div class="sc-l">Produk</div><div class="sc-v" id="s-prod">0</div><div class="sc-s">aktif</div><div class="sc-bar"><div class="sc-f" id="sf-prod" style="background:var(--adit);width:0%"></div></div></div>
-    <div class="sc"><div class="sc-l">Live</div><div class="sc-v" id="s-live">0</div><div class="sc-s">konten</div><div class="sc-bar"><div class="sc-f" id="sf-live" style="background:var(--najwa);width:0%"></div></div></div>
-    <div class="sc"><div class="sc-l">Sebar</div><div class="sc-v" id="s-share">0</div><div class="sc-s">Dio done</div><div class="sc-bar"><div class="sc-f" id="sf-share" style="background:var(--dio);width:0%"></div></div></div>
-  </div>
+
   <div class="tabs">
-    <button class="tab on" id="tb-calendar">Kalender</button>
-    <button class="tab" id="tb-products">Produk</button>
-    <button class="tab" id="tb-report">Laporan</button>
-    <button class="tab" id="tb-install">Install</button>
+    <button class="tab-btn on" id="tab-tasks">✅ Tugas</button>
+    <button class="tab-btn" id="tab-products">🛍 Produk</button>
+    <button class="tab-btn" id="tab-report">📊 Laporan</button>
   </div>
+
   <div class="content">
-    <div class="view on" id="view-calendar">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-        <div class="legend">
-          <div class="li all on" id="fi-all">Semua</div>
-          <div class="li adit" id="fi-adit">Adit</div>
-          <div class="li najwa" id="fi-najwa">Najwa</div>
-          <div class="li dio" id="fi-dio">Dio</div>
+
+    <!-- TASKS PAGE -->
+    <div class="page on" id="pg-tasks"></div>
+
+    <!-- PRODUCTS PAGE -->
+    <div class="page" id="pg-products">
+      <div class="add-prod-form">
+        <h4>➕ Tambah Produk</h4>
+        <div class="form-row">
+          <label class="form-lbl">Nama Produk</label>
+          <input class="form-inp" id="pf-name" placeholder="Nama produk...">
         </div>
-        <button class="btn" id="btn-add-task">+ Tugas</button>
+        <div class="form-row">
+          <label class="form-lbl">PIC</label>
+          <select class="form-sel" id="pf-pic">
+            <option value="Adit">Adit</option>
+            <option value="Najwa">Najwa</option>
+            <option value="Dio">Dio</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-lbl">Status</label>
+          <select class="form-sel" id="pf-status">
+            <option value="riset">Riset</option>
+            <option value="checkout">Check Out</option>
+            <option value="menunggu">Menunggu Datang</option>
+            <option value="datang">Produk Datang</option>
+            <option value="konten">Buat Konten</option>
+            <option value="editing">Editing</option>
+            <option value="upload">Upload</option>
+            <option value="live">Live</option>
+            <option value="review">Review</option>
+          </select>
+        </div>
+        <button class="form-btn" id="btn-add-prod">Tambah Produk</button>
       </div>
-      <div class="cal-outer"><div id="cal-grid"></div></div>
+      <div id="prod-list"></div>
     </div>
-    <div class="view" id="view-products">
-      <div class="pt">
-        <div class="pt-h"><h3>Tracker Produk</h3><button class="btn" id="btn-add-prod">+ Produk</button></div>
-        <div style="overflow-x:auto"><table><thead><tr><th>#</th><th>Nama</th><th>PIC</th><th>Checkout</th><th>Datang</th><th>Status</th><th>Progress</th><th></th></tr></thead><tbody id="prod-body"></tbody></table></div>
-      </div>
+
+    <!-- REPORT PAGE -->
+    <div class="page" id="pg-report">
+      <div class="report-grid" id="report-grid"></div>
     </div>
-    <div class="view" id="view-report">
-      <div class="rg" id="rep-cards"></div>
-      <div class="pt">
-        <div class="pt-h"><h3>Rekap Mingguan</h3></div>
-        <div style="overflow-x:auto"><table><thead><tr><th>Divisi</th><th>Total</th><th>Selesai</th><th>Belum</th><th>Progress</th></tr></thead><tbody id="rep-rows"></tbody></table></div>
-      </div>
-    </div>
-    <div class="view" id="view-install">
-      <div class="guide-card">
-        <h3>iPhone — Add to Home Screen</h3>
-        <div class="gstep"><div class="gsn">1</div><p>Buka URL di Safari</p></div>
-        <div class="gstep"><div class="gsn">2</div><p>Tap Share lalu Add to Home Screen</p></div>
-        <div class="gstep"><div class="gsn">3</div><p>Tap Add</p></div>
-      </div>
-      <div class="guide-card">
-        <h3>Android — Add to Home Screen</h3>
-        <div class="gstep blue"><div class="gsn">1</div><p>Buka URL di Chrome</p></div>
-        <div class="gstep blue"><div class="gsn">2</div><p>Tap titik tiga lalu Add to Home screen</p></div>
-        <div class="gstep blue"><div class="gsn">3</div><p>Konfirmasi</p></div>
-      </div>
+
+  </div>
+</div>
+
+<!-- CONFIRM -->
+<div id="confirm-dialog">
+  <div class="confirm-box">
+    <h4>Hapus?</h4>
+    <p id="confirm-msg">Item ini akan dihapus permanen.</p>
+    <div class="confirm-btns">
+      <button class="confirm-no" id="confirm-no">Batal</button>
+      <button class="confirm-yes" id="confirm-yes">Hapus</button>
     </div>
   </div>
 </div>
 
-<div id="cdialog">
-  <div class="cdbox">
-    <div style="font-size:28px;margin-bottom:8px">🗑</div>
-    <div style="font-size:14px;font-weight:700;margin-bottom:6px">Hapus tugas?</div>
-    <div style="font-size:12px;color:var(--muted);margin-bottom:18px" id="cdtext"></div>
-    <div style="display:flex;gap:10px">
-      <button id="cd-no" style="flex:1;padding:10px;border-radius:8px;border:1.5px solid var(--border2);background:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer">Batal</button>
-      <button id="cd-yes" style="flex:1;padding:10px;border-radius:8px;border:none;background:var(--red);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">Hapus</button>
-    </div>
-  </div>
-</div>
-
-<div class="ovl" id="tm">
-  <div class="modal">
-    <div class="modal-h">Tambah Tugas <div class="dpill" id="tm-pill"></div></div>
-    <div class="fg"><label class="fl2">Divisi</label>
-      <select class="fsel" id="tm-div">
-        <option value="adit">Adit</option><option value="najwa">Najwa</option><option value="dio">Dio</option>
-      </select>
-    </div>
-    <div class="fg"><label class="fl2">Hari</label>
-      <select class="fsel" id="tm-day">
-        <option value="0">Senin</option><option value="1">Selasa</option><option value="2">Rabu</option>
-        <option value="3">Kamis</option><option value="4">Jumat</option><option value="5">Sabtu</option><option value="6">Minggu</option>
-      </select>
-    </div>
-    <div class="fg"><label class="fl2">Tugas</label><input class="fi2" id="tm-text" placeholder="Deskripsi tugas..."></div>
-    <div class="fg"><label class="fl2">Tag</label>
-      <div class="tag-row" id="tag-row">
-        <div class="to shopee" data-tag="shopee">Shopee</div>
-        <div class="to tiktok" data-tag="tiktok">TikTok</div>
-        <div class="to ig" data-tag="ig">IG</div>
-        <div class="to yt" data-tag="yt">YouTube</div>
-        <div class="to x" data-tag="x">X</div>
-        <div class="to fb" data-tag="fb">Facebook</div>
-        <div class="to threads" data-tag="threads">Threads</div>
-        <div class="to produk" data-tag="produk">Produk</div>
-        <div class="to konten" data-tag="konten">Konten</div>
-        <div class="to edit" data-tag="edit">Edit</div>
-      </div>
-    </div>
-    <div class="m-btns">
-      <button class="btn" id="tm-cancel">Batal</button>
-      <button class="btn pri" id="tm-save">Simpan</button>
-    </div>
-  </div>
-</div>
-
-<div class="ovl" id="pm">
-  <div class="modal">
-    <div class="modal-h">Tambah Produk</div>
-    <div class="fg"><label class="fl2">Nama Produk</label><input class="fi2" id="pm-name" placeholder="Nama produk..."></div>
-    <div class="fg"><label class="fl2">PIC</label>
-      <select class="fsel" id="pm-pic"><option>Adit</option><option>Najwa</option><option>Dio</option></select>
-    </div>
-    <div class="fg"><label class="fl2">Tgl Checkout</label><input class="fi2" id="pm-co" type="date"></div>
-    <div class="fg"><label class="fl2">Est. Datang</label><input class="fi2" id="pm-arr" type="date"></div>
-    <div class="fg"><label class="fl2">Status</label>
-      <select class="fsel" id="pm-st">
-        <option value="riset">Riset</option><option value="checkout">Check Out</option>
-        <option value="menunggu">Menunggu Datang</option><option value="datang">Produk Datang</option>
-        <option value="konten">Buat Konten</option><option value="editing">Editing</option>
-        <option value="upload">Upload</option><option value="live">Live</option><option value="review">Review</option>
-      </select>
-    </div>
-    <div class="m-btns">
-      <button class="btn" id="pm-cancel">Batal</button>
-      <button class="btn pri" id="pm-save">Simpan</button>
-    </div>
-  </div>
-</div>
-
-<div class="banner" id="banner"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-var SB_URL = 'https://knvmvdjgsdikoglhcaxr.supabase.co/rest/v1/appdata';
-var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtudm12ZGpnc2Rpa29nbGhjYXhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NTM4MTksImV4cCI6MjA5MjMyOTgxOX0.QHnaq09tGBcfb5UwyrQFTMTQbimxyRGriD-_mPxntB8';
+// ── CONFIG ──────────────────────────────────────────
+var SB = 'https://knvmvdjgsdikoglhcaxr.supabase.co/rest/v1/appdata';
+var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtudm12ZGpnc2Rpa29nbGhjYXhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NTM4MTksImV4cCI6MjA5MjMyOTgxOX0.QHnaq09tGBcfb5UwyrQFTMTQbimxyRGriD-_mPxntB8';
 
-var DAYS = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
-var WKEND = [5,6];
 var DIVS = [
-  {id:'adit',name:'Adit',role:'Produk & Konten'},
-  {id:'najwa',name:'Najwa',role:'Edit & Ops'},
-  {id:'dio',name:'Dio',role:'Media Sosial'}
+  {id:'adit', name:'Adit', role:'Produk & Konten', color:'var(--adit)'},
+  {id:'najwa',name:'Najwa',role:'Edit & Ops',      color:'var(--najwa)'},
+  {id:'dio',  name:'Dio',  role:'Media Sosial',    color:'var(--dio)'}
 ];
+var DAYS = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
 var STAGES = ['riset','checkout','menunggu','datang','konten','editing','upload','live','review'];
 var SL = {riset:'Riset',checkout:'Checkout',menunggu:'Menunggu',datang:'Datang',konten:'Konten',editing:'Editing',upload:'Upload',live:'Live',review:'Review'};
-var DEF = [
-  {id:1,div:'adit',day:0,text:'Riset produk trending minggu ini',tags:['produk'],done:false},
-  {id:2,div:'adit',day:0,text:'Ajukan list produk ke Najwa',tags:['produk'],done:false},
-  {id:3,div:'adit',day:1,text:'Buat konten produk batch 1',tags:['konten'],done:false},
-  {id:4,div:'adit',day:1,text:'Shooting konten produk',tags:['konten'],done:false},
-  {id:5,div:'adit',day:2,text:'Buat konten produk batch 2',tags:['konten'],done:false},
-  {id:6,div:'adit',day:3,text:'Riset produk minggu depan',tags:['produk'],done:false},
-  {id:7,div:'adit',day:4,text:'Review performance konten',tags:['produk'],done:false},
-  {id:8,div:'najwa',day:0,text:'Proses checkout produk',tags:['produk','shopee'],done:false},
-  {id:9,div:'najwa',day:1,text:'Edit video konten batch 1',tags:['edit','tiktok'],done:false},
-  {id:10,div:'najwa',day:2,text:'Edit video konten batch 2',tags:['edit'],done:false},
-  {id:11,div:'najwa',day:2,text:'Upload ke TikTok Affiliate',tags:['tiktok'],done:false},
-  {id:12,div:'najwa',day:3,text:'Upload ke Shopee Affiliate',tags:['shopee'],done:false},
-  {id:13,div:'najwa',day:3,text:'Kirim link ke Dio',tags:['tiktok','shopee'],done:false},
-  {id:14,div:'dio',day:0,text:'Review engagement minggu lalu',tags:['ig','x'],done:false},
-  {id:15,div:'dio',day:2,text:'Siapkan caption penyebaran link',tags:['ig','threads'],done:false},
-  {id:16,div:'dio',day:3,text:'Sebar link TikTok ke IG',tags:['ig'],done:false},
-  {id:17,div:'dio',day:3,text:'Sebar link Shopee ke Threads & FB',tags:['threads','fb'],done:false},
-  {id:18,div:'dio',day:4,text:'Monitor engagement',tags:['ig','x'],done:false},
-  {id:19,div:'dio',day:4,text:'Laporan reach ke owner',tags:['ig','fb'],done:false}
+
+var DEF_TASKS = [
+  {id:1,div:'adit',day:0,text:'Riset produk trending minggu ini',done:false},
+  {id:2,div:'adit',day:0,text:'Ajukan list produk ke Najwa',done:false},
+  {id:3,div:'adit',day:1,text:'Buat konten produk batch 1',done:false},
+  {id:4,div:'adit',day:1,text:'Shooting konten produk',done:false},
+  {id:5,div:'adit',day:2,text:'Buat konten produk batch 2',done:false},
+  {id:6,div:'adit',day:3,text:'Riset produk untuk minggu depan',done:false},
+  {id:7,div:'adit',day:4,text:'Review performance konten',done:false},
+  {id:8,div:'najwa',day:0,text:'Proses checkout produk dari Adit',done:false},
+  {id:9,div:'najwa',day:1,text:'Edit video konten batch 1',done:false},
+  {id:10,div:'najwa',day:2,text:'Edit video konten batch 2',done:false},
+  {id:11,div:'najwa',day:2,text:'Upload ke TikTok Affiliate',done:false},
+  {id:12,div:'najwa',day:3,text:'Upload ke Shopee Affiliate',done:false},
+  {id:13,div:'najwa',day:3,text:'Kirim link ke Dio',done:false},
+  {id:14,div:'dio',day:0,text:'Review engagement minggu lalu',done:false},
+  {id:15,div:'dio',day:2,text:'Siapkan caption penyebaran link',done:false},
+  {id:16,div:'dio',day:3,text:'Sebar link TikTok ke IG',done:false},
+  {id:17,div:'dio',day:3,text:'Sebar link Shopee ke Threads & FB',done:false},
+  {id:18,div:'dio',day:4,text:'Monitor engagement & balas komentar',done:false},
+  {id:19,div:'dio',day:4,text:'Laporan reach ke owner',done:false}
 ];
 
+// ── STATE ────────────────────────────────────────────
 var who = '';
 var tasks = [];
 var products = [];
-var filt = 'all';
-var curView = 'calendar';
-var pendingDel = -1;
-var selTags = [];
 var weekOff = 0;
-var syncTimer = null;
-var banTimer = null;
+var curTab = 'tasks';
+var confirmCb = null;
+var toastTimer = null;
+
 var TODAY = new Date();
-var todayIdx = (function(){ var d = TODAY.getDay(); return d === 0 ? 6 : d - 1; }());
-var MON = getMon(0);
+var todayDayIdx = (function(){ var d = TODAY.getDay(); return d === 0 ? 6 : d - 1; }());
 
 function getMon(off) {
   var d = new Date(TODAY);
@@ -376,499 +299,438 @@ function getMon(off) {
   d.setDate(d.getDate() - day + (day === 0 ? -6 : 1) + off * 7);
   return d;
 }
+var MON = getMon(0);
 
+// ── STORAGE ──────────────────────────────────────────
 function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
 function lsDel(k){ try{ localStorage.removeItem(k); }catch(e){} }
 
-function sbGet() {
-  return fetch(SB_URL + '?select=key,value&apikey=' + SB_KEY);
+// ── TOAST ────────────────────────────────────────────
+function toast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  if (toastTimer) { clearTimeout(toastTimer); }
+  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2500);
 }
 
-function sbUpsert(key, val) {
-  return fetch(SB_URL + '?apikey=' + SB_KEY + '&on_conflict=key', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Prefer': 'resolution=merge-duplicates,return=minimal'
-    },
-    body: JSON.stringify({key: key, value: val})
-  });
+// ── CONFIRM ──────────────────────────────────────────
+function confirm(msg, cb) {
+  document.getElementById('confirm-msg').textContent = msg;
+  document.getElementById('confirm-dialog').className = 'show';
+  confirmCb = cb;
 }
 
-function setSyncState(cls, lbl) {
-  document.getElementById('sdot').className = 'dot' + (cls ? ' ' + cls : '');
-  document.getElementById('slbl').textContent = lbl || '';
+// ── SYNC STATE ───────────────────────────────────────
+function setSyncState(s, lbl) {
+  document.getElementById('sync-dot').className = 'sync-dot' + (s ? ' ' + s : '');
+  document.getElementById('sync-time').textContent = lbl || '—';
 }
 
-function doFetch() {
-  setSyncState('busy','Syncing...');
-  sbGet()
+// ── SUPABASE ─────────────────────────────────────────
+function sbRead(cb) {
+  setSyncState('busy', 'Syncing...');
+  fetch(SB + '?select=key,value&apikey=' + KEY)
   .then(function(r) {
     if (!r.ok) { throw new Error('HTTP ' + r.status); }
     return r.json();
   })
   .then(function(rows) {
-    var i, t, p;
+    var i, parsed;
     for (i = 0; i < rows.length; i++) {
-      if (rows[i].key === 'tasks') {
-        t = JSON.parse(rows[i].value);
-        if (t && t.length > 0) { tasks = t; lsSet('aff_tasks', rows[i].value); }
-      }
-      if (rows[i].key === 'products') {
-        p = JSON.parse(rows[i].value);
-        if (p) { products = p; lsSet('aff_prods', rows[i].value); }
-      }
+      try {
+        parsed = JSON.parse(rows[i].value);
+        if (rows[i].key === 'tasks' && parsed && parsed.length > 0) {
+          tasks = parsed;
+          lsSet('aff_tasks', rows[i].value);
+        }
+        if (rows[i].key === 'products' && parsed) {
+          products = parsed;
+          lsSet('aff_prods', rows[i].value);
+        }
+      } catch(e) {}
     }
-    var ts = new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-    setSyncState('ok', ts);
-    render();
+    var t = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
+    setSyncState('ok', t);
+    if (cb) { cb(); }
   })
   .catch(function(err) {
-    setSyncState('err','Gagal');
-    showBanner('Sync gagal: ' + err.message);
+    setSyncState('err', 'Gagal');
+    toast('Sync gagal: ' + err.message);
   });
 }
 
-function doPush() {
-  setSyncState('busy','Menyimpan...');
-  sbUpsert('tasks', JSON.stringify(tasks))
-  .then(function(r) {
-    if (!r.ok) { throw new Error('HTTP ' + r.status); }
-    return sbUpsert('products', JSON.stringify(products));
+function sbWrite(cb) {
+  setSyncState('busy', 'Menyimpan...');
+  fetch(SB + '?apikey=' + KEY + '&on_conflict=key', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=minimal'},
+    body: JSON.stringify({key:'tasks', value: JSON.stringify(tasks)})
   })
   .then(function(r) {
     if (!r.ok) { throw new Error('HTTP ' + r.status); }
-    var ts = new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-    setSyncState('ok', ts);
-    showBanner('Tersimpan!');
-    setTimeout(doFetch, 1500);
+    return fetch(SB + '?apikey=' + KEY + '&on_conflict=key', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=minimal'},
+      body: JSON.stringify({key:'products', value: JSON.stringify(products)})
+    });
+  })
+  .then(function(r) {
+    if (!r.ok) { throw new Error('HTTP ' + r.status); }
+    var t = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
+    setSyncState('ok', t);
+    toast('✅ Tersimpan!');
+    if (cb) { cb(); }
   })
   .catch(function(err) {
-    setSyncState('err','Gagal');
-    showBanner('Gagal simpan: ' + err.message);
+    setSyncState('err', 'Gagal');
+    toast('Gagal simpan: ' + err.message);
   });
 }
 
-function pickWho(w) {
-  who = w;
-  var btns = document.querySelectorAll('.wb');
-  var i;
-  for (i = 0; i < btns.length; i++) { btns[i].className = 'wb'; }
-  document.getElementById('wb-' + w).className = 'wb sel-' + w;
-  var sb = document.getElementById('start-btn');
-  sb.textContent = 'Masuk sebagai ' + w.charAt(0).toUpperCase() + w.slice(1);
-  sb.className = 'start ready';
-}
-
-function launch() {
-  document.getElementById('setup').style.display = 'none';
-  document.getElementById('app').style.display = 'flex';
-  var lbl = {adit:'Adit',najwa:'Najwa',dio:'Dio',owner:'Owner'};
-  document.getElementById('hdr-sub').textContent = lbl[who] || who;
-  var lt = lsGet('aff_tasks');
-  var lp = lsGet('aff_prods');
-  tasks = lt ? JSON.parse(lt) : JSON.parse(JSON.stringify(DEF));
-  products = lp ? JSON.parse(lp) : [];
-  weekOff = 0; MON = getMon(0);
-  updateWeekLabel();
-  render();
-  doFetch();
-  syncTimer = setInterval(doFetch, 10000);
-}
-
-function doLogout() {
-  clearInterval(syncTimer);
-  lsDel('aff_who');
-  who = '';
-  document.getElementById('app').style.display = 'none';
-  var btns = document.querySelectorAll('.wb');
-  var i;
-  for (i = 0; i < btns.length; i++) { btns[i].className = 'wb'; }
-  document.getElementById('start-btn').textContent = 'Pilih nama dulu';
-  document.getElementById('start-btn').className = 'start';
-  document.getElementById('setup').style.display = 'flex';
-  showBanner('Logged out');
-}
-
-function doReset() {
-  if (!window.confirm('Reset data lokal?')) { return; }
-  clearInterval(syncTimer);
-  lsDel('aff_who'); lsDel('aff_tasks'); lsDel('aff_prods');
-  window.location.reload();
-}
-
-function render() {
-  updateStats();
-  buildCal();
-  renderProducts();
-  if (curView === 'report') { renderReport(); }
-}
-
-function updateStats() {
-  var i, dn = 0, tot = tasks.length;
-  for (i = 0; i < tasks.length; i++) { if (tasks[i].done) { dn++; } }
-  var pct = tot ? Math.round(dn / tot * 100) : 0;
-  document.getElementById('s-done').textContent = dn;
-  document.getElementById('s-dones').textContent = 'dari ' + tot;
-  document.getElementById('sf-done').style.width = pct + '%';
-  var pl = products.length;
-  document.getElementById('s-prod').textContent = pl;
-  document.getElementById('sf-prod').style.width = Math.min(100, pl * 12) + '%';
-  var live = 0;
-  for (i = 0; i < products.length; i++) {
-    if (products[i].status === 'live' || products[i].status === 'upload') { live++; }
-  }
-  document.getElementById('s-live').textContent = live;
-  document.getElementById('sf-live').style.width = (pl ? Math.round(live / pl * 100) : 0) + '%';
-  var dA = 0, dD = 0;
-  for (i = 0; i < tasks.length; i++) {
-    if (tasks[i].div === 'dio') { dA++; if (tasks[i].done) { dD++; } }
-  }
-  document.getElementById('s-share').textContent = dD;
-  document.getElementById('sf-share').style.width = (dA ? Math.round(dD / dA * 100) : 0) + '%';
-}
-
-function shiftWeek(dir) {
-  weekOff += dir; MON = getMon(weekOff);
-  updateWeekLabel(); buildCal();
-}
-
-function updateWeekLabel() {
+// ── RENDER TASKS ─────────────────────────────────────
+function renderTasks() {
   var sun = new Date(MON); sun.setDate(MON.getDate() + 6);
-  var fmt = function(d) { return d.toLocaleDateString('id-ID',{day:'numeric',month:'short'}); };
-  var lbl = weekOff===0?'Minggu Ini':weekOff===1?'Minggu Depan':weekOff===-1?'Minggu Lalu':fmt(MON)+'-'+fmt(sun);
-  document.getElementById('wnav-lbl').textContent = lbl;
-}
+  var fmt = function(d){ return d.toLocaleDateString('id-ID',{day:'numeric',month:'short'}); };
+  var html = '';
+  var di, ci, ti, dv, dayTasks, t, tags;
 
-function xss(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-function buildCal() {
-  var divs = filt === 'all' ? DIVS : DIVS.filter(function(d){ return d.id === filt; });
-  var h = '<div class="cal-grid">';
-  var i, di, ci, ti, dt, isTd, isWE, dv;
-  h += '<div class="ch corner">Divisi</div>';
-  for (i = 0; i < 7; i++) {
-    dt = new Date(MON); dt.setDate(MON.getDate() + i);
-    isTd = (weekOff === 0 && i === todayIdx);
-    isWE = (WKEND.indexOf(i) >= 0);
-    h += '<div class="ch'+(isTd?' td-h':isWE?' we-h':'')+'"><span class="dn">'+dt.getDate()+'</span>'+DAYS[i]+'</div>';
-  }
-  for (di = 0; di < divs.length; di++) {
-    dv = divs[di];
-    h += '<div class="dlbl '+dv.id+'"><div class="dav '+dv.id+'">'+dv.name[0]+'</div><div class="dname">'+dv.name+'</div><div class="drole">'+dv.role+'</div></div>';
-    for (ci = 0; ci < 7; ci++) {
-      isWE = (WKEND.indexOf(ci) >= 0);
-      h += '<div class="dcell'+(isWE?' we':'')+'" data-div="'+dv.id+'" data-day="'+ci+'">';
-      for (ti = 0; ti < tasks.length; ti++) {
-        if (tasks[ti].div === dv.id && tasks[ti].day === ci) { h += chip(tasks[ti]); }
-      }
-      h += '<button class="add-btn" data-div="'+dv.id+'" data-day="'+ci+'">+ tugas</button></div>';
+  for (di = 0; di < DIVS.length; di++) {
+    dv = DIVS[di];
+    var total = 0, done = 0;
+    for (ti = 0; ti < tasks.length; ti++) {
+      if (tasks[ti].div === dv.id) { total++; if (tasks[ti].done) { done++; } }
     }
-  }
-  h += '</div>';
-  document.getElementById('cal-grid').innerHTML = h;
-  bindCal();
-}
+    html += '<div class="person-block">';
+    html += '<div class="person-head ' + dv.id + '">';
+    html += '<div><div class="person-name ' + dv.id + '">' + dv.name + '</div><div class="person-meta">' + dv.role + '</div></div>';
+    html += '<div class="person-meta">' + done + '/' + total + ' selesai</div>';
+    html += '</div>';
+    html += '<div class="task-list">';
 
-function bindCal() {
-  var chips = document.querySelectorAll('.tc');
-  var i;
-  for (i = 0; i < chips.length; i++) {
-    chips[i].addEventListener('click', onChipClick);
+    for (ci = 0; ci < 7; ci++) {
+      dayTasks = [];
+      for (ti = 0; ti < tasks.length; ti++) {
+        if (tasks[ti].div === dv.id && tasks[ti].day === ci) { dayTasks.push(tasks[ti]); }
+      }
+      if (dayTasks.length === 0) { continue; }
+
+      var dt = new Date(MON); dt.setDate(MON.getDate() + ci);
+      var isToday = (weekOff === 0 && ci === todayDayIdx);
+      html += '<div style="padding:6px 14px;background:' + (isToday ? '#fff8f0' : '#fafafa') + ';border-bottom:1px solid var(--border);font-size:10px;font-weight:700;color:' + (isToday ? 'var(--adit)' : 'var(--muted)') + ';text-transform:uppercase;letter-spacing:.06em">'
+        + (isToday ? '● ' : '') + DAYS[ci] + ', ' + fmt(dt) + '</div>';
+
+      for (ti = 0; ti < dayTasks.length; ti++) {
+        t = dayTasks[ti];
+        html += '<div class="task-item' + (t.done ? ' done' : '') + '" data-id="' + t.id + '">';
+        html += '<div class="task-cb">' + (t.done ? '✓' : '') + '</div>';
+        html += '<div class="task-text">' + esc(t.text) + '</div>';
+        html += '<button class="task-del" data-id="' + t.id + '">×</button>';
+        html += '</div>';
+      }
+    }
+
+    html += '<div class="add-task-row" data-div="' + dv.id + '">';
+    html += '<input class="add-task-inp" placeholder="Tambah tugas ' + dv.name + '..." data-div="' + dv.id + '">';
+    html += '<select style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:12px;background:var(--white);margin-right:4px" data-div="' + dv.id + '" class="add-task-day">';
+    for (ci = 0; ci < 7; ci++) { html += '<option value="' + ci + '">' + DAYS[ci] + '</option>'; }
+    html += '</select>';
+    html += '<button class="add-task-btn" data-div="' + dv.id + '">+</button>';
+    html += '</div>';
+    html += '</div></div>';
   }
-  var dels = document.querySelectorAll('.tc-del');
+
+  var pg = document.getElementById('pg-tasks');
+  pg.innerHTML = html;
+
+  // Bind task toggle & delete
+  var items = pg.querySelectorAll('.task-item');
+  var i;
+  for (i = 0; i < items.length; i++) {
+    items[i].addEventListener('click', function(e) {
+      if (e.target.classList.contains('task-del')) { return; }
+      var id = parseInt(this.getAttribute('data-id'), 10);
+      toggleTask(id);
+    });
+  }
+  var dels = pg.querySelectorAll('.task-del');
   for (i = 0; i < dels.length; i++) {
-    dels[i].addEventListener('click', onDelClick);
+    dels[i].addEventListener('click', function(e) {
+      e.stopPropagation();
+      var id = parseInt(this.getAttribute('data-id'), 10);
+      var t = findTask(id);
+      confirm(t ? '"' + t.text + '"' : 'Tugas ini?', function() { deleteTask(id); });
+    });
   }
-  var adds = document.querySelectorAll('.add-btn');
-  for (i = 0; i < adds.length; i++) {
-    adds[i].addEventListener('click', onAddClick);
+  var addBtns = pg.querySelectorAll('.add-task-btn');
+  for (i = 0; i < addBtns.length; i++) {
+    addBtns[i].addEventListener('click', function() {
+      var div = this.getAttribute('data-div');
+      var row = this.parentNode;
+      var inp = row.querySelector('.add-task-inp');
+      var daySel = row.querySelector('.add-task-day');
+      var txt = inp.value.trim();
+      if (!txt) { inp.focus(); return; }
+      addTask(div, parseInt(daySel.value, 10), txt);
+      inp.value = '';
+    });
+  }
+  var inps = pg.querySelectorAll('.add-task-inp');
+  for (i = 0; i < inps.length; i++) {
+    inps[i].addEventListener('keydown', function(e) {
+      if (e.key !== 'Enter') { return; }
+      var div = this.getAttribute('data-div');
+      var row = this.parentNode;
+      var daySel = row.querySelector('.add-task-day');
+      var txt = this.value.trim();
+      if (!txt) { return; }
+      addTask(div, parseInt(daySel.value, 10), txt);
+      this.value = '';
+    });
   }
 }
 
-function onChipClick(e) {
-  var el = e.currentTarget;
-  var id = parseInt(el.getAttribute('data-id'), 10);
+// ── TASK ACTIONS ─────────────────────────────────────
+function findTask(id) {
   var i;
-  for (i = 0; i < tasks.length; i++) {
-    if (tasks[i].id === id) { tasks[i].done = !tasks[i].done; break; }
-  }
+  for (i = 0; i < tasks.length; i++) { if (tasks[i].id === id) { return tasks[i]; } }
+  return null;
+}
+
+function toggleTask(id) {
+  var t = findTask(id);
+  if (!t) { return; }
+  t.done = !t.done;
   lsSet('aff_tasks', JSON.stringify(tasks));
-  render();
-  doPush();
+  renderTasks();
+  renderReport();
+  sbWrite(null);
 }
 
-function onDelClick(e) {
-  e.stopPropagation();
-  var id = parseInt(e.currentTarget.getAttribute('data-id'), 10);
-  pendingDel = id;
-  var t = null, i;
-  for (i = 0; i < tasks.length; i++) { if (tasks[i].id === id) { t = tasks[i]; break; } }
-  document.getElementById('cdtext').textContent = t ? t.text : 'Tugas ini akan dihapus.';
-  document.getElementById('cdialog').className = 'on';
+function addTask(div, day, text) {
+  var nid = 1, i;
+  for (i = 0; i < tasks.length; i++) { if (tasks[i].id >= nid) { nid = tasks[i].id + 1; } }
+  tasks.push({id:nid, div:div, day:day, text:text, done:false});
+  lsSet('aff_tasks', JSON.stringify(tasks));
+  renderTasks();
+  renderReport();
+  sbWrite(null);
+  toast('✅ Tugas ditambahkan!');
 }
 
-function onAddClick(e) {
-  var div = e.currentTarget.getAttribute('data-div');
-  var day = parseInt(e.currentTarget.getAttribute('data-day'), 10);
-  openTM(div, day);
+function deleteTask(id) {
+  var newT = [], i;
+  for (i = 0; i < tasks.length; i++) { if (tasks[i].id !== id) { newT.push(tasks[i]); } }
+  tasks = newT;
+  lsSet('aff_tasks', JSON.stringify(tasks));
+  renderTasks();
+  renderReport();
+  sbWrite(null);
+  toast('Tugas dihapus');
 }
 
-function chip(t) {
-  var tags = '', i;
-  for (i = 0; i < (t.tags||[]).length; i++) {
-    tags += '<span class="tt '+t.tags[i]+'">'+t.tags[i]+'</span>';
-  }
-  return '<div class="tc '+t.div+(t.done?' done':'')+'" data-id="'+t.id+'">'
-    +'<div class="chk">'+(t.done?'✓':'')+'</div>'
-    +'<div class="tc-b"><div class="tc-t">'+xss(t.text)+'</div><div class="tc-tags">'+tags+'</div></div>'
-    +'<div class="tc-del" data-id="'+t.id+'">✕</div>'
-    +'</div>';
-}
-
+// ── RENDER PRODUCTS ──────────────────────────────────
 function renderProducts() {
-  var tb = document.getElementById('prod-body');
+  var html = '', i, p, sel;
   if (!products.length) {
-    tb.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:22px;color:var(--muted)">Belum ada produk.</td></tr>';
+    html = '<div style="text-align:center;padding:32px;color:var(--muted);font-size:13px">Belum ada produk. Tambah di atas!</div>';
+    document.getElementById('prod-list').innerHTML = html;
     return;
   }
-  var html = '', i, j, p, si, dots, opts;
   for (i = 0; i < products.length; i++) {
-    p = products[i]; si = STAGES.indexOf(p.status);
-    dots = ''; opts = '';
+    p = products[i];
+    sel = '';
+    var j;
     for (j = 0; j < STAGES.length; j++) {
-      dots += '<div class="sd'+(j<si?' done':j===si?' act':'')+'"></div>';
-      opts += '<option value="'+STAGES[j]+'"'+(STAGES[j]===p.status?' selected':'')+'>'+SL[STAGES[j]]+'</option>';
+      sel += '<option value="' + STAGES[j] + '"' + (STAGES[j] === p.status ? ' selected' : '') + '>' + SL[STAGES[j]] + '</option>';
     }
-    html += '<tr><td>'+(i+1)+'</td><td style="font-weight:700">'+xss(p.name)+'</td><td>'+xss(p.pic)+'</td>'
-      +'<td>'+(p.checkout||'-')+'</td><td>'+(p.arrive||'-')+'</td>'
-      +'<td><span class="sb '+p.status+'">'+(SL[p.status]||p.status)+'</span></td>'
-      +'<td><div class="sdots">'+dots+'</div></td>'
-      +'<td><select class="prod-status" data-idx="'+i+'" style="font-size:10px;padding:3px 5px;border:1px solid var(--border);border-radius:5px;background:var(--bg);font-family:inherit">'+opts+'</select>'
-      +' <button class="prod-del btn sm danger" data-idx="'+i+'">X</button></td></tr>';
+    html += '<div class="prod-card">';
+    html += '<div class="prod-head"><div><div class="prod-name">' + esc(p.name) + '</div><div class="prod-pic">PIC: ' + esc(p.pic) + '</div></div>';
+    html += '<span class="status-badge s-' + p.status + '">' + (SL[p.status]||p.status) + '</span></div>';
+    html += '<div class="prod-body"><select class="prod-status" data-idx="' + i + '">' + sel + '</select>';
+    html += '<button class="prod-del" data-idx="' + i + '">×</button></div>';
+    html += '</div>';
   }
-  tb.innerHTML = html;
+  document.getElementById('prod-list').innerHTML = html;
+
   var sels = document.querySelectorAll('.prod-status');
   var k;
   for (k = 0; k < sels.length; k++) {
-    sels[k].addEventListener('change', function(e) {
-      var idx = parseInt(e.target.getAttribute('data-idx'), 10);
-      products[idx].status = e.target.value;
+    sels[k].addEventListener('change', function() {
+      var idx = parseInt(this.getAttribute('data-idx'), 10);
+      products[idx].status = this.value;
       lsSet('aff_prods', JSON.stringify(products));
-      renderProducts(); updateStats(); doPush();
+      renderProducts();
+      sbWrite(null);
+      toast('Status diupdate!');
     });
   }
   var dels = document.querySelectorAll('.prod-del');
   for (k = 0; k < dels.length; k++) {
-    dels[k].addEventListener('click', function(e) {
-      var idx = parseInt(e.target.getAttribute('data-idx'), 10);
-      products.splice(idx, 1);
-      lsSet('aff_prods', JSON.stringify(products));
-      renderProducts(); updateStats(); doPush();
+    dels[k].addEventListener('click', function() {
+      var idx = parseInt(this.getAttribute('data-idx'), 10);
+      var name = products[idx].name;
+      confirm('Hapus produk "' + name + '"?', function() {
+        products.splice(idx, 1);
+        lsSet('aff_prods', JSON.stringify(products));
+        renderProducts();
+        sbWrite(null);
+        toast('Produk dihapus');
+      });
     });
   }
 }
 
+// ── RENDER REPORT ────────────────────────────────────
 function renderReport() {
-  var cards = '', rows = '', i, j, d, all, dn, pct;
+  var html = '', i, j, d, tot, dn, pct;
   for (i = 0; i < DIVS.length; i++) {
-    d = DIVS[i]; all = []; dn = 0;
+    d = DIVS[i]; tot = 0; dn = 0;
     for (j = 0; j < tasks.length; j++) {
-      if (tasks[j].div === d.id) { all.push(tasks[j]); if (tasks[j].done) { dn++; } }
+      if (tasks[j].div === d.id) { tot++; if (tasks[j].done) { dn++; } }
     }
-    pct = all.length ? Math.round(dn / all.length * 100) : 0;
-    cards += '<div class="rc"><div class="rc-h '+d.id+'"><div class="rn">'+d.name+'</div><div class="rr">'+d.role+'</div></div>'
-      +'<div class="rc-b">'
-      +'<div class="rs"><span>Total</span><span class="rv">'+all.length+'</span></div>'
-      +'<div class="rs"><span>Selesai</span><span class="rv" style="color:var(--green)">'+dn+'</span></div>'
-      +'<div class="rs"><span>Belum</span><span class="rv" style="color:var(--red)">'+(all.length-dn)+'</span></div>'
-      +'<div class="rs"><span>%</span><span class="rv">'+pct+'%</span></div>'
-      +'</div></div>';
-    rows += '<tr><td><b style="color:var(--'+d.id+')">'+d.name+'</b></td><td>'+all.length+'</td>'
-      +'<td style="color:var(--green);font-weight:700">'+dn+'</td>'
-      +'<td style="color:var(--red)">'+(all.length-dn)+'</td>'
-      +'<td><div style="display:flex;align-items:center;gap:5px">'
-      +'<div style="flex:1;height:4px;background:var(--border);border-radius:4px;overflow:hidden">'
-      +'<div style="width:'+pct+'%;height:100%;background:var(--'+d.id+');border-radius:4px"></div></div>'
-      +'<b style="font-size:10px">'+pct+'%</b></div></td></tr>';
+    pct = tot ? Math.round(dn / tot * 100) : 0;
+    html += '<div class="report-card">';
+    html += '<div class="report-card-head ' + d.id + '">' + d.name + '<div style="font-size:10px;font-weight:400;opacity:.7;margin-top:2px">' + d.role + '</div></div>';
+    html += '<div class="report-card-body">';
+    html += '<div class="report-row"><span>Total</span><span class="report-val">' + tot + '</span></div>';
+    html += '<div class="report-row"><span>Selesai</span><span class="report-val" style="color:var(--green)">' + dn + '</span></div>';
+    html += '<div class="report-row"><span>Belum</span><span class="report-val" style="color:var(--red)">' + (tot-dn) + '</span></div>';
+    html += '<div class="prog-bar"><div class="prog-fill" style="width:' + pct + '%;background:var(--' + d.id + ')"></div></div>';
+    html += '<div style="text-align:right;font-size:11px;font-weight:700;margin-top:4px">' + pct + '%</div>';
+    html += '</div></div>';
   }
-  document.getElementById('rep-cards').innerHTML = cards;
-  document.getElementById('rep-rows').innerHTML = rows;
+  document.getElementById('report-grid').innerHTML = html;
 }
 
-function openTM(div, day) {
-  document.getElementById('tm-div').value = div || 'adit';
-  document.getElementById('tm-day').value = day || 0;
-  document.getElementById('tm-text').value = '';
-  selTags = [];
-  var tags = document.querySelectorAll('.to'), i;
-  for (i = 0; i < tags.length; i++) { tags[i].classList.remove('sel'); }
-  upPill();
-  document.getElementById('tm').classList.add('on');
-  setTimeout(function() { document.getElementById('tm-text').focus(); }, 300);
+// ── WEEK NAV ─────────────────────────────────────────
+function updateWeekLabel() {
+  var lbl = weekOff === 0 ? 'Minggu Ini' : weekOff === 1 ? 'Minggu Depan' : weekOff === -1 ? 'Minggu Lalu' : 'Offset ' + weekOff;
+  document.getElementById('wnav-lbl').textContent = lbl;
 }
 
-function upPill() {
-  var d = document.getElementById('tm-div').value;
-  var p = document.getElementById('tm-pill');
-  p.textContent = {adit:'Adit',najwa:'Najwa',dio:'Dio'}[d] || d;
-  p.className = 'dpill ' + d;
+// ── TAB NAV ──────────────────────────────────────────
+function switchTab(tab) {
+  curTab = tab;
+  var pages = ['tasks','products','report'];
+  var i;
+  for (i = 0; i < pages.length; i++) {
+    document.getElementById('pg-' + pages[i]).classList.toggle('on', pages[i] === tab);
+    document.getElementById('tab-' + pages[i]).classList.toggle('on', pages[i] === tab);
+  }
+  if (tab === 'tasks') { renderTasks(); }
+  if (tab === 'products') { renderProducts(); }
+  if (tab === 'report') { renderReport(); }
 }
 
-function showBanner(msg) {
-  var b = document.getElementById('banner');
-  b.textContent = msg;
-  b.classList.add('show');
-  if (banTimer) { clearTimeout(banTimer); }
-  banTimer = setTimeout(function() { b.classList.remove('show'); }, 2500);
+// ── HELPERS ──────────────────────────────────────────
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-function gv(v) {
-  curView = v;
-  var views = document.querySelectorAll('.view'), i;
-  for (i = 0; i < views.length; i++) { views[i].classList.remove('on'); }
-  document.getElementById('view-' + v).classList.add('on');
-  var tabs = document.querySelectorAll('.tab');
-  for (i = 0; i < tabs.length; i++) { tabs[i].classList.remove('on'); }
-  document.getElementById('tb-' + v).classList.add('on');
-  if (v === 'report') { renderReport(); }
+// ── SETUP ────────────────────────────────────────────
+function pickWho(w) {
+  who = w;
+  var btns = document.querySelectorAll('.who-btn'), i;
+  for (i = 0; i < btns.length; i++) { btns[i].className = 'who-btn'; }
+  document.getElementById('wb-' + w).className = 'who-btn on-' + w;
+  var btn = document.getElementById('setup-enter');
+  btn.textContent = 'Masuk sebagai ' + w.charAt(0).toUpperCase() + w.slice(1) + ' →';
+  btn.className = 'setup-enter ok';
 }
 
-// ── BIND ALL EVENTS ON LOAD ──
+function doLaunch() {
+  if (!who) { return; }
+  lsSet('aff_who', who);
+  document.getElementById('pg-setup').style.display = 'none';
+  document.getElementById('pg-app').style.display = 'flex';
+  document.getElementById('hdr-who').textContent = who.charAt(0).toUpperCase() + who.slice(1);
+
+  var lt = lsGet('aff_tasks');
+  var lp = lsGet('aff_prods');
+  tasks = lt ? JSON.parse(lt) : JSON.parse(JSON.stringify(DEF_TASKS));
+  products = lp ? JSON.parse(lp) : [];
+
+  weekOff = 0; MON = getMon(0);
+  updateWeekLabel();
+  renderTasks();
+  renderReport();
+
+  sbRead(function() { renderTasks(); renderReport(); renderProducts(); });
+}
+
+function doLogout() {
+  lsDel('aff_who');
+  who = '';
+  document.getElementById('pg-app').style.display = 'none';
+  var btns = document.querySelectorAll('.who-btn'), i;
+  for (i = 0; i < btns.length; i++) { btns[i].className = 'who-btn'; }
+  document.getElementById('setup-enter').textContent = 'Pilih nama dulu ↑';
+  document.getElementById('setup-enter').className = 'setup-enter';
+  document.getElementById('pg-setup').style.display = 'flex';
+  toast('Logged out');
+}
+
+// ── INIT ─────────────────────────────────────────────
 window.onload = function() {
-  // Setup buttons
+  // Setup
   document.getElementById('wb-adit').addEventListener('click', function(){ pickWho('adit'); });
   document.getElementById('wb-najwa').addEventListener('click', function(){ pickWho('najwa'); });
   document.getElementById('wb-dio').addEventListener('click', function(){ pickWho('dio'); });
   document.getElementById('wb-owner').addEventListener('click', function(){ pickWho('owner'); });
-  document.getElementById('start-btn').addEventListener('click', function(){
-    if (!who) { return; }
-    lsSet('aff_who', who);
-    launch();
-  });
+  document.getElementById('setup-enter').addEventListener('click', doLaunch);
 
-  // Header buttons
-  document.getElementById('btn-sync').addEventListener('click', doFetch);
+  // Header
+  document.getElementById('btn-sync').addEventListener('click', function() {
+    sbRead(function() { renderTasks(); renderReport(); renderProducts(); });
+  });
   document.getElementById('btn-logout').addEventListener('click', doLogout);
-  document.getElementById('btn-reset').addEventListener('click', doReset);
 
   // Week nav
-  document.getElementById('btn-prev').addEventListener('click', function(){ shiftWeek(-1); });
-  document.getElementById('btn-next').addEventListener('click', function(){ shiftWeek(1); });
+  document.getElementById('btn-prev').addEventListener('click', function() {
+    weekOff--; MON = getMon(weekOff); updateWeekLabel(); renderTasks();
+  });
+  document.getElementById('btn-next').addEventListener('click', function() {
+    weekOff++; MON = getMon(weekOff); updateWeekLabel(); renderTasks();
+  });
 
   // Tabs
-  document.getElementById('tb-calendar').addEventListener('click', function(){ gv('calendar'); });
-  document.getElementById('tb-products').addEventListener('click', function(){ gv('products'); });
-  document.getElementById('tb-report').addEventListener('click', function(){ gv('report'); });
-  document.getElementById('tb-install').addEventListener('click', function(){ gv('install'); });
+  document.getElementById('tab-tasks').addEventListener('click', function(){ switchTab('tasks'); });
+  document.getElementById('tab-products').addEventListener('click', function(){ switchTab('products'); });
+  document.getElementById('tab-report').addEventListener('click', function(){ switchTab('report'); });
 
-  // Filter legend
-  document.getElementById('fi-all').addEventListener('click', function(){ fd('all'); });
-  document.getElementById('fi-adit').addEventListener('click', function(){ fd('adit'); });
-  document.getElementById('fi-najwa').addEventListener('click', function(){ fd('najwa'); });
-  document.getElementById('fi-dio').addEventListener('click', function(){ fd('dio'); });
-
-  // Add task/product buttons
-  document.getElementById('btn-add-task').addEventListener('click', function(){ openTM('adit', 0); });
-  document.getElementById('btn-add-prod').addEventListener('click', function(){
-    document.getElementById('pm-name').value = '';
-    document.getElementById('pm-co').value = TODAY.toISOString().split('T')[0];
-    document.getElementById('pm-arr').value = '';
-    document.getElementById('pm-st').value = 'riset';
-    document.getElementById('pm').classList.add('on');
-  });
-
-  // Task modal
-  document.getElementById('tm-div').addEventListener('change', upPill);
-  document.getElementById('tm-cancel').addEventListener('click', function(){ document.getElementById('tm').classList.remove('on'); });
-  document.getElementById('tm-save').addEventListener('click', function(){
-    var txt = document.getElementById('tm-text').value.trim();
-    if (!txt) { return; }
-    var nid = 1, i;
-    for (i = 0; i < tasks.length; i++) { if (tasks[i].id >= nid) { nid = tasks[i].id + 1; } }
-    tasks.push({
-      id: nid,
-      div: document.getElementById('tm-div').value,
-      day: parseInt(document.getElementById('tm-day').value, 10),
-      text: txt,
-      tags: selTags.slice(),
-      done: false
-    });
-    lsSet('aff_tasks', JSON.stringify(tasks));
-    document.getElementById('tm').classList.remove('on');
-    render(); doPush();
-    showBanner('Tugas ditambahkan!');
-  });
-
-  // Tag buttons
-  var tagBtns = document.querySelectorAll('.to');
-  var k;
-  for (k = 0; k < tagBtns.length; k++) {
-    tagBtns[k].addEventListener('click', function(e) {
-      var tag = e.currentTarget.getAttribute('data-tag');
-      e.currentTarget.classList.toggle('sel');
-      var idx = selTags.indexOf(tag);
-      if (idx >= 0) { selTags.splice(idx, 1); } else { selTags.push(tag); }
-    });
-  }
-
-  // Product modal
-  document.getElementById('pm-cancel').addEventListener('click', function(){ document.getElementById('pm').classList.remove('on'); });
-  document.getElementById('pm-save').addEventListener('click', function(){
-    var n = document.getElementById('pm-name').value.trim();
-    if (!n) { return; }
+  // Add product
+  document.getElementById('btn-add-prod').addEventListener('click', function() {
+    var name = document.getElementById('pf-name').value.trim();
+    if (!name) { document.getElementById('pf-name').focus(); return; }
     products.push({
-      name: n,
-      pic: document.getElementById('pm-pic').value,
-      checkout: document.getElementById('pm-co').value,
-      arrive: document.getElementById('pm-arr').value,
-      status: document.getElementById('pm-st').value
+      name: name,
+      pic: document.getElementById('pf-pic').value,
+      status: document.getElementById('pf-status').value
     });
     lsSet('aff_prods', JSON.stringify(products));
-    document.getElementById('pm').classList.remove('on');
-    renderProducts(); updateStats(); doPush();
-    showBanner('Produk ditambahkan!');
+    document.getElementById('pf-name').value = '';
+    renderProducts();
+    sbWrite(null);
+    toast('✅ Produk ditambahkan!');
   });
 
   // Confirm dialog
-  document.getElementById('cd-yes').addEventListener('click', function(){
-    document.getElementById('cdialog').className = '';
-    if (pendingDel < 0) { return; }
-    var newT = [], i;
-    for (i = 0; i < tasks.length; i++) { if (tasks[i].id !== pendingDel) { newT.push(tasks[i]); } }
-    tasks = newT; pendingDel = -1;
-    lsSet('aff_tasks', JSON.stringify(tasks));
-    render(); doPush();
-    showBanner('Tugas dihapus');
+  document.getElementById('confirm-yes').addEventListener('click', function() {
+    document.getElementById('confirm-dialog').className = '';
+    if (confirmCb) { confirmCb(); confirmCb = null; }
   });
-  document.getElementById('cd-no').addEventListener('click', function(){
-    document.getElementById('cdialog').className = '';
-    pendingDel = -1;
+  document.getElementById('confirm-no').addEventListener('click', function() {
+    document.getElementById('confirm-dialog').className = '';
+    confirmCb = null;
   });
-
-  // Overlay close
-  document.getElementById('tm').addEventListener('click', function(e){ if (e.target === this) { this.classList.remove('on'); } });
-  document.getElementById('pm').addEventListener('click', function(e){ if (e.target === this) { this.classList.remove('on'); } });
 
   // Auto login
   var w = lsGet('aff_who');
-  if (w) {
-    who = w;
-    launch();
-  } else {
-    document.getElementById('setup').style.display = 'flex';
-  }
+  if (w) { who = w; doLaunch(); }
+  else { document.getElementById('pg-setup').style.display = 'flex'; }
 };
-
-function fd(d) {
-  filt = d;
-  var lis = document.querySelectorAll('.li'), i;
-  for (i = 0; i < lis.length; i++) {
-    lis[i].classList.toggle('on', lis[i].id === 'fi-' + d);
-  }
-  buildCal();
-}
 </script>
 </body>
 </html>
