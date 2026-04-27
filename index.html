@@ -234,6 +234,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
       <div class="dot" id="sdot"></div>
       <span class="sync-t" id="sync-t">—</span>
       <button class="hbtn" id="btn-sync">↻ Sync</button>
+      <button class="hbtn" id="btn-changepin">🔑 PIN</button>
       <button class="hbtn" id="btn-logout">Keluar</button>
       <button class="hbtn" id="btn-reset" style="color:#f87171;border-color:#f87171">Reset</button>
     </div>
@@ -355,7 +356,55 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
   </div>
 </div>
 
-<!-- CONFIRM -->
+<!-- CHANGE PIN MODAL -->
+<div class="ovl" id="pin-modal">
+  <div class="modal" style="text-align:center">
+    <div class="modal-h" style="justify-content:center">🔑 Ganti PIN</div>
+    <div id="pin-modal-step1">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Masukkan PIN lama kamu dulu</p>
+      <div class="pin-dots" id="cp-dots-old">
+        <div class="pdot" id="cpd-old-0"></div><div class="pdot" id="cpd-old-1"></div>
+        <div class="pdot" id="cpd-old-2"></div><div class="pdot" id="cpd-old-3"></div>
+      </div>
+      <div class="pin-pad">
+        <button class="pk cp-key" data-n="1">1</button><button class="pk cp-key" data-n="2">2</button><button class="pk cp-key" data-n="3">3</button>
+        <button class="pk cp-key" data-n="4">4</button><button class="pk cp-key" data-n="5">5</button><button class="pk cp-key" data-n="6">6</button>
+        <button class="pk cp-key" data-n="7">7</button><button class="pk cp-key" data-n="8">8</button><button class="pk cp-key" data-n="9">9</button>
+        <button class="pk" style="visibility:hidden"></button><button class="pk cp-key" data-n="0">0</button>
+        <button class="pk" id="cp-del-old" style="font-size:14px;color:var(--muted)">⌫</button>
+      </div>
+      <div class="pin-err" id="cp-err-old"></div>
+    </div>
+    <div id="pin-modal-step2" style="display:none">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:6px">Masukkan PIN baru (4 digit)</p>
+      <div class="pin-dots">
+        <div class="pdot" id="cpd-new-0"></div><div class="pdot" id="cpd-new-1"></div>
+        <div class="pdot" id="cpd-new-2"></div><div class="pdot" id="cpd-new-3"></div>
+      </div>
+      <div class="pin-pad">
+        <button class="pk cp-new-key" data-n="1">1</button><button class="pk cp-new-key" data-n="2">2</button><button class="pk cp-new-key" data-n="3">3</button>
+        <button class="pk cp-new-key" data-n="4">4</button><button class="pk cp-new-key" data-n="5">5</button><button class="pk cp-new-key" data-n="6">6</button>
+        <button class="pk cp-new-key" data-n="7">7</button><button class="pk cp-new-key" data-n="8">8</button><button class="pk cp-new-key" data-n="9">9</button>
+        <button class="pk" style="visibility:hidden"></button><button class="pk cp-new-key" data-n="0">0</button>
+        <button class="pk" id="cp-del-new" style="font-size:14px;color:var(--muted)">⌫</button>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin:10px 0 6px">Konfirmasi PIN baru</p>
+      <div class="pin-dots">
+        <div class="pdot" id="cpd-conf-0"></div><div class="pdot" id="cpd-conf-1"></div>
+        <div class="pdot" id="cpd-conf-2"></div><div class="pdot" id="cpd-conf-3"></div>
+      </div>
+      <div class="pin-pad" style="margin-top:8px">
+        <button class="pk cp-conf-key" data-n="1">1</button><button class="pk cp-conf-key" data-n="2">2</button><button class="pk cp-conf-key" data-n="3">3</button>
+        <button class="pk cp-conf-key" data-n="4">4</button><button class="pk cp-conf-key" data-n="5">5</button><button class="pk cp-conf-key" data-n="6">6</button>
+        <button class="pk cp-conf-key" data-n="7">7</button><button class="pk cp-conf-key" data-n="8">8</button><button class="pk cp-conf-key" data-n="9">9</button>
+        <button class="pk" style="visibility:hidden"></button><button class="pk cp-conf-key" data-n="0">0</button>
+        <button class="pk" id="cp-del-conf" style="font-size:14px;color:var(--muted)">⌫</button>
+      </div>
+      <div class="pin-err" id="cp-err-new"></div>
+    </div>
+    <button class="btn" id="cp-cancel" style="width:100%;justify-content:center;margin-top:14px">Batal</button>
+  </div>
+</div>
 <div id="cdialog">
   <div class="cbox">
     <h4>Hapus?</h4><p id="cmsg"></p>
@@ -961,7 +1010,94 @@ window.onload=function(){
     document.getElementById('cdialog').className='';confirmCb=null;
   });
 
-  // Auto login
+  // Change PIN
+  var cpOld='', cpNew='', cpConf='';
+
+  function updateCpDots(prefix, val) {
+    for(var i=0;i<4;i++){
+      document.getElementById('cpd-'+prefix+'-'+i).className='pdot'+(i<val.length?' on':'');
+    }
+  }
+
+  function openPinModal(){
+    cpOld='';cpNew='';cpConf='';
+    updateCpDots('old','');
+    document.getElementById('pin-modal-step1').style.display='block';
+    document.getElementById('pin-modal-step2').style.display='none';
+    document.getElementById('cp-err-old').textContent='';
+    document.getElementById('cp-err-new').textContent='';
+    document.getElementById('pin-modal').classList.add('on');
+  }
+
+  document.getElementById('btn-changepin').addEventListener('click', openPinModal);
+  document.getElementById('cp-cancel').addEventListener('click',function(){document.getElementById('pin-modal').classList.remove('on');});
+  document.getElementById('pin-modal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('on');}});
+
+  // Step 1 — old PIN
+  var cpOldKeys=document.querySelectorAll('.cp-key');
+  for(k=0;k<cpOldKeys.length;k++){
+    cpOldKeys[k].addEventListener('click',function(){
+      if(cpOld.length>=4){return;}
+      cpOld+=this.getAttribute('data-n');
+      updateCpDots('old',cpOld);
+      document.getElementById('cp-err-old').textContent='';
+      if(cpOld.length===4){
+        var saved=lsGet('pin_'+who)||PINS[who];
+        if(cpOld===saved){
+          document.getElementById('pin-modal-step1').style.display='none';
+          document.getElementById('pin-modal-step2').style.display='block';
+        } else {
+          document.getElementById('cp-err-old').textContent='❌ PIN lama salah';
+          cpOld=''; updateCpDots('old','');
+        }
+      }
+    });
+  }
+  document.getElementById('cp-del-old').addEventListener('click',function(){
+    if(!cpOld.length){return;} cpOld=cpOld.slice(0,-1); updateCpDots('old',cpOld);
+  });
+
+  // Step 2 — new PIN
+  var cpNewKeys=document.querySelectorAll('.cp-new-key');
+  for(k=0;k<cpNewKeys.length;k++){
+    cpNewKeys[k].addEventListener('click',function(){
+      if(cpNew.length>=4){return;}
+      cpNew+=this.getAttribute('data-n');
+      updateCpDots('new',cpNew);
+    });
+  }
+  document.getElementById('cp-del-new').addEventListener('click',function(){
+    if(!cpNew.length){return;} cpNew=cpNew.slice(0,-1); updateCpDots('new',cpNew);
+  });
+
+  // Step 2 — confirm PIN
+  var cpConfKeys=document.querySelectorAll('.cp-conf-key');
+  for(k=0;k<cpConfKeys.length;k++){
+    cpConfKeys[k].addEventListener('click',function(){
+      if(cpConf.length>=4){return;}
+      cpConf+=this.getAttribute('data-n');
+      updateCpDots('conf',cpConf);
+      document.getElementById('cp-err-new').textContent='';
+      if(cpConf.length===4){
+        if(cpNew.length<4){
+          document.getElementById('cp-err-new').textContent='❌ PIN baru belum lengkap';
+          cpConf=''; updateCpDots('conf',''); return;
+        }
+        if(cpNew===cpConf){
+          lsSet('pin_'+who, cpNew);
+          document.getElementById('pin-modal').classList.remove('on');
+          toast('✅ PIN berhasil diganti!');
+        } else {
+          document.getElementById('cp-err-new').textContent='❌ PIN tidak cocok, coba lagi';
+          cpNew=''; cpConf='';
+          updateCpDots('new',''); updateCpDots('conf','');
+        }
+      }
+    });
+  }
+  document.getElementById('cp-del-conf').addEventListener('click',function(){
+    if(!cpConf.length){return;} cpConf=cpConf.slice(0,-1); updateCpDots('conf',cpConf);
+  });
   var w=lsGet('aff_who');
   if(w){who=w;whoSel=w;doLaunch();}
   else{document.getElementById('pg-setup').style.display='flex';}
