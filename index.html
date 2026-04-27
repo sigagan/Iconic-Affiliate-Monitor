@@ -707,14 +707,13 @@ function renderTasks(){
 
 // ── TASK MODAL ───────────────────────────────────────
 function openModal(div,day){
-  closeAllModals();
-  // Blur semua input dulu agar keyboard turun sebelum modal buka
-  if(document.activeElement){document.activeElement.blur();}
   var jd=JD[who]||JD.owner;
   var sel=document.getElementById('m-div'),i;
+  // Set options sesuai jobdesk
   for(i=0;i<sel.options.length;i++){
     sel.options[i].disabled=(jd.toggle.indexOf(sel.options[i].value)<0);
   }
+  // Pre-select
   if(div&&jd.toggle.indexOf(div)>=0){sel.value=div;}
   else{
     for(i=0;i<sel.options.length;i++){
@@ -727,8 +726,8 @@ function openModal(div,day){
   var tos=document.querySelectorAll('.to'),k;
   for(k=0;k<tos.length;k++){tos[k].classList.remove('sel');}
   updatePill();
-  // Buka modal tanpa auto-focus agar keyboard tidak muncul otomatis
-  openOvl('task-modal');
+  document.getElementById('task-modal').classList.add('on');
+  setTimeout(function(){document.getElementById('m-text').focus();},300);
 }
 
 function updatePill(){
@@ -977,14 +976,14 @@ window.onload=function(){
   document.getElementById('tab-report').addEventListener('click',function(){switchTab('report');});
 
   // Stats click — info modal
-  document.getElementById('sc-done').addEventListener('click',function(){showInfo('done');openOvl('info-modal');});
-  document.getElementById('sc-prod').addEventListener('click',function(){showInfo('prod');openOvl('info-modal');});
-  document.getElementById('sc-live').addEventListener('click',function(){showInfo('live');openOvl('info-modal');});
-  document.getElementById('sc-share').addEventListener('click',function(){showInfo('share');openOvl('info-modal');});
+  document.getElementById('sc-done').addEventListener('click',function(){showInfo('done');});
+  document.getElementById('sc-prod').addEventListener('click',function(){showInfo('prod');});
+  document.getElementById('sc-live').addEventListener('click',function(){showInfo('live');});
+  document.getElementById('sc-share').addEventListener('click',function(){showInfo('share');});
 
   // Info modal close
-  document.getElementById('info-close').addEventListener('click',function(){closeAllModals();});
-  document.getElementById('info-modal').addEventListener('click',function(e){if(e.target===this){closeAllModals();}});
+  document.getElementById('info-close').addEventListener('click',function(){document.getElementById('info-modal').classList.remove('on');});
+  document.getElementById('info-modal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('on');}});
 
   // Task modal
   document.getElementById('m-div').addEventListener('change',updatePill);
@@ -1045,8 +1044,8 @@ window.onload=function(){
   }
 
   document.getElementById('btn-changepin').addEventListener('click', openPinModal);
-  document.getElementById('cp-cancel').addEventListener('click',function(){closeAllModals();});
-  document.getElementById('pin-modal').addEventListener('click',function(e){if(e.target===this){closeAllModals();}});
+  document.getElementById('cp-cancel').addEventListener('click',function(){document.getElementById('pin-modal').classList.remove('on');});
+  document.getElementById('pin-modal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('on');}});
 
   // Step 1 — old PIN
   var cpOldKeys=document.querySelectorAll('.cp-key');
