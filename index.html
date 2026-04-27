@@ -17,7 +17,6 @@
 }
 html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
 
-/* SETUP */
 #pg-setup{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px}
 .setup-card{background:var(--white);border-radius:16px;padding:24px;width:100%;max-width:380px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
 .logo{font-size:24px;font-weight:800;margin-bottom:4px}.logo span{color:var(--adit)}
@@ -41,7 +40,6 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 .setup-go{width:100%;padding:13px;border-radius:10px;border:none;background:var(--border);color:#999;font-family:inherit;font-size:15px;font-weight:700;cursor:not-allowed;margin-top:8px}
 .setup-go.ok{background:var(--ink);color:#fff;cursor:pointer}
 
-/* APP */
 #pg-app{display:none;flex-direction:column;height:100vh}
 .hdr{background:var(--ink);color:#fff;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .hdr-l{font-size:14px;font-weight:800}.hdr-l span{font-weight:400;font-size:11px;color:#aaa;margin-left:6px}
@@ -51,10 +49,8 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 .sync-t{font-size:9px;color:#aaa}
 .hbtn{padding:5px 9px;border-radius:6px;border:1px solid #444;background:transparent;color:#ccc;font-family:inherit;font-size:10px;font-weight:600;cursor:pointer}
 
-/* STATS */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 12px;flex-shrink:0}
-.sc{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:8px 10px;cursor:pointer;transition:.15s}
-.sc:active{opacity:.8}
+.sc{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:8px 10px;cursor:pointer}
 .sc-l{font-size:7px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:2px}
 .sc-v{font-size:20px;font-weight:800;line-height:1}
 .sc-s{font-size:8px;color:var(--muted);margin-top:1px}
@@ -62,24 +58,20 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 .sc-f{height:100%;border-radius:2px;transition:width .4s}
 .sc-click{font-size:7px;color:var(--muted);margin-top:3px}
 
-/* WEEK NAV */
 .wnav{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--white);border-bottom:1px solid var(--border);flex-shrink:0}
 .wnav-btn{padding:5px 12px;border-radius:6px;border:1.5px solid var(--border);background:var(--bg);font-family:inherit;font-size:11px;font-weight:600;cursor:pointer}
 .wnav-lbl{font-size:12px;font-weight:700}
 
-/* TABS */
 .tabs{display:flex;border-bottom:2px solid var(--border);flex-shrink:0;background:var(--white)}
 .tab{flex:1;padding:9px 4px;border:none;background:transparent;font-family:inherit;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px}
 .tab.on{color:var(--ink);border-bottom-color:var(--ink)}
 
-/* CONTENT */
 .content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .page{display:none;padding:10px 12px 80px}.page.on{display:block}
 
-/* CALENDAR */
 .filt-row{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
 .fb{padding:4px 12px;border-radius:20px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;border:2px solid transparent}
-.cal-wrap{overflow-x:auto;border-radius:12px;border:1.5px solid var(--border);box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.cal-wrap{overflow-x:auto;border-radius:12px;border:1.5px solid var(--border)}
 .cal-grid{display:grid;grid-template-columns:72px repeat(7,minmax(120px,1fr));background:var(--border);gap:1px;min-width:900px}
 .ch{background:var(--ink);color:#fff;padding:7px 8px}
 .ch.corner{background:#141420;display:flex;align-items:flex-end;padding-bottom:8px;font-size:8px;color:#666}
@@ -98,7 +90,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 .tc.najwa{background:var(--najwa-l);border-color:#bdd1fb}
 .tc.dio{background:var(--dio-l);border-color:#d5bafc}
 .tc.done{opacity:.4}
-.tc.clickable{cursor:pointer}
+.tc.can-tog{cursor:pointer}
 .tchk{width:13px;height:13px;border-radius:3px;border:1.5px solid currentColor;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800}
 .tc.adit .tchk{color:var(--adit)}.tc.najwa .tchk{color:var(--najwa)}.tc.dio .tchk{color:var(--dio)}
 .tc.done .tchk{color:#fff!important}
@@ -111,16 +103,12 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 .ttag.x{background:#d6edff;color:#004da0}.ttag.fb{background:#d6e0ff;color:#002da0}
 .ttag.threads{background:#ecdaff;color:#4c00a0}.ttag.produk{background:#fff0d6;color:#8c4a00}
 .ttag.konten{background:#e8ffd6;color:#2a6a00}.ttag.edit{background:#d6eeff;color:#004888}
-.tx{font-size:10px;color:var(--muted);cursor:pointer;padding:0 2px;flex-shrink:0;line-height:1}
+.tx{font-size:10px;color:var(--muted);cursor:pointer;padding:0 2px;flex-shrink:0}
 .add-cell{margin-top:auto;padding-top:3px}
 .add-btn-cell{width:100%;padding:4px;border:1.5px dashed var(--border);border-radius:5px;background:transparent;color:var(--muted);font-size:9px;cursor:pointer;font-family:inherit}
-.add-btn-cell:active{border-color:var(--ink);color:var(--ink)}
 
-/* MODAL */
-.ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:900;align-items:flex-end;justify-content:center}
-.ovl.on{display:flex}
-.modal{background:var(--white);border-radius:16px 16px 0 0;padding:20px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;animation:slideUp .25s ease}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.ovl{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.55);z-index:900;align-items:flex-end;justify-content:center}
+.modal{background:var(--white);border-radius:16px 16px 0 0;padding:20px;width:100%;max-width:500px;max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .modal-h{font-size:15px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .mpill{font-size:8px;padding:2px 7px;border-radius:4px;text-transform:uppercase;font-weight:700}
 .mpill.adit{background:var(--adit-l);color:var(--adit)}.mpill.najwa{background:var(--najwa-l);color:var(--najwa)}.mpill.dio{background:var(--dio-l);color:var(--dio)}
@@ -129,27 +117,18 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 .fi,.fs{width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--bg);outline:none}
 .fi:focus,.fs:focus{border-color:var(--ink);background:var(--white)}
 .tag-row{display:flex;gap:4px;flex-wrap:wrap}
-.to{padding:4px 8px;border-radius:5px;font-size:9px;font-weight:700;text-transform:uppercase;cursor:pointer;border:1.5px solid transparent}
-.to.sel{border-color:var(--ink)!important;box-shadow:0 0 0 1px var(--ink)}
+.to{padding:4px 8px;border-radius:5px;font-size:9px;font-weight:700;text-transform:uppercase;cursor:pointer;border:1.5px solid transparent;display:inline-block}
+.to.sel{border-color:var(--ink)!important}
 .mbtns{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
-.btn{display:inline-flex;align-items:center;padding:8px 14px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);color:var(--ink);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer}
-.btn.pri{background:var(--ink);color:#fff;border-color:var(--ink)}
+.mbtn{padding:8px 14px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);color:var(--ink);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer}
+.mbtn.pri{background:var(--ink);color:#fff;border-color:var(--ink)}
 
-/* INFO MODAL (stats detail) */
-.info-modal{background:var(--white);border-radius:16px 16px 0 0;padding:20px;width:100%;max-width:500px;max-height:80vh;overflow-y:auto;animation:slideUp .25s ease}
-.info-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
-.info-item:last-child{border-bottom:none}
-.info-badge{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.info-name{font-size:13px;font-weight:600;margin-bottom:2px}
-.info-sub{font-size:11px;color:var(--muted)}
-
-/* PRODUCTS */
 .prod-card{background:var(--white);border-radius:12px;border:1.5px solid var(--border);margin-bottom:10px;overflow:hidden}
 .prod-head{padding:11px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
 .prod-name{font-size:13px;font-weight:700}.prod-pic{font-size:11px;color:var(--muted);margin-top:2px}
 .prod-body{padding:9px 14px;display:flex;align-items:center;gap:8px}
 .prod-sel{padding:5px 8px;border:1.5px solid var(--border);border-radius:20px;font-family:inherit;font-size:11px;font-weight:600;background:var(--bg);cursor:pointer;flex:1;outline:none}
-.prod-del{width:32px;height:32px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);color:var(--muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.prod-del{width:32px;height:32px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);color:var(--muted);font-size:18px;cursor:pointer;flex-shrink:0}
 .sbadge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;text-transform:uppercase;white-space:nowrap}
 .s-riset{background:#fff3e0;color:#b05500}.s-checkout{background:#e0f0ff;color:#005bb0}
 .s-menunggu{background:#fff0eb;color:#c43000}.s-datang{background:#edfff5;color:#006830}
@@ -157,13 +136,12 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 .s-upload{background:#d4fde4;color:#005a20}.s-live{background:#c8fcd8;color:#003d15}.s-review{background:#ffe0e0;color:#a00000}
 .add-prod{background:var(--white);border-radius:12px;border:1.5px solid var(--border);padding:14px;margin-bottom:14px}
 .add-prod h4{font-size:13px;font-weight:700;margin-bottom:12px}
-.form-row{margin-bottom:10px}
-.form-lbl{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
-.form-inp,.form-sel{width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--bg);outline:none}
-.form-inp:focus,.form-sel:focus{border-color:var(--ink);background:var(--white)}
-.form-btn{width:100%;padding:12px;border-radius:8px;border:none;background:var(--ink);color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px}
+.frow{margin-bottom:10px}
+.flbl{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.finp,.fsel{width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--bg);outline:none}
+.finp:focus,.fsel:focus{border-color:var(--ink);background:var(--white)}
+.fbtn{width:100%;padding:12px;border-radius:8px;border:none;background:var(--ink);color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px}
 
-/* REPORT */
 .rep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
 .rep-card{background:var(--white);border-radius:12px;border:1.5px solid var(--border);overflow:hidden}
 .rep-head{padding:10px 12px;color:#fff;font-weight:800;font-size:13px}
@@ -172,11 +150,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 .rep-row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid var(--border)}
 .rep-row:last-child{border-bottom:none}.rep-val{font-weight:700}
 .pbar{height:5px;background:var(--border);border-radius:5px;overflow:hidden;margin-top:7px}
-.pbar-f{height:100%;border-radius:5px;transition:width .4s}
+.pbar-f{height:100%;border-radius:5px}
 
-/* CONFIRM */
-#cdialog{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center}
-#cdialog.show{display:flex}
+.cdialog{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center}
 .cbox{background:#fff;border-radius:14px;padding:22px;width:270px;text-align:center}
 .cbox h4{font-size:15px;font-weight:700;margin-bottom:6px}
 .cbox p{font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.5}
@@ -184,7 +160,6 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 .cno{flex:1;padding:10px;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer}
 .cyes{flex:1;padding:10px;border-radius:8px;border:none;background:var(--red);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
 
-/* TOAST */
 .toast{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 18px;border-radius:24px;font-size:13px;font-weight:600;z-index:1000;white-space:nowrap;pointer-events:none}
 .toast.show{display:block}
 
@@ -197,32 +172,38 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 <div id="pg-setup">
 <div class="setup-card">
   <div class="logo">Affiliate <span>Monitor</span></div>
-  <div class="logo-sub">Dashboard tim affiliate — login dengan PIN</div>
+  <div class="logo-sub">Dashboard tim affiliate</div>
   <span class="slbl">Kamu siapa?</span>
   <div class="who-grid">
-    <button class="wb" id="wb-adit">👤 Adit</button>
-    <button class="wb" id="wb-najwa">👤 Najwa</button>
-    <button class="wb" id="wb-dio">👤 Dio</button>
-    <button class="wb" id="wb-owner">👑 Owner</button>
+    <button class="wb" id="wb-adit" onclick="pickWho('adit')">👤 Adit</button>
+    <button class="wb" id="wb-najwa" onclick="pickWho('najwa')">👤 Najwa</button>
+    <button class="wb" id="wb-dio" onclick="pickWho('dio')">👤 Dio</button>
+    <button class="wb" id="wb-owner" onclick="pickWho('owner')">👑 Owner</button>
   </div>
   <div class="pin-wrap" id="pin-wrap" style="display:none">
     <span class="slbl" style="text-align:center">PIN 4 Digit</span>
     <div class="pin-dots">
-      <div class="pdot" id="pd0"></div>
-      <div class="pdot" id="pd1"></div>
-      <div class="pdot" id="pd2"></div>
-      <div class="pdot" id="pd3"></div>
+      <div class="pdot" id="pd0"></div><div class="pdot" id="pd1"></div>
+      <div class="pdot" id="pd2"></div><div class="pdot" id="pd3"></div>
     </div>
     <div class="pin-pad">
-      <button class="pk" data-n="1">1</button><button class="pk" data-n="2">2</button><button class="pk" data-n="3">3</button>
-      <button class="pk" data-n="4">4</button><button class="pk" data-n="5">5</button><button class="pk" data-n="6">6</button>
-      <button class="pk" data-n="7">7</button><button class="pk" data-n="8">8</button><button class="pk" data-n="9">9</button>
-      <button class="pk" style="visibility:hidden"></button><button class="pk" data-n="0">0</button><button class="pk" id="pk-del" style="font-size:14px;color:var(--muted)">⌫</button>
+      <button class="pk" onclick="pressPin('1')">1</button>
+      <button class="pk" onclick="pressPin('2')">2</button>
+      <button class="pk" onclick="pressPin('3')">3</button>
+      <button class="pk" onclick="pressPin('4')">4</button>
+      <button class="pk" onclick="pressPin('5')">5</button>
+      <button class="pk" onclick="pressPin('6')">6</button>
+      <button class="pk" onclick="pressPin('7')">7</button>
+      <button class="pk" onclick="pressPin('8')">8</button>
+      <button class="pk" onclick="pressPin('9')">9</button>
+      <button class="pk" style="visibility:hidden"></button>
+      <button class="pk" onclick="pressPin('0')">0</button>
+      <button class="pk" onclick="delPin()" style="font-size:14px;color:var(--muted)">⌫</button>
     </div>
     <div class="pin-err" id="pin-err"></div>
   </div>
   <div class="pin-hint" id="pin-hint"></div>
-  <button class="setup-go" id="btn-go">Pilih nama dulu ↑</button>
+  <button class="setup-go" id="btn-go" onclick="tryLogin()">Pilih nama dulu ↑</button>
 </div>
 </div>
 
@@ -233,53 +214,49 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
     <div class="hdr-r">
       <div class="dot" id="sdot"></div>
       <span class="sync-t" id="sync-t">—</span>
-      <button class="hbtn" id="btn-sync">↻ Sync</button>
-      <button class="hbtn" id="btn-changepin">🔑 PIN</button>
-      <button class="hbtn" id="btn-logout">Keluar</button>
+      <button class="hbtn" onclick="doSync()">↻ Sync</button>
+      <button class="hbtn" onclick="openChangePIN()">🔑 PIN</button>
+      <button class="hbtn" onclick="doLogout()">Keluar</button>
     </div>
   </div>
 
   <div class="stats">
-    <div class="sc" id="sc-done">
-      <div class="sc-l">✅ Selesai</div>
-      <div class="sc-v" id="st-done">0</div>
+    <div class="sc" onclick="showInfo('done')">
+      <div class="sc-l">✅ Selesai</div><div class="sc-v" id="st-done">0</div>
       <div class="sc-s" id="st-dones">dari 0</div>
       <div class="sc-bar"><div class="sc-f" id="sf-done" style="background:var(--green);width:0%"></div></div>
-      <div class="sc-click">tap untuk detail</div>
+      <div class="sc-click">tap detail</div>
     </div>
-    <div class="sc" id="sc-prod">
-      <div class="sc-l">🛍 Produk</div>
-      <div class="sc-v" id="st-prod">0</div>
+    <div class="sc" onclick="showInfo('prod')">
+      <div class="sc-l">🛍 Produk</div><div class="sc-v" id="st-prod">0</div>
       <div class="sc-s">aktif</div>
       <div class="sc-bar"><div class="sc-f" id="sf-prod" style="background:var(--adit);width:0%"></div></div>
-      <div class="sc-click">tap untuk detail</div>
+      <div class="sc-click">tap detail</div>
     </div>
-    <div class="sc" id="sc-live">
-      <div class="sc-l">📲 Live</div>
-      <div class="sc-v" id="st-live">0</div>
+    <div class="sc" onclick="showInfo('live')">
+      <div class="sc-l">📲 Live</div><div class="sc-v" id="st-live">0</div>
       <div class="sc-s">konten</div>
       <div class="sc-bar"><div class="sc-f" id="sf-live" style="background:var(--najwa);width:0%"></div></div>
-      <div class="sc-click">tap untuk detail</div>
+      <div class="sc-click">tap detail</div>
     </div>
-    <div class="sc" id="sc-share">
-      <div class="sc-l">🔗 Sebar</div>
-      <div class="sc-v" id="st-share">0</div>
+    <div class="sc" onclick="showInfo('share')">
+      <div class="sc-l">🔗 Sebar</div><div class="sc-v" id="st-share">0</div>
       <div class="sc-s">Dio done</div>
       <div class="sc-bar"><div class="sc-f" id="sf-share" style="background:var(--dio);width:0%"></div></div>
-      <div class="sc-click">tap untuk detail</div>
+      <div class="sc-click">tap detail</div>
     </div>
   </div>
 
   <div class="wnav">
-    <button class="wnav-btn" id="btn-prev">‹ Lalu</button>
+    <button class="wnav-btn" onclick="shiftWeek(-1)">‹ Lalu</button>
     <span class="wnav-lbl" id="wnav-lbl">Minggu Ini</span>
-    <button class="wnav-btn" id="btn-next">Depan ›</button>
+    <button class="wnav-btn" onclick="shiftWeek(1)">Depan ›</button>
   </div>
 
   <div class="tabs">
-    <button class="tab on" id="tab-tasks">📅 Tugas</button>
-    <button class="tab" id="tab-products">🛍 Produk</button>
-    <button class="tab" id="tab-report">📊 Laporan</button>
+    <button class="tab on" id="tab-tasks" onclick="switchTab('tasks')">📅 Tugas</button>
+    <button class="tab" id="tab-products" onclick="switchTab('products')">🛍 Produk</button>
+    <button class="tab" id="tab-report" onclick="switchTab('report')">📊 Laporan</button>
   </div>
 
   <div class="content">
@@ -287,19 +264,19 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
     <div class="page" id="pg-products">
       <div class="add-prod" id="add-prod-form">
         <h4>➕ Tambah Produk</h4>
-        <div class="form-row"><label class="form-lbl">Nama Produk</label><input class="form-inp" id="pf-name" placeholder="Nama produk..."></div>
-        <div class="form-row"><label class="form-lbl">PIC</label>
-          <select class="form-sel" id="pf-pic"><option>Adit</option><option>Najwa</option><option>Dio</option></select>
+        <div class="frow"><label class="flbl">Nama Produk</label><input class="finp" id="pf-name" placeholder="Nama produk..."></div>
+        <div class="frow"><label class="flbl">PIC</label>
+          <select class="fsel" id="pf-pic"><option>Adit</option><option>Najwa</option><option>Dio</option></select>
         </div>
-        <div class="form-row"><label class="form-lbl">Status</label>
-          <select class="form-sel" id="pf-status">
+        <div class="frow"><label class="flbl">Status</label>
+          <select class="fsel" id="pf-status">
             <option value="riset">Riset</option><option value="checkout">Check Out</option>
             <option value="menunggu">Menunggu Datang</option><option value="datang">Produk Datang</option>
             <option value="konten">Buat Konten</option><option value="editing">Editing</option>
             <option value="upload">Upload</option><option value="live">Live</option><option value="review">Review</option>
           </select>
         </div>
-        <button class="form-btn" id="btn-add-prod">Tambah Produk</button>
+        <button class="fbtn" onclick="addProd()">Tambah Produk</button>
       </div>
       <div id="prod-list"></div>
     </div>
@@ -308,14 +285,12 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 </div>
 
 <!-- TASK MODAL -->
-<div class="ovl" id="task-modal">
+<div class="ovl" id="task-modal" onclick="if(event.target===this)closeModal('task-modal')">
   <div class="modal">
     <div class="modal-h">Tambah Tugas <div class="mpill" id="m-pill"></div></div>
     <div class="fg"><label class="fl">Divisi</label>
-      <select class="fs" id="m-div">
-        <option value="adit">Adit</option>
-        <option value="najwa">Najwa</option>
-        <option value="dio">Dio</option>
+      <select class="fs" id="m-div" onchange="updatePill()">
+        <option value="adit">Adit</option><option value="najwa">Najwa</option><option value="dio">Dio</option>
       </select>
     </div>
     <div class="fg"><label class="fl">Hari</label>
@@ -325,91 +300,93 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
       </select>
     </div>
     <div class="fg"><label class="fl">Tugas</label><input class="fi" id="m-text" placeholder="Deskripsi tugas..."></div>
-    <div class="fg"><label class="fl">Kategori / Tag</label>
+    <div class="fg"><label class="fl">Tag</label>
       <div class="tag-row">
-        <div class="to shopee" data-tag="shopee" style="background:#fff4ec;color:#b84400">Shopee</div>
-        <div class="to tiktok" data-tag="tiktok" style="background:#ecfdf5;color:#006830">TikTok</div>
-        <div class="to ig"     data-tag="ig"     style="background:#fdf2f8;color:#9c0060">IG</div>
-        <div class="to yt"     data-tag="yt"     style="background:#fef2f2;color:#9c0000">YouTube</div>
-        <div class="to x"      data-tag="x"      style="background:#eff6ff;color:#004da0">X</div>
-        <div class="to fb"     data-tag="fb"     style="background:#eff2ff;color:#002da0">Facebook</div>
-        <div class="to threads" data-tag="threads" style="background:#f5f0ff;color:#4c00a0">Threads</div>
-        <div class="to produk" data-tag="produk" style="background:#fffbeb;color:#8c4a00">Produk</div>
-        <div class="to konten" data-tag="konten" style="background:#f0fdf4;color:#2a6a00">Konten</div>
-        <div class="to edit"   data-tag="edit"   style="background:#eff8ff;color:#004888">Edit</div>
+        <div class="to shopee" onclick="togTag(this,'shopee')" style="background:#fff4ec;color:#b84400">Shopee</div>
+        <div class="to tiktok" onclick="togTag(this,'tiktok')" style="background:#ecfdf5;color:#006830">TikTok</div>
+        <div class="to ig"     onclick="togTag(this,'ig')"     style="background:#fdf2f8;color:#9c0060">IG</div>
+        <div class="to yt"     onclick="togTag(this,'yt')"     style="background:#fef2f2;color:#9c0000">YouTube</div>
+        <div class="to x"      onclick="togTag(this,'x')"      style="background:#eff6ff;color:#004da0">X</div>
+        <div class="to fb"     onclick="togTag(this,'fb')"     style="background:#eff2ff;color:#002da0">Facebook</div>
+        <div class="to threads" onclick="togTag(this,'threads')" style="background:#f5f0ff;color:#4c00a0">Threads</div>
+        <div class="to produk" onclick="togTag(this,'produk')" style="background:#fffbeb;color:#8c4a00">Produk</div>
+        <div class="to konten" onclick="togTag(this,'konten')" style="background:#f0fdf4;color:#2a6a00">Konten</div>
+        <div class="to edit"   onclick="togTag(this,'edit')"   style="background:#eff8ff;color:#004888">Edit</div>
       </div>
     </div>
     <div class="mbtns">
-      <button class="btn" id="m-cancel">Batal</button>
-      <button class="btn pri" id="m-save">Simpan Tugas</button>
+      <button class="mbtn" onclick="closeModal('task-modal')">Batal</button>
+      <button class="mbtn pri" onclick="saveTask()">Simpan</button>
     </div>
   </div>
 </div>
 
-<!-- INFO MODAL (stats detail) -->
-<div class="ovl" id="info-modal">
-  <div class="info-modal">
+<!-- INFO MODAL -->
+<div class="ovl" id="info-modal" onclick="if(event.target===this)closeModal('info-modal')">
+  <div class="modal">
     <div class="modal-h" id="info-title">Detail</div>
     <div id="info-body"></div>
-    <div style="margin-top:14px"><button class="btn" id="info-close" style="width:100%;justify-content:center">Tutup</button></div>
+    <div style="margin-top:14px"><button class="mbtn" onclick="closeModal('info-modal')" style="width:100%;text-align:center">Tutup</button></div>
   </div>
 </div>
 
 <!-- CHANGE PIN MODAL -->
-<div class="ovl" id="pin-modal">
+<div class="ovl" id="pin-modal" onclick="if(event.target===this)closeModal('pin-modal')">
   <div class="modal" style="text-align:center">
     <div class="modal-h" style="justify-content:center">🔑 Ganti PIN</div>
-    <div id="pin-modal-step1">
-      <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Masukkan PIN lama kamu dulu</p>
-      <div class="pin-dots" id="cp-dots-old">
-        <div class="pdot" id="cpd-old-0"></div><div class="pdot" id="cpd-old-1"></div>
-        <div class="pdot" id="cpd-old-2"></div><div class="pdot" id="cpd-old-3"></div>
+    <div id="cp-step1">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Masukkan PIN lama</p>
+      <div class="pin-dots">
+        <div class="pdot" id="cpd0"></div><div class="pdot" id="cpd1"></div>
+        <div class="pdot" id="cpd2"></div><div class="pdot" id="cpd3"></div>
       </div>
-      <div class="pin-pad">
-        <button class="pk cp-key" data-n="1">1</button><button class="pk cp-key" data-n="2">2</button><button class="pk cp-key" data-n="3">3</button>
-        <button class="pk cp-key" data-n="4">4</button><button class="pk cp-key" data-n="5">5</button><button class="pk cp-key" data-n="6">6</button>
-        <button class="pk cp-key" data-n="7">7</button><button class="pk cp-key" data-n="8">8</button><button class="pk cp-key" data-n="9">9</button>
-        <button class="pk" style="visibility:hidden"></button><button class="pk cp-key" data-n="0">0</button>
-        <button class="pk" id="cp-del-old" style="font-size:14px;color:var(--muted)">⌫</button>
+      <div class="pin-pad" style="margin-top:10px">
+        <button class="pk" onclick="cpPress('old','1')">1</button><button class="pk" onclick="cpPress('old','2')">2</button><button class="pk" onclick="cpPress('old','3')">3</button>
+        <button class="pk" onclick="cpPress('old','4')">4</button><button class="pk" onclick="cpPress('old','5')">5</button><button class="pk" onclick="cpPress('old','6')">6</button>
+        <button class="pk" onclick="cpPress('old','7')">7</button><button class="pk" onclick="cpPress('old','8')">8</button><button class="pk" onclick="cpPress('old','9')">9</button>
+        <button class="pk" style="visibility:hidden"></button><button class="pk" onclick="cpPress('old','0')">0</button>
+        <button class="pk" onclick="cpDel('old')" style="font-size:14px;color:var(--muted)">⌫</button>
       </div>
       <div class="pin-err" id="cp-err-old"></div>
     </div>
-    <div id="pin-modal-step2" style="display:none">
-      <p style="font-size:12px;color:var(--muted);margin-bottom:6px">Masukkan PIN baru (4 digit)</p>
+    <div id="cp-step2" style="display:none">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:6px">PIN baru</p>
       <div class="pin-dots">
-        <div class="pdot" id="cpd-new-0"></div><div class="pdot" id="cpd-new-1"></div>
-        <div class="pdot" id="cpd-new-2"></div><div class="pdot" id="cpd-new-3"></div>
+        <div class="pdot" id="cpn0"></div><div class="pdot" id="cpn1"></div>
+        <div class="pdot" id="cpn2"></div><div class="pdot" id="cpn3"></div>
       </div>
-      <div class="pin-pad">
-        <button class="pk cp-new-key" data-n="1">1</button><button class="pk cp-new-key" data-n="2">2</button><button class="pk cp-new-key" data-n="3">3</button>
-        <button class="pk cp-new-key" data-n="4">4</button><button class="pk cp-new-key" data-n="5">5</button><button class="pk cp-new-key" data-n="6">6</button>
-        <button class="pk cp-new-key" data-n="7">7</button><button class="pk cp-new-key" data-n="8">8</button><button class="pk cp-new-key" data-n="9">9</button>
-        <button class="pk" style="visibility:hidden"></button><button class="pk cp-new-key" data-n="0">0</button>
-        <button class="pk" id="cp-del-new" style="font-size:14px;color:var(--muted)">⌫</button>
+      <div class="pin-pad" style="margin-top:8px">
+        <button class="pk" onclick="cpPress('new','1')">1</button><button class="pk" onclick="cpPress('new','2')">2</button><button class="pk" onclick="cpPress('new','3')">3</button>
+        <button class="pk" onclick="cpPress('new','4')">4</button><button class="pk" onclick="cpPress('new','5')">5</button><button class="pk" onclick="cpPress('new','6')">6</button>
+        <button class="pk" onclick="cpPress('new','7')">7</button><button class="pk" onclick="cpPress('new','8')">8</button><button class="pk" onclick="cpPress('new','9')">9</button>
+        <button class="pk" style="visibility:hidden"></button><button class="pk" onclick="cpPress('new','0')">0</button>
+        <button class="pk" onclick="cpDel('new')" style="font-size:14px;color:var(--muted)">⌫</button>
       </div>
       <p style="font-size:12px;color:var(--muted);margin:10px 0 6px">Konfirmasi PIN baru</p>
       <div class="pin-dots">
-        <div class="pdot" id="cpd-conf-0"></div><div class="pdot" id="cpd-conf-1"></div>
-        <div class="pdot" id="cpd-conf-2"></div><div class="pdot" id="cpd-conf-3"></div>
+        <div class="pdot" id="cpc0"></div><div class="pdot" id="cpc1"></div>
+        <div class="pdot" id="cpc2"></div><div class="pdot" id="cpc3"></div>
       </div>
       <div class="pin-pad" style="margin-top:8px">
-        <button class="pk cp-conf-key" data-n="1">1</button><button class="pk cp-conf-key" data-n="2">2</button><button class="pk cp-conf-key" data-n="3">3</button>
-        <button class="pk cp-conf-key" data-n="4">4</button><button class="pk cp-conf-key" data-n="5">5</button><button class="pk cp-conf-key" data-n="6">6</button>
-        <button class="pk cp-conf-key" data-n="7">7</button><button class="pk cp-conf-key" data-n="8">8</button><button class="pk cp-conf-key" data-n="9">9</button>
-        <button class="pk" style="visibility:hidden"></button><button class="pk cp-conf-key" data-n="0">0</button>
-        <button class="pk" id="cp-del-conf" style="font-size:14px;color:var(--muted)">⌫</button>
+        <button class="pk" onclick="cpPress('conf','1')">1</button><button class="pk" onclick="cpPress('conf','2')">2</button><button class="pk" onclick="cpPress('conf','3')">3</button>
+        <button class="pk" onclick="cpPress('conf','4')">4</button><button class="pk" onclick="cpPress('conf','5')">5</button><button class="pk" onclick="cpPress('conf','6')">6</button>
+        <button class="pk" onclick="cpPress('conf','7')">7</button><button class="pk" onclick="cpPress('conf','8')">8</button><button class="pk" onclick="cpPress('conf','9')">9</button>
+        <button class="pk" style="visibility:hidden"></button><button class="pk" onclick="cpPress('conf','0')">0</button>
+        <button class="pk" onclick="cpDel('conf')" style="font-size:14px;color:var(--muted)">⌫</button>
       </div>
       <div class="pin-err" id="cp-err-new"></div>
     </div>
-    <button class="btn" id="cp-cancel" style="width:100%;justify-content:center;margin-top:14px">Batal</button>
+    <button class="mbtn" onclick="closeModal('pin-modal')" style="width:100%;text-align:center;margin-top:12px">Batal</button>
   </div>
 </div>
-<div id="cdialog">
+
+<!-- CONFIRM -->
+<div class="cdialog" id="cdialog">
   <div class="cbox">
-    <h4>Hapus?</h4><p id="cmsg"></p>
+    <h4>Konfirmasi</h4><p id="cmsg"></p>
     <div class="cbtns">
-      <button class="cno" id="cno">Batal</button>
-      <button class="cyes" id="cyes">Hapus</button>
+      <button class="cno" onclick="closeConfirm(false)">Batal</button>
+      <button class="cyes" onclick="closeConfirm(true)">Ya, Hapus</button>
     </div>
   </div>
 </div>
@@ -417,67 +394,72 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CONFIG ──────────────────────────────────────────
 var SB  = 'https://knvmvdjgsdikoglhcaxr.supabase.co/rest/v1/appdata';
 var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtudm12ZGpnc2Rpa29nbGhjYXhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NTM4MTksImV4cCI6MjA5MjMyOTgxOX0.QHnaq09tGBcfb5UwyrQFTMTQbimxyRGriD-_mPxntB8';
-
-// PIN per user
-var PINS = {adit:'1111', najwa:'2222', dio:'3333', owner:'0000'};
-
-// Jobdesk per user
+var PINS = {adit:'1111',najwa:'2222',dio:'3333',owner:'0000'};
 var JD = {
-  adit:  {add:true,  del:true,  toggle:['adit'],            prod:false},
-  najwa: {add:true,  del:true,  toggle:['najwa'],           prod:true},
-  dio:   {add:true,  del:true,  toggle:['dio'],             prod:false},
-  owner: {add:true,  del:true,  toggle:['adit','najwa','dio'], prod:true}
+  adit: {add:true,del:true,toggle:['adit'],prod:false},
+  najwa:{add:true,del:true,toggle:['najwa'],prod:true},
+  dio:  {add:true,del:true,toggle:['dio'],prod:false},
+  owner:{add:true,del:true,toggle:['adit','najwa','dio'],prod:true}
 };
-
 var DIVS  = [{id:'adit',name:'Adit',role:'Produk & Konten'},{id:'najwa',name:'Najwa',role:'Edit & Ops'},{id:'dio',name:'Dio',role:'Media Sosial'}];
 var DAYS  = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
 var STAGES= ['riset','checkout','menunggu','datang','konten','editing','upload','live','review'];
 var SL    = {riset:'Riset',checkout:'Checkout',menunggu:'Menunggu',datang:'Datang',konten:'Konten',editing:'Editing',upload:'Upload',live:'Live',review:'Review'};
 
-// ── STATE ────────────────────────────────────────────
-var who='', tasks=[], products=[];
-var weekOff=0, curTab='tasks', curFilt='all';
-var selTags=[], confirmCb=null, toastTmr=null, syncTmr=null;
-var pinVal='', whoSel='';
+var who='',whoSel='',pinVal='';
+var tasks=[],products=[],selTags=[];
+var weekOff=0,curTab='tasks',curFilt='all';
+var confirmCb=null,toastTmr=null,syncTmr=null;
+var cpOld='',cpNew='',cpConf='';
 var TODAY=new Date();
-var todayDi=(function(){ var d=TODAY.getDay(); return d===0?6:d-1; }());
+var todayDi=(function(){var d=TODAY.getDay();return d===0?6:d-1;}());
 var MON=getMon(0);
 
-function getMon(off){
-  var d=new Date(TODAY),day=d.getDay();
-  d.setDate(d.getDate()-day+(day===0?-6:1)+off*7);
-  return d;
-}
+function getMon(off){var d=new Date(TODAY),day=d.getDay();d.setDate(d.getDate()-day+(day===0?-6:1)+off*7);return d;}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){}}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function capFirst(s){return s?s.charAt(0).toUpperCase()+s.slice(1):'';}
 
-// ── STORAGE ──────────────────────────────────────────
-function lsSet(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
-function lsGet(k){ try{return localStorage.getItem(k);}catch(e){return null;} }
-function lsDel(k){ try{localStorage.removeItem(k);}catch(e){} }
-
-// ── TOAST ────────────────────────────────────────────
 function toast(msg){
   var t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
+  t.textContent=msg;t.classList.add('show');
   if(toastTmr){clearTimeout(toastTmr);}
   toastTmr=setTimeout(function(){t.classList.remove('show');},2500);
 }
 
-// ── CONFIRM ──────────────────────────────────────────
-function doConfirm(msg,cb){
-  document.getElementById('cmsg').textContent=msg;
-  document.getElementById('cdialog').className='show';
-  confirmCb=cb;
+// MODAL
+function openModal(id){
+  var el=document.getElementById(id);
+  if(!el){return;}
+  el.style.display='flex';
+}
+function closeModal(id){
+  var el=document.getElementById(id);
+  if(!el){return;}
+  el.style.display='none';
 }
 
-// ── SYNC ─────────────────────────────────────────────
+// CONFIRM
+function doConfirm(msg,cb){
+  document.getElementById('cmsg').textContent=msg;
+  document.getElementById('cdialog').style.display='flex';
+  confirmCb=cb;
+}
+function closeConfirm(yes){
+  document.getElementById('cdialog').style.display='none';
+  if(yes&&confirmCb){confirmCb();}
+  confirmCb=null;
+}
+
+// SYNC
 function setSS(s,lbl){
   document.getElementById('sdot').className='dot'+(s?' '+s:'');
   document.getElementById('sync-t').textContent=lbl||'—';
 }
-
 function sbRead(cb){
   setSS('busy','Syncing...');
   fetch(SB+'?select=key,value&apikey='+KEY)
@@ -492,40 +474,34 @@ function sbRead(cb){
       }catch(e){}
     }
     var t=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-    setSS('ok',t);
-    if(cb){cb();}
+    setSS('ok',t);if(cb){cb();}
   })
   .catch(function(err){setSS('err','Gagal');toast('Sync gagal: '+err.message);});
 }
-
-function sbWrite(retryCount){
-  retryCount=retryCount||0;
+function sbWrite(){
   setSS('busy','Menyimpan...');
   var base=SB+'?apikey='+KEY+'&on_conflict=key';
   var hdrs={'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=minimal'};
   var tb=JSON.stringify({key:'tasks',value:JSON.stringify(tasks)});
   var pb=JSON.stringify({key:'products',value:JSON.stringify(products)});
-  fetch(base,{method:'POST',headers:hdrs,body:tb})
-  .then(function(r){
-    if(!r.ok){return r.text().then(function(t){throw new Error('HTTP '+r.status+' '+t);});}
-    return fetch(base,{method:'POST',headers:hdrs,body:pb});
-  })
-  .then(function(r){
-    if(!r.ok){return r.text().then(function(t){throw new Error('HTTP '+r.status+' '+t);});}
-    var t=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-    setSS('ok',t); toast('✅ Tersimpan!');
-  })
-  .catch(function(err){
-    if(retryCount<2){
-      setTimeout(function(){sbWrite(retryCount+1);},2000);
-      toast('Menyimpan ulang...');
-    } else {
-      setSS('err','Gagal'); toast('Gagal simpan: '+err.message);
-    }
-  });
+  function tryWrite(retry){
+    fetch(base,{method:'POST',headers:hdrs,body:tb})
+    .then(function(r){if(!r.ok){throw new Error('HTTP '+r.status);}return fetch(base,{method:'POST',headers:hdrs,body:pb});})
+    .then(function(r){
+      if(!r.ok){throw new Error('HTTP '+r.status);}
+      var t=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+      setSS('ok',t);toast('✅ Tersimpan!');
+    })
+    .catch(function(err){
+      if(retry>0){setTimeout(function(){tryWrite(retry-1);},2000);}
+      else{setSS('err','Gagal');toast('Gagal simpan: '+err.message);}
+    });
+  }
+  tryWrite(2);
 }
+function doSync(){sbRead(function(){renderTasks();renderStats();renderReport();renderProducts();});}
 
-// ── STATS ────────────────────────────────────────────
+// STATS
 function renderStats(){
   var i,dn=0,tot=tasks.length;
   for(i=0;i<tasks.length;i++){if(tasks[i].done){dn++;}}
@@ -546,279 +522,205 @@ function renderStats(){
   document.getElementById('sf-share').style.width=(dA?Math.round(dD/dA*100):0)+'%';
 }
 
-// ── STATS DETAIL (info modal) ────────────────────────
+// INFO MODAL
 function showInfo(type){
-  var title='', html='', i, t, p;
+  var title='',html='',i,t,p;
   if(type==='done'){
     title='✅ Tugas Selesai';
-    var done=[];
-    for(i=0;i<tasks.length;i++){if(tasks[i].done){done.push(tasks[i]);}}
-    if(!done.length){html='<div style="text-align:center;padding:20px;color:var(--muted)">Belum ada tugas selesai.</div>';}
-    for(i=0;i<done.length;i++){
-      t=done[i];
-      html+='<div class="info-item">'
-        +'<div class="info-badge" style="background:var(--'+t.div+'-l)">✓</div>'
-        +'<div><div class="info-name">'+esc(t.text)+'</div>'
-        +'<div class="info-sub">'+capFirst(t.div)+' — '+DAYS[t.day]+'</div></div></div>';
+    for(i=0;i<tasks.length;i++){
+      t=tasks[i];if(!t.done){continue;}
+      html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
+        +'<div style="width:32px;height:32px;border-radius:8px;background:var(--'+t.div+'-l);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">✓</div>'
+        +'<div><div style="font-size:13px;font-weight:600">'+esc(t.text)+'</div>'
+        +'<div style="font-size:11px;color:var(--muted)">'+capFirst(t.div)+' — '+DAYS[t.day]+'</div></div></div>';
     }
+    if(!html){html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada tugas selesai.</p>';}
   } else if(type==='prod'){
     title='🛍 Semua Produk';
-    if(!products.length){html='<div style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk.</div>';}
     for(i=0;i<products.length;i++){
       p=products[i];
-      html+='<div class="info-item">'
-        +'<div class="info-badge" style="background:var(--adit-l)">🛍</div>'
-        +'<div><div class="info-name">'+esc(p.name)+'</div>'
-        +'<div class="info-sub">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'" style="font-size:9px">'+(SL[p.status]||p.status)+'</span></div></div></div>';
+      html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
+        +'<div style="width:32px;height:32px;border-radius:8px;background:var(--adit-l);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">🛍</div>'
+        +'<div><div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
+        +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'" style="font-size:9px">'+(SL[p.status]||p.status)+'</span></div></div></div>';
     }
+    if(!html){html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk.</p>';}
   } else if(type==='live'){
     title='📲 Produk Live / Upload';
-    var live=[];
-    for(i=0;i<products.length;i++){if(products[i].status==='live'||products[i].status==='upload'){live.push(products[i]);}}
-    if(!live.length){html='<div style="text-align:center;padding:20px;color:var(--muted)">Belum ada konten live.</div>';}
-    for(i=0;i<live.length;i++){
-      p=live[i];
-      html+='<div class="info-item">'
-        +'<div class="info-badge" style="background:var(--najwa-l)">📲</div>'
-        +'<div><div class="info-name">'+esc(p.name)+'</div>'
-        +'<div class="info-sub">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'" style="font-size:9px">'+(SL[p.status]||p.status)+'</span></div></div></div>';
+    for(i=0;i<products.length;i++){
+      p=products[i];if(p.status!=='live'&&p.status!=='upload'){continue;}
+      html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
+        +'<div style="width:32px;height:32px;border-radius:8px;background:var(--najwa-l);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">📲</div>'
+        +'<div><div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
+        +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'" style="font-size:9px">'+(SL[p.status]||p.status)+'</span></div></div></div>';
     }
+    if(!html){html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada konten live.</p>';}
   } else if(type==='share'){
-    title='🔗 Tugas Sebar Dio Selesai';
-    var dioTasks=[];
-    for(i=0;i<tasks.length;i++){if(tasks[i].div==='dio'){dioTasks.push(tasks[i]);}}
-    if(!dioTasks.length){html='<div style="text-align:center;padding:20px;color:var(--muted)">Belum ada tugas Dio.</div>';}
-    for(i=0;i<dioTasks.length;i++){
-      t=dioTasks[i];
-      html+='<div class="info-item">'
-        +'<div class="info-badge" style="background:var(--dio-l)">'+(t.done?'✓':'·')+'</div>'
-        +'<div><div class="info-name" style="'+(t.done?'text-decoration:line-through;color:var(--muted)':'')+'">'+esc(t.text)+'</div>'
-        +'<div class="info-sub">'+DAYS[t.day]+' · '+(t.done?'<span style="color:var(--green);font-weight:700">Selesai</span>':'<span style="color:var(--amber)">Belum</span>')+'</div></div></div>';
+    title='🔗 Tugas Dio';
+    for(i=0;i<tasks.length;i++){
+      t=tasks[i];if(t.div!=='dio'){continue;}
+      html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
+        +'<div style="width:32px;height:32px;border-radius:8px;background:var(--dio-l);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">'+(t.done?'✓':'·')+'</div>'
+        +'<div><div style="font-size:13px;font-weight:600;'+(t.done?'text-decoration:line-through;color:var(--muted)':'')+'">'+esc(t.text)+'</div>'
+        +'<div style="font-size:11px;color:var(--muted)">'+DAYS[t.day]+' · '+(t.done?'<span style="color:var(--green);font-weight:700">Selesai</span>':'<span style="color:var(--amber)">Belum</span>')+'</div></div></div>';
     }
+    if(!html){html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada tugas Dio.</p>';}
   }
   document.getElementById('info-title').textContent=title;
   document.getElementById('info-body').innerHTML=html;
-  document.getElementById('info-modal').classList.add('on');
+  openModal('info-modal');
 }
 
-// ── CALENDAR ─────────────────────────────────────────
+// CALENDAR
+function shiftWeek(dir){weekOff+=dir;MON=getMon(weekOff);document.getElementById('wnav-lbl').textContent=weekOff===0?'Minggu Ini':weekOff===1?'Minggu Depan':weekOff===-1?'Minggu Lalu':'Offset '+weekOff;renderTasks();}
+
 function renderTasks(){
   var pg=document.getElementById('pg-tasks');
   var jd=JD[who]||JD.owner;
-  var html='';
-
-  // Filter + add button
-  html+='<div class="filt-row">';
+  var html='<div class="filt-row">';
   var filts=[['all','Semua','var(--ink)'],['adit','Adit','var(--adit)'],['najwa','Najwa','var(--najwa)'],['dio','Dio','var(--dio)']];
   var fi;
   for(fi=0;fi<filts.length;fi++){
     var f=filts[fi],on=(curFilt===f[0]);
-    html+='<button class="fb" data-filt="'+f[0]+'" style="border-color:'+f[2]+';background:'+(on?f[2]:'transparent')+';color:'+(on?'#fff':f[2])+'">'+f[1]+'</button>';
+    html+='<button class="fb" onclick="setFilt(\''+f[0]+'\')" style="border-color:'+f[2]+';background:'+(on?f[2]:'transparent')+';color:'+(on?'#fff':f[2])+'">'+f[1]+'</button>';
   }
-  if(jd.add){
-    html+='<button id="btn-open-modal" style="margin-left:auto;padding:4px 12px;border-radius:20px;border:2px solid var(--ink);background:var(--ink);color:#fff;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer">+ Tugas</button>';
-  }
-  html+='</div>';
-
-  // Calendar grid
-  html+='<div class="cal-wrap"><div class="cal-grid">';
-  html+='<div class="ch corner">Divisi</div>';
+  if(jd.add){html+='<button onclick="openTaskModal(null,null)" style="margin-left:auto;padding:4px 12px;border-radius:20px;border:2px solid var(--ink);background:var(--ink);color:#fff;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer">+ Tugas</button>';}
+  html+='</div><div class="cal-wrap"><div class="cal-grid"><div class="ch corner">Divisi</div>';
   var ci,di,ti,dt,isToday,isWE,dv,dayTasks,t,tags,tg,tot,dn;
   for(ci=0;ci<7;ci++){
-    dt=new Date(MON); dt.setDate(MON.getDate()+ci);
-    isToday=(weekOff===0&&ci===todayDi); isWE=(ci===5||ci===6);
+    dt=new Date(MON);dt.setDate(MON.getDate()+ci);
+    isToday=(weekOff===0&&ci===todayDi);isWE=(ci===5||ci===6);
     html+='<div class="ch'+(isToday?' today':isWE?' wend':'')+'"><span class="dn">'+dt.getDate()+'</span><span class="dw">'+DAYS[ci]+(isWE?' 🏖':'')+'</span></div>';
   }
-
   var divsShow=curFilt==='all'?DIVS:DIVS.filter(function(d){return d.id===curFilt;});
   for(di=0;di<divsShow.length;di++){
-    dv=divsShow[di]; tot=0; dn=0;
+    dv=divsShow[di];tot=0;dn=0;
     for(ti=0;ti<tasks.length;ti++){if(tasks[ti].div===dv.id){tot++;if(tasks[ti].done){dn++;}}}
-    html+='<div class="dlbl '+dv.id+'">'
-      +'<div class="dname">'+dv.name+'</div>'
-      +'<div class="drole">'+dv.role+'</div>'
-      +'<div class="dprog '+dv.id+'">'+dn+'/'+tot+'</div></div>';
-
+    html+='<div class="dlbl '+dv.id+'"><div class="dname">'+dv.name+'</div><div class="drole">'+dv.role+'</div><div class="dprog '+dv.id+'">'+dn+'/'+tot+'</div></div>';
     for(ci=0;ci<7;ci++){
-      isToday=(weekOff===0&&ci===todayDi); isWE=(ci===5||ci===6);
+      isToday=(weekOff===0&&ci===todayDi);isWE=(ci===5||ci===6);
       dayTasks=[];
-      for(ti=0;ti<tasks.length;ti++){
-        if(tasks[ti].div===dv.id&&tasks[ti].day===ci){dayTasks.push(tasks[ti]);}
-      }
+      for(ti=0;ti<tasks.length;ti++){if(tasks[ti].div===dv.id&&tasks[ti].day===ci){dayTasks.push(tasks[ti]);}}
       html+='<div class="dcell'+(isToday?' today':isWE?' wend':'')+'">';
       for(ti=0;ti<dayTasks.length;ti++){
-        t=dayTasks[ti];
-        tags='';
+        t=dayTasks[ti];tags='';
         for(tg=0;tg<(t.tags||[]).length;tg++){tags+='<span class="ttag '+t.tags[tg]+'">'+t.tags[tg]+'</span>';}
-        // canToggle hanya untuk divisi yang sesuai jobdesk
         var canTog=(jd.toggle.indexOf(dv.id)>=0);
-        html+='<div class="tc '+dv.id+(t.done?' done':'')+(canTog?' clickable':'')+'" data-id="'+t.id+'" data-div="'+dv.id+'">'
+        html+='<div class="tc '+dv.id+(t.done?' done':'')+(canTog?' can-tog':'')+'" '+(canTog?'onclick="togTask('+t.id+')"':'')+' >'
           +'<div class="tchk">'+(t.done?'✓':'')+'</div>'
-          +'<div style="flex:1;min-width:0"><div class="ttxt">'+esc(t.text)+'</div>'
-          +(tags?'<div style="margin-top:2px">'+tags+'</div>':'')
-          +'</div>';
-        if(jd.del){html+='<span class="tx" data-id="'+t.id+'">×</span>';}
+          +'<div style="flex:1;min-width:0"><div class="ttxt">'+esc(t.text)+'</div>'+(tags?'<div style="margin-top:2px">'+tags+'</div>':'')+'</div>';
+        if(jd.del){html+='<span class="tx" onclick="event.stopPropagation();askDelTask('+t.id+')">×</span>';}
         html+='</div>';
       }
-      // Add button — hanya untuk divisi jobdesk sendiri
       if(jd.add&&jd.toggle.indexOf(dv.id)>=0){
-        html+='<div class="add-cell"><button class="add-btn-cell" data-div="'+dv.id+'" data-day="'+ci+'">+ tugas</button></div>';
+        html+='<div class="add-cell"><button class="add-btn-cell" onclick="openTaskModal(\''+dv.id+'\','+ci+')">+ tugas</button></div>';
       }
       html+='</div>';
     }
   }
   html+='</div></div>';
   pg.innerHTML=html;
-
-  // Bind filter
-  var fbs=pg.querySelectorAll('.fb'),k;
-  for(k=0;k<fbs.length;k++){
-    fbs[k].addEventListener('click',function(){curFilt=this.getAttribute('data-filt');renderTasks();});
-  }
-  // Open modal button
-  var omBtn=document.getElementById('btn-open-modal');
-  if(omBtn){omBtn.addEventListener('click',function(){openModal(null,null);});}
-  // Add-btn-cell
-  var adds=pg.querySelectorAll('.add-btn-cell');
-  for(k=0;k<adds.length;k++){
-    adds[k].addEventListener('click',function(){
-      openModal(this.getAttribute('data-div'),parseInt(this.getAttribute('data-day'),10));
-    });
-  }
-  // Task chip toggle — hanya clickable jika ada class
-  var chips=pg.querySelectorAll('.tc.clickable');
-  for(k=0;k<chips.length;k++){
-    chips[k].addEventListener('click',function(e){
-      if(e.target.classList.contains('tx')){return;}
-      togTask(parseInt(this.getAttribute('data-id'),10));
-    });
-  }
-  // Delete X
-  var txs=pg.querySelectorAll('.tx');
-  for(k=0;k<txs.length;k++){
-    txs[k].addEventListener('click',function(e){
-      e.stopPropagation();
-      var id=parseInt(this.getAttribute('data-id'),10);
-      var t=findTask(id);
-      doConfirm(t?'"'+t.text+'"':'Tugas ini?',function(){delTask(id);});
-    });
-  }
 }
 
-// ── TASK MODAL ───────────────────────────────────────
-function openModal(div,day){
-  closeAllModals();
-  // Blur semua input dulu agar keyboard turun sebelum modal buka
-  if(document.activeElement){document.activeElement.blur();}
+function setFilt(f){curFilt=f;renderTasks();}
+
+// TASK MODAL
+function openTaskModal(div,day){
   var jd=JD[who]||JD.owner;
   var sel=document.getElementById('m-div'),i;
-  for(i=0;i<sel.options.length;i++){
-    sel.options[i].disabled=(jd.toggle.indexOf(sel.options[i].value)<0);
-  }
+  for(i=0;i<sel.options.length;i++){sel.options[i].disabled=(jd.toggle.indexOf(sel.options[i].value)<0);}
   if(div&&jd.toggle.indexOf(div)>=0){sel.value=div;}
-  else{
-    for(i=0;i<sel.options.length;i++){
-      if(!sel.options[i].disabled){sel.value=sel.options[i].value;break;}
-    }
-  }
+  else{for(i=0;i<sel.options.length;i++){if(!sel.options[i].disabled){sel.value=sel.options[i].value;break;}}}
   if(day!==null&&day!==undefined){document.getElementById('m-day').value=day;}
   document.getElementById('m-text').value='';
   selTags=[];
   var tos=document.querySelectorAll('.to'),k;
   for(k=0;k<tos.length;k++){tos[k].classList.remove('sel');}
   updatePill();
-  // Buka modal tanpa auto-focus agar keyboard tidak muncul otomatis
-  openOvl('task-modal');
+  openModal('task-modal');
 }
-
 function updatePill(){
   var d=document.getElementById('m-div').value;
   var p=document.getElementById('m-pill');
   p.textContent={adit:'Adit',najwa:'Najwa',dio:'Dio'}[d]||d;
   p.className='mpill '+d;
 }
-
-// ── TASK ACTIONS ─────────────────────────────────────
-function findTask(id){var i;for(i=0;i<tasks.length;i++){if(tasks[i].id===id){return tasks[i];}}return null;}
-
-function togTask(id){
-  var t=findTask(id);if(!t){return;}
-  t.done=!t.done;
-  lsSet('aff_tasks',JSON.stringify(tasks));
-  renderTasks();renderStats();renderReport();
-  sbWrite();
+function togTag(el,tag){
+  el.classList.toggle('sel');
+  var idx=selTags.indexOf(tag);
+  if(idx>=0){selTags.splice(idx,1);}else{selTags.push(tag);}
 }
-
-function addTask(div,day,text,tags){
+function saveTask(){
+  var txt=document.getElementById('m-text').value.trim();
+  if(!txt){document.getElementById('m-text').focus();return;}
   var nid=1,i;
   for(i=0;i<tasks.length;i++){if(tasks[i].id>=nid){nid=tasks[i].id+1;}}
-  tasks.push({id:nid,div:div,day:day,text:text,tags:tags||[],done:false});
+  tasks.push({id:nid,div:document.getElementById('m-div').value,day:parseInt(document.getElementById('m-day').value,10),text:txt,tags:selTags.slice(),done:false});
   lsSet('aff_tasks',JSON.stringify(tasks));
+  closeModal('task-modal');
   renderTasks();renderStats();renderReport();
-  sbWrite();
-  toast('✅ Tugas ditambahkan!');
+  sbWrite();toast('✅ Tugas ditambahkan!');
 }
 
-function delTask(id){
-  var n=[],i;
-  for(i=0;i<tasks.length;i++){if(tasks[i].id!==id){n.push(tasks[i]);}}
-  tasks=n;
-  lsSet('aff_tasks',JSON.stringify(tasks));
-  renderTasks();renderStats();renderReport();
-  sbWrite();
-  toast('Tugas dihapus');
+// TASK ACTIONS
+function findTask(id){var i;for(i=0;i<tasks.length;i++){if(tasks[i].id===id){return tasks[i];}}return null;}
+function togTask(id){
+  var t=findTask(id);if(!t){return;}
+  t.done=!t.done;lsSet('aff_tasks',JSON.stringify(tasks));
+  renderTasks();renderStats();renderReport();sbWrite();
+}
+function askDelTask(id){
+  var t=findTask(id);
+  doConfirm(t?'"'+t.text+'"':'Tugas ini?',function(){
+    var n=[],i;for(i=0;i<tasks.length;i++){if(tasks[i].id!==id){n.push(tasks[i]);}}
+    tasks=n;lsSet('aff_tasks',JSON.stringify(tasks));
+    renderTasks();renderStats();renderReport();sbWrite();toast('Tugas dihapus');
+  });
 }
 
-// ── PRODUCTS ─────────────────────────────────────────
+// PRODUCTS
 function renderProducts(){
   var jd=JD[who]||JD.owner;
   var af=document.getElementById('add-prod-form');
   if(af){af.style.display=jd.prod?'block':'none';}
   var el=document.getElementById('prod-list');
-  if(!products.length){el.innerHTML='<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px">Belum ada produk.</div>';return;}
+  if(!products.length){el.innerHTML='<div style="text-align:center;padding:28px;color:var(--muted)">Belum ada produk.</div>';return;}
   var html='',i,p,opts,j;
   for(i=0;i<products.length;i++){
     p=products[i];opts='';
     for(j=0;j<STAGES.length;j++){opts+='<option value="'+STAGES[j]+'"'+(STAGES[j]===p.status?' selected':'')+'>'+SL[STAGES[j]]+'</option>';}
     html+='<div class="prod-card"><div class="prod-head"><div><div class="prod-name">'+esc(p.name)+'</div><div class="prod-pic">PIC: '+esc(p.pic)+'</div></div>'
       +'<span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div>'
-      +'<div class="prod-body"><select class="prod-sel" data-idx="'+i+'"'+(jd.prod?'':' disabled')+'>'+opts+'</select>'
-      +(jd.prod?'<button class="prod-del" data-idx="'+i+'">×</button>':'')+'</div></div>';
+      +'<div class="prod-body"><select class="prod-sel" onchange="updProd('+i+',this.value)"'+(jd.prod?'':' disabled')+'>'+opts+'</select>'
+      +(jd.prod?'<button class="prod-del" onclick="askDelProd('+i+')">×</button>':'')+'</div></div>';
   }
   el.innerHTML=html;
-  var sels=el.querySelectorAll('.prod-sel'),k;
-  for(k=0;k<sels.length;k++){
-    sels[k].addEventListener('change',function(){
-      var idx=parseInt(this.getAttribute('data-idx'),10);
-      products[idx].status=this.value;
-      lsSet('aff_prods',JSON.stringify(products));
-      renderProducts();renderStats();sbWrite();toast('Status diupdate!');
-    });
-  }
-  var dels=el.querySelectorAll('.prod-del');
-  for(k=0;k<dels.length;k++){
-    dels[k].addEventListener('click',function(){
-      var idx=parseInt(this.getAttribute('data-idx'),10);
-      doConfirm('Hapus "'+products[idx].name+'"?',function(){
-        products.splice(idx,1);
-        lsSet('aff_prods',JSON.stringify(products));
-        renderProducts();renderStats();sbWrite();toast('Produk dihapus');
-      });
-    });
-  }
+}
+function addProd(){
+  var name=document.getElementById('pf-name').value.trim();
+  if(!name){document.getElementById('pf-name').focus();return;}
+  products.push({name:name,pic:document.getElementById('pf-pic').value,status:document.getElementById('pf-status').value});
+  lsSet('aff_prods',JSON.stringify(products));
+  document.getElementById('pf-name').value='';
+  renderProducts();renderStats();sbWrite();toast('✅ Produk ditambahkan!');
+}
+function updProd(i,s){products[i].status=s;lsSet('aff_prods',JSON.stringify(products));renderProducts();renderStats();sbWrite();toast('Status diupdate!');}
+function askDelProd(i){
+  doConfirm('Hapus "'+products[i].name+'"?',function(){
+    products.splice(i,1);lsSet('aff_prods',JSON.stringify(products));
+    renderProducts();renderStats();sbWrite();toast('Produk dihapus');
+  });
 }
 
-// ── REPORT ───────────────────────────────────────────
+// REPORT
 function renderReport(){
   var html='',i,j,d,tot,dn,pct;
   for(i=0;i<DIVS.length;i++){
     d=DIVS[i];tot=0;dn=0;
     for(j=0;j<tasks.length;j++){if(tasks[j].div===d.id){tot++;if(tasks[j].done){dn++;}}}
     pct=tot?Math.round(dn/tot*100):0;
-    html+='<div class="rep-card"><div class="rep-head '+d.id+'">'+d.name
-      +'<div style="font-size:10px;font-weight:400;opacity:.7;margin-top:1px">'+d.role+'</div></div>'
-      +'<div class="rep-body">'
-      +'<div class="rep-row"><span>Total</span><span class="rep-val">'+tot+'</span></div>'
+    html+='<div class="rep-card"><div class="rep-head '+d.id+'">'+d.name+'<div style="font-size:10px;font-weight:400;opacity:.7;margin-top:1px">'+d.role+'</div></div>'
+      +'<div class="rep-body"><div class="rep-row"><span>Total</span><span class="rep-val">'+tot+'</span></div>'
       +'<div class="rep-row"><span>Selesai</span><span class="rep-val" style="color:var(--green)">'+dn+'</span></div>'
       +'<div class="rep-row"><span>Belum</span><span class="rep-val" style="color:var(--red)">'+(tot-dn)+'</span></div>'
       +'<div class="pbar"><div class="pbar-f" style="width:'+pct+'%;background:var(--'+d.id+')"></div></div>'
@@ -828,11 +730,7 @@ function renderReport(){
   document.getElementById('rep-grid').innerHTML=html;
 }
 
-// ── WEEK / TAB ────────────────────────────────────────
-function updateWeekLbl(){
-  document.getElementById('wnav-lbl').textContent=weekOff===0?'Minggu Ini':weekOff===1?'Minggu Depan':weekOff===-1?'Minggu Lalu':'Offset '+weekOff;
-}
-
+// TABS
 function switchTab(tab){
   curTab=tab;
   var tabs=['tasks','products','report'],i;
@@ -845,7 +743,7 @@ function switchTab(tab){
   if(tab==='report'){renderReport();}
 }
 
-// ── PIN ──────────────────────────────────────────────
+// PIN LOGIN
 function pickWho(w){
   whoSel=w;pinVal='';
   var btns=document.querySelectorAll('.wb'),i;
@@ -853,56 +751,81 @@ function pickWho(w){
   document.getElementById('wb-'+w).className='wb on-'+w;
   document.getElementById('pin-wrap').style.display='block';
   document.getElementById('pin-err').textContent='';
-  updatePinDots();
   document.getElementById('pin-hint').textContent='PIN default: '+PINS[w];
+  updatePinDots();
   var btn=document.getElementById('btn-go');
   btn.textContent='Masuk sebagai '+capFirst(w)+' →';
   btn.className='setup-go ok';
 }
+function updatePinDots(){for(var i=0;i<4;i++){document.getElementById('pd'+i).className='pdot'+(i<pinVal.length?' on':'');}}
+function pressPin(n){if(pinVal.length>=4){return;}pinVal+=n;updatePinDots();document.getElementById('pin-err').textContent='';if(pinVal.length===4){checkPin();}}
+function delPin(){if(!pinVal.length){return;}pinVal=pinVal.slice(0,-1);updatePinDots();}
+function tryLogin(){if(!whoSel){return;}if(pinVal.length===4){checkPin();}else{document.getElementById('pin-err').textContent='Masukkan 4 digit PIN';}}
+function checkPin(){
+  var correct=lsGet('pin_'+whoSel)||PINS[whoSel];
+  if(pinVal===correct){who=whoSel;doLaunch();}
+  else{document.getElementById('pin-err').textContent='❌ PIN salah';pinVal='';updatePinDots();}
+}
 
-function updatePinDots(){
-  for(var i=0;i<4;i++){
-    document.getElementById('pd'+i).className='pdot'+(i<pinVal.length?' on':'');
+// CHANGE PIN
+function openChangePIN(){
+  cpOld='';cpNew='';cpConf='';
+  updateCpDots('d',cpOld);updateCpDots('n',cpNew);updateCpDots('c',cpConf);
+  document.getElementById('cp-step1').style.display='block';
+  document.getElementById('cp-step2').style.display='none';
+  document.getElementById('cp-err-old').textContent='';
+  document.getElementById('cp-err-new').textContent='';
+  openModal('pin-modal');
+}
+function updateCpDots(prefix,val){
+  var ids={d:['cpd0','cpd1','cpd2','cpd3'],n:['cpn0','cpn1','cpn2','cpn3'],c:['cpc0','cpc1','cpc2','cpc3']};
+  var arr=ids[prefix];if(!arr){return;}
+  for(var i=0;i<4;i++){document.getElementById(arr[i]).className='pdot'+(i<val.length?' on':'');}
+}
+function cpPress(step,n){
+  if(step==='old'){
+    if(cpOld.length>=4){return;}cpOld+=n;updateCpDots('d',cpOld);
+    document.getElementById('cp-err-old').textContent='';
+    if(cpOld.length===4){
+      var correct=lsGet('pin_'+who)||PINS[who];
+      if(cpOld===correct){document.getElementById('cp-step1').style.display='none';document.getElementById('cp-step2').style.display='block';}
+      else{document.getElementById('cp-err-old').textContent='❌ PIN lama salah';cpOld='';updateCpDots('d',cpOld);}
+    }
+  } else if(step==='new'){
+    if(cpNew.length>=4){return;}cpNew+=n;updateCpDots('n',cpNew);
+  } else if(step==='conf'){
+    if(cpConf.length>=4){return;}cpConf+=n;updateCpDots('c',cpConf);
+    document.getElementById('cp-err-new').textContent='';
+    if(cpConf.length===4){
+      if(cpNew.length<4){document.getElementById('cp-err-new').textContent='❌ PIN baru belum lengkap';cpConf='';updateCpDots('c',cpConf);return;}
+      if(cpNew===cpConf){lsSet('pin_'+who,cpNew);closeModal('pin-modal');toast('✅ PIN berhasil diganti!');}
+      else{document.getElementById('cp-err-new').textContent='❌ PIN tidak cocok';cpNew='';cpConf='';updateCpDots('n',cpNew);updateCpDots('c',cpConf);}
+    }
   }
 }
-
-function pressPin(n){
-  if(pinVal.length>=4){return;}
-  pinVal+=n; updatePinDots();
-  document.getElementById('pin-err').textContent='';
-  if(pinVal.length===4){checkPin();}
+function cpDel(step){
+  if(step==='old'){if(!cpOld.length){return;}cpOld=cpOld.slice(0,-1);updateCpDots('d',cpOld);}
+  else if(step==='new'){if(!cpNew.length){return;}cpNew=cpNew.slice(0,-1);updateCpDots('n',cpNew);}
+  else if(step==='conf'){if(!cpConf.length){return;}cpConf=cpConf.slice(0,-1);updateCpDots('c',cpConf);}
 }
 
-function delPin(){if(!pinVal.length){return;}pinVal=pinVal.slice(0,-1);updatePinDots();}
-
-function checkPin(){
-  var saved=lsGet('pin_'+whoSel);
-  var correct=saved||PINS[whoSel];
-  if(pinVal===correct){who=whoSel;doLaunch();}
-  else{document.getElementById('pin-err').textContent='❌ PIN salah, coba lagi';pinVal='';updatePinDots();}
-}
-
-// ── LAUNCH ───────────────────────────────────────────
-function doSync(){sbRead(function(){renderTasks();renderStats();renderReport();renderProducts();});}
-
+// LAUNCH
 function doLaunch(){
   lsSet('aff_who',who);
   document.getElementById('pg-setup').style.display='none';
   document.getElementById('pg-app').style.display='flex';
   document.getElementById('hdr-who').textContent=capFirst(who);
   var lt=lsGet('aff_tasks'),lp=lsGet('aff_prods');
-  tasks=lt?JSON.parse(lt):[];
-  products=lp?JSON.parse(lp):[];
+  tasks=lt?JSON.parse(lt):[];products=lp?JSON.parse(lp):[];
   weekOff=0;MON=getMon(0);
-  updateWeekLbl();renderStats();renderTasks();renderReport();
+  document.getElementById('wnav-lbl').textContent='Minggu Ini';
+  renderStats();renderTasks();renderReport();
   sbRead(function(){renderTasks();renderStats();renderReport();renderProducts();});
   if(syncTmr){clearInterval(syncTmr);}
   syncTmr=setInterval(doSync,15000);
 }
-
 function doLogout(){
-  clearInterval(syncTmr);lsDel('aff_who');
-  who='';whoSel='';pinVal='';
+  clearInterval(syncTmr);lsDel('aff_who');who='';whoSel='';pinVal='';
   document.getElementById('pg-app').style.display='none';
   document.getElementById('pin-wrap').style.display='none';
   document.getElementById('pin-err').textContent='';
@@ -915,204 +838,8 @@ function doLogout(){
   toast('Logged out');
 }
 
-function capFirst(s){return s?s.charAt(0).toUpperCase()+s.slice(1):'';}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-
-// ── INIT ─────────────────────────────────────────────
+// AUTO LOGIN
 window.onload=function(){
-  // Setup
-  document.getElementById('wb-adit').addEventListener('click',function(){pickWho('adit');});
-  document.getElementById('wb-najwa').addEventListener('click',function(){pickWho('najwa');});
-  document.getElementById('wb-dio').addEventListener('click',function(){pickWho('dio');});
-  document.getElementById('wb-owner').addEventListener('click',function(){pickWho('owner');});
-
-  // PIN pad
-  var pks=document.querySelectorAll('.pk'),k;
-  for(k=0;k<pks.length;k++){
-    pks[k].addEventListener('click',function(){
-      var n=this.getAttribute('data-n');
-      if(n!==null&&n!==''){pressPin(n);}
-    });
-  }
-  document.getElementById('pk-del').addEventListener('click',delPin);
-  document.getElementById('btn-go').addEventListener('click',function(){
-    if(!whoSel){return;}
-    if(pinVal.length===4){checkPin();}
-    else{document.getElementById('pin-err').textContent='Masukkan 4 digit PIN';}
-  });
-
-  // Header
-  document.getElementById('btn-reset').addEventListener('click',function(){
-    doConfirm('Hapus SEMUA data (lokal + server)? Semua tugas dan produk akan terhapus permanen.',function(){
-      clearInterval(syncTmr);
-      tasks=[];products=[];
-      lsDel('aff_tasks');lsDel('aff_prods');
-      var base=SB+'?apikey='+KEY+'&on_conflict=key';
-      var hdrs={'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=minimal'};
-      fetch(base,{method:'POST',headers:hdrs,body:JSON.stringify({key:'tasks',value:'[]'})})
-      .then(function(){
-        return fetch(base,{method:'POST',headers:hdrs,body:JSON.stringify({key:'products',value:'[]'})});
-      })
-      .then(function(){
-        toast('✅ Semua data dihapus!');
-      })
-      .catch(function(){
-        toast('Data lokal dihapus (server mungkin belum sync)');
-      })
-      .finally(function(){
-        renderTasks();renderStats();renderReport();renderProducts();
-        syncTmr=setInterval(doSync,15000);
-      });
-    });
-  });
-  document.getElementById('btn-logout').addEventListener('click',doLogout);
-
-  // Week nav
-  document.getElementById('btn-prev').addEventListener('click',function(){weekOff--;MON=getMon(weekOff);updateWeekLbl();renderTasks();});
-  document.getElementById('btn-next').addEventListener('click',function(){weekOff++;MON=getMon(weekOff);updateWeekLbl();renderTasks();});
-
-  // Tabs
-  document.getElementById('tab-tasks').addEventListener('click',function(){switchTab('tasks');});
-  document.getElementById('tab-products').addEventListener('click',function(){switchTab('products');});
-  document.getElementById('tab-report').addEventListener('click',function(){switchTab('report');});
-
-  // Stats click — info modal
-  document.getElementById('sc-done').addEventListener('click',function(){showInfo('done');openOvl('info-modal');});
-  document.getElementById('sc-prod').addEventListener('click',function(){showInfo('prod');openOvl('info-modal');});
-  document.getElementById('sc-live').addEventListener('click',function(){showInfo('live');openOvl('info-modal');});
-  document.getElementById('sc-share').addEventListener('click',function(){showInfo('share');openOvl('info-modal');});
-
-  // Info modal close
-  document.getElementById('info-close').addEventListener('click',function(){closeAllModals();});
-  document.getElementById('info-modal').addEventListener('click',function(e){if(e.target===this){closeAllModals();}});
-
-  // Task modal
-  document.getElementById('m-div').addEventListener('change',updatePill);
-  document.getElementById('m-cancel').addEventListener('click',function(){document.getElementById('task-modal').classList.remove('on');});
-  document.getElementById('task-modal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('on');}});
-  var tos=document.querySelectorAll('.to');
-  for(k=0;k<tos.length;k++){
-    tos[k].addEventListener('click',function(){
-      this.classList.toggle('sel');
-      var tag=this.getAttribute('data-tag');
-      var idx=selTags.indexOf(tag);
-      if(idx>=0){selTags.splice(idx,1);}else{selTags.push(tag);}
-    });
-  }
-  document.getElementById('m-save').addEventListener('click',function(){
-    var txt=document.getElementById('m-text').value.trim();
-    if(!txt){document.getElementById('m-text').focus();return;}
-    addTask(document.getElementById('m-div').value,parseInt(document.getElementById('m-day').value,10),txt,selTags.slice());
-    document.getElementById('task-modal').classList.remove('on');
-  });
-
-  // Add product
-  document.getElementById('btn-add-prod').addEventListener('click',function(){
-    var name=document.getElementById('pf-name').value.trim();
-    if(!name){document.getElementById('pf-name').focus();return;}
-    products.push({name:name,pic:document.getElementById('pf-pic').value,status:document.getElementById('pf-status').value});
-    lsSet('aff_prods',JSON.stringify(products));
-    document.getElementById('pf-name').value='';
-    renderProducts();renderStats();sbWrite();toast('✅ Produk ditambahkan!');
-  });
-
-  // Confirm
-  document.getElementById('cyes').addEventListener('click',function(){
-    document.getElementById('cdialog').className='';
-    if(confirmCb){confirmCb();confirmCb=null;}
-  });
-  document.getElementById('cno').addEventListener('click',function(){
-    document.getElementById('cdialog').className='';confirmCb=null;
-  });
-
-  // Change PIN
-  var cpOld='', cpNew='', cpConf='';
-
-  function updateCpDots(prefix, val) {
-    for(var i=0;i<4;i++){
-      document.getElementById('cpd-'+prefix+'-'+i).className='pdot'+(i<val.length?' on':'');
-    }
-  }
-
-  function openPinModal(){
-    cpOld='';cpNew='';cpConf='';
-    updateCpDots('old','');
-    document.getElementById('pin-modal-step1').style.display='block';
-    document.getElementById('pin-modal-step2').style.display='none';
-    document.getElementById('cp-err-old').textContent='';
-    document.getElementById('cp-err-new').textContent='';
-    document.getElementById('pin-modal').classList.add('on');
-  }
-
-  document.getElementById('btn-changepin').addEventListener('click', openPinModal);
-  document.getElementById('cp-cancel').addEventListener('click',function(){closeAllModals();});
-  document.getElementById('pin-modal').addEventListener('click',function(e){if(e.target===this){closeAllModals();}});
-
-  // Step 1 — old PIN
-  var cpOldKeys=document.querySelectorAll('.cp-key');
-  for(k=0;k<cpOldKeys.length;k++){
-    cpOldKeys[k].addEventListener('click',function(){
-      if(cpOld.length>=4){return;}
-      cpOld+=this.getAttribute('data-n');
-      updateCpDots('old',cpOld);
-      document.getElementById('cp-err-old').textContent='';
-      if(cpOld.length===4){
-        var saved=lsGet('pin_'+who)||PINS[who];
-        if(cpOld===saved){
-          document.getElementById('pin-modal-step1').style.display='none';
-          document.getElementById('pin-modal-step2').style.display='block';
-        } else {
-          document.getElementById('cp-err-old').textContent='❌ PIN lama salah';
-          cpOld=''; updateCpDots('old','');
-        }
-      }
-    });
-  }
-  document.getElementById('cp-del-old').addEventListener('click',function(){
-    if(!cpOld.length){return;} cpOld=cpOld.slice(0,-1); updateCpDots('old',cpOld);
-  });
-
-  // Step 2 — new PIN
-  var cpNewKeys=document.querySelectorAll('.cp-new-key');
-  for(k=0;k<cpNewKeys.length;k++){
-    cpNewKeys[k].addEventListener('click',function(){
-      if(cpNew.length>=4){return;}
-      cpNew+=this.getAttribute('data-n');
-      updateCpDots('new',cpNew);
-    });
-  }
-  document.getElementById('cp-del-new').addEventListener('click',function(){
-    if(!cpNew.length){return;} cpNew=cpNew.slice(0,-1); updateCpDots('new',cpNew);
-  });
-
-  // Step 2 — confirm PIN
-  var cpConfKeys=document.querySelectorAll('.cp-conf-key');
-  for(k=0;k<cpConfKeys.length;k++){
-    cpConfKeys[k].addEventListener('click',function(){
-      if(cpConf.length>=4){return;}
-      cpConf+=this.getAttribute('data-n');
-      updateCpDots('conf',cpConf);
-      document.getElementById('cp-err-new').textContent='';
-      if(cpConf.length===4){
-        if(cpNew.length<4){
-          document.getElementById('cp-err-new').textContent='❌ PIN baru belum lengkap';
-          cpConf=''; updateCpDots('conf',''); return;
-        }
-        if(cpNew===cpConf){
-          lsSet('pin_'+who, cpNew);
-          document.getElementById('pin-modal').classList.remove('on');
-          toast('✅ PIN berhasil diganti!');
-        } else {
-          document.getElementById('cp-err-new').textContent='❌ PIN tidak cocok, coba lagi';
-          cpNew=''; cpConf='';
-          updateCpDots('new',''); updateCpDots('conf','');
-        }
-      }
-    });
-  }
-  document.getElementById('cp-del-conf').addEventListener('click',function(){
-    if(!cpConf.length){return;} cpConf=cpConf.slice(0,-1); updateCpDots('conf',cpConf);
-  });
   var w=lsGet('aff_who');
   if(w){who=w;whoSel=w;doLaunch();}
   else{document.getElementById('pg-setup').style.display='flex';}
