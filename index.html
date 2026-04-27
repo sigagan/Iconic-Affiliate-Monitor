@@ -728,7 +728,7 @@ function openModal(div,day){
   for(k=0;k<tos.length;k++){tos[k].classList.remove('sel');}
   updatePill();
   // Buka modal tanpa auto-focus agar keyboard tidak muncul otomatis
-  document.getElementById('task-modal').classList.add('on');
+  openOvl('task-modal');
 }
 
 function updatePill(){
@@ -977,14 +977,14 @@ window.onload=function(){
   document.getElementById('tab-report').addEventListener('click',function(){switchTab('report');});
 
   // Stats click — info modal
-  document.getElementById('sc-done').addEventListener('click',function(){showInfo('done');});
-  document.getElementById('sc-prod').addEventListener('click',function(){showInfo('prod');});
-  document.getElementById('sc-live').addEventListener('click',function(){showInfo('live');});
-  document.getElementById('sc-share').addEventListener('click',function(){showInfo('share');});
+  document.getElementById('sc-done').addEventListener('click',function(){showInfo('done');openOvl('info-modal');});
+  document.getElementById('sc-prod').addEventListener('click',function(){showInfo('prod');openOvl('info-modal');});
+  document.getElementById('sc-live').addEventListener('click',function(){showInfo('live');openOvl('info-modal');});
+  document.getElementById('sc-share').addEventListener('click',function(){showInfo('share');openOvl('info-modal');});
 
   // Info modal close
-  document.getElementById('info-close').addEventListener('click',function(){document.getElementById('info-modal').classList.remove('on');});
-  document.getElementById('info-modal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('on');}});
+  document.getElementById('info-close').addEventListener('click',function(){closeAllModals();});
+  document.getElementById('info-modal').addEventListener('click',function(e){if(e.target===this){closeAllModals();}});
 
   // Task modal
   document.getElementById('m-div').addEventListener('change',updatePill);
@@ -1045,8 +1045,8 @@ window.onload=function(){
   }
 
   document.getElementById('btn-changepin').addEventListener('click', openPinModal);
-  document.getElementById('cp-cancel').addEventListener('click',function(){document.getElementById('pin-modal').classList.remove('on');});
-  document.getElementById('pin-modal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('on');}});
+  document.getElementById('cp-cancel').addEventListener('click',function(){closeAllModals();});
+  document.getElementById('pin-modal').addEventListener('click',function(e){if(e.target===this){closeAllModals();}});
 
   // Step 1 — old PIN
   var cpOldKeys=document.querySelectorAll('.cp-key');
