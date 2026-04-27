@@ -943,11 +943,26 @@ window.onload=function(){
 
   // Header
   document.getElementById('btn-reset').addEventListener('click',function(){
-    doConfirm('Hapus semua data lokal di HP ini? (data di server tetap aman)',function(){
-      lsDel('aff_tasks');lsDel('aff_prods');lsDel('aff_who');
+    doConfirm('Hapus SEMUA data (lokal + server)? Semua tugas dan produk akan terhapus permanen.',function(){
+      clearInterval(syncTmr);
       tasks=[];products=[];
-      renderTasks();renderStats();renderReport();renderProducts();
-      toast('✅ Data lokal dihapus. Sync untuk ambil data terbaru.');
+      lsDel('aff_tasks');lsDel('aff_prods');
+      var base=SB+'?apikey='+KEY+'&on_conflict=key';
+      var hdrs={'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=minimal'};
+      fetch(base,{method:'POST',headers:hdrs,body:JSON.stringify({key:'tasks',value:'[]'})})
+      .then(function(){
+        return fetch(base,{method:'POST',headers:hdrs,body:JSON.stringify({key:'products',value:'[]'})});
+      })
+      .then(function(){
+        toast('✅ Semua data dihapus!');
+      })
+      .catch(function(){
+        toast('Data lokal dihapus (server mungkin belum sync)');
+      })
+      .finally(function(){
+        renderTasks();renderStats();renderReport();renderProducts();
+        syncTmr=setInterval(doSync,15000);
+      });
     });
   });
   document.getElementById('btn-logout').addEventListener('click',doLogout);
