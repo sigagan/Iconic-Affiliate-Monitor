@@ -706,14 +706,19 @@ function renderTasks(){
 }
 
 // ── TASK MODAL ───────────────────────────────────────
+function closeAllModals(){
+  var modals=document.querySelectorAll('.ovl'),i;
+  for(i=0;i<modals.length;i++){modals[i].classList.remove('on');}
+}
+
 function openModal(div,day){
+  // Tutup semua modal lain dulu
+  closeAllModals();
   var jd=JD[who]||JD.owner;
   var sel=document.getElementById('m-div'),i;
-  // Set options sesuai jobdesk
   for(i=0;i<sel.options.length;i++){
     sel.options[i].disabled=(jd.toggle.indexOf(sel.options[i].value)<0);
   }
-  // Pre-select
   if(div&&jd.toggle.indexOf(div)>=0){sel.value=div;}
   else{
     for(i=0;i<sel.options.length;i++){
@@ -727,7 +732,10 @@ function openModal(div,day){
   for(k=0;k<tos.length;k++){tos[k].classList.remove('sel');}
   updatePill();
   document.getElementById('task-modal').classList.add('on');
-  setTimeout(function(){document.getElementById('m-text').focus();},300);
+  setTimeout(function(){
+    var inp=document.getElementById('m-text');
+    if(inp){inp.focus();}
+  },350);
 }
 
 function updatePill(){
