@@ -691,32 +691,64 @@ function renderProducts(){
   var af=document.getElementById('add-prod-form');
   if(af){af.style.display=jd.prod?'block':'none';}
   var el=document.getElementById('prod-list');
-  if(!products.length){el.innerHTML='<div style="text-align:center;padding:28px;color:var(--muted)">Belum ada produk.</div>';return;}
+  if(!el){return;}
+  if(!products.length){
+    el.innerHTML='<div style="text-align:center;padding:28px;color:var(--muted)">Belum ada produk.</div>';
+    return;
+  }
   var html='',i,p,opts,j;
   for(i=0;i<products.length;i++){
     p=products[i];opts='';
-    for(j=0;j<STAGES.length;j++){opts+='<option value="'+STAGES[j]+'"'+(STAGES[j]===p.status?' selected':'')+'>'+SL[STAGES[j]]+'</option>';}
-    html+='<div class="prod-card"><div class="prod-head"><div><div class="prod-name">'+esc(p.name)+'</div><div class="prod-pic">PIC: '+esc(p.pic)+'</div></div>'
-      +'<span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div>'
-      +'<div class="prod-body"><select class="prod-sel" onchange="updProd('+i+',this.value)"'+(jd.prod?'':' disabled')+'>'+opts+'</select>'
-      +(jd.prod?'<button class="prod-del" onclick="askDelProd('+i+')">×</button>':'')+'</div></div>';
+    for(j=0;j<STAGES.length;j++){
+      opts+='<option value="'+STAGES[j]+'"'+(STAGES[j]===p.status?' selected':'')+'>'+SL[STAGES[j]]+'</option>';
+    }
+    html+='<div class="prod-card">'
+      +'<div class="prod-head">'
+      +'<div><div class="prod-name">'+esc(p.name)+'</div><div class="prod-pic">PIC: '+esc(p.pic)+'</div></div>'
+      +'<span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span>'
+      +'</div>'
+      +'<div class="prod-body">'
+      +'<select class="prod-sel" data-idx="'+i+'"'+(jd.prod?'':' disabled')+'>'+opts+'</select>'
+      +(jd.prod?'<button class="prod-del" data-idx="'+i+'">×</button>':'')
+      +'</div></div>';
   }
   el.innerHTML=html;
+
+  // Bind events setelah render
+  var sels=el.querySelectorAll('.prod-sel'),k;
+  for(k=0;k<sels.length;k++){
+    sels[k].addEventListener('change',function(){
+      var idx=parseInt(this.getAttribute('data-idx'),10);
+      products[idx].status=this.value;
+      lsSet('aff_prods',JSON.stringify(products));
+      renderProducts();renderStats();sbWrite();toast('Status diupdate!');
+    });
+  }
+  var dels=el.querySelectorAll('.prod-del');
+  for(k=0;k<dels.length;k++){
+    dels[k].addEventListener('click',function(){
+      var idx=parseInt(this.getAttribute('data-idx'),10);
+      var nama=products[idx]?products[idx].name:'produk ini';
+      doConfirm('Hapus "'+nama+'"?',function(){
+        products.splice(idx,1);
+        lsSet('aff_prods',JSON.stringify(products));
+        renderProducts();renderStats();sbWrite();toast('Produk dihapus');
+      });
+    });
+  }
 }
+
 function addProd(){
   var name=document.getElementById('pf-name').value.trim();
   if(!name){document.getElementById('pf-name').focus();return;}
-  products.push({name:name,pic:document.getElementById('pf-pic').value,status:document.getElementById('pf-status').value});
+  products.push({
+    name:name,
+    pic:document.getElementById('pf-pic').value,
+    status:document.getElementById('pf-status').value
+  });
   lsSet('aff_prods',JSON.stringify(products));
   document.getElementById('pf-name').value='';
   renderProducts();renderStats();sbWrite();toast('✅ Produk ditambahkan!');
-}
-function updProd(i,s){products[i].status=s;lsSet('aff_prods',JSON.stringify(products));renderProducts();renderStats();sbWrite();toast('Status diupdate!');}
-function askDelProd(i){
-  doConfirm('Hapus "'+products[i].name+'"?',function(){
-    products.splice(i,1);lsSet('aff_prods',JSON.stringify(products));
-    renderProducts();renderStats();sbWrite();toast('Produk dihapus');
-  });
 }
 
 // REPORT
