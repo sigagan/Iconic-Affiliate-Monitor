@@ -609,7 +609,7 @@ function renderTasks(){
         html+='<div class="tc '+dv.id+(t.done?' done':'')+(canTog?' can-tog':'')+'" '+(canTog?'onclick="togTask('+t.id+')"':'')+' >'
           +'<div class="tchk">'+(t.done?'✓':'')+'</div>'
           +'<div style="flex:1;min-width:0"><div class="ttxt">'+esc(t.text)+'</div>'+(tags?'<div style="margin-top:2px">'+tags+'</div>':'')+'</div>';
-        if(jd.del){html+='<span class="tx" onclick="event.stopPropagation();askDelTask('+t.id+')">×</span>';}
+        if(jd.del&&jd.toggle.indexOf(dv.id)>=0){html+='<span class="tx" onclick="event.stopPropagation();askDelTask('+t.id+')">×</span>';}
         html+='</div>';
       }
       if(jd.add&&jd.toggle.indexOf(dv.id)>=0){
