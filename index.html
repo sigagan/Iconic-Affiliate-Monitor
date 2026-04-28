@@ -398,10 +398,10 @@ var SB  = 'https://knvmvdjgsdikoglhcaxr.supabase.co/rest/v1/appdata';
 var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtudm12ZGpnc2Rpa29nbGhjYXhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NTM4MTksImV4cCI6MjA5MjMyOTgxOX0.QHnaq09tGBcfb5UwyrQFTMTQbimxyRGriD-_mPxntB8';
 var PINS = {adit:'1111',najwa:'2222',dio:'3333',owner:'0000'};
 var JD = {
-  adit: {add:true,del:true,toggle:['adit'],prod:false},
-  najwa:{add:true,del:true,toggle:['najwa'],prod:true},
-  dio:  {add:true,del:true,toggle:['dio'],prod:false},
-  owner:{add:true,del:true,toggle:['adit','najwa','dio'],prod:true}
+  adit: {add:true,toggle:['adit'],prod:false},
+  najwa:{add:true,toggle:['najwa'],prod:true},
+  dio:  {add:true,toggle:['dio'],prod:false},
+  owner:{add:true,toggle:['adit','najwa','dio'],prod:true}
 };
 var DIVS  = [{id:'adit',name:'Adit',role:'Produk & Konten'},{id:'najwa',name:'Najwa',role:'Edit & Ops'},{id:'dio',name:'Dio',role:'Media Sosial'}];
 var DAYS  = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
@@ -609,7 +609,7 @@ function renderTasks(){
         html+='<div class="tc '+dv.id+(t.done?' done':'')+(canTog?' can-tog':'')+'" '+(canTog?'onclick="togTask('+t.id+')"':'')+' >'
           +'<div class="tchk">'+(t.done?'✓':'')+'</div>'
           +'<div style="flex:1;min-width:0"><div class="ttxt">'+esc(t.text)+'</div>'+(tags?'<div style="margin-top:2px">'+tags+'</div>':'')+'</div>';
-        if(jd.del&&jd.toggle.indexOf(dv.id)>=0){html+='<span class="tx" onclick="event.stopPropagation();askDelTask('+t.id+')">×</span>';}
+        if(jd.toggle.indexOf(dv.id)>=0){html+='<span class="tx" onclick="event.stopPropagation();askDelTask('+t.id+')">×</span>';}
         html+='</div>';
       }
       if(jd.add&&jd.toggle.indexOf(dv.id)>=0){
