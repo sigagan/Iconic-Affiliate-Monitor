@@ -605,11 +605,11 @@ function renderTasks(){
       for(ti=0;ti<dayTasks.length;ti++){
         t=dayTasks[ti];tags='';
         for(tg=0;tg<(t.tags||[]).length;tg++){tags+='<span class="ttag '+t.tags[tg]+'">'+t.tags[tg]+'</span>';}
-        var canTog=(jd.toggle.indexOf(dv.id)>=0);
+        var canDel=(jd.toggle.indexOf(dv.id)>=0);
         html+='<div class="tc '+dv.id+(t.done?' done':'')+(canTog?' can-tog':'')+'" '+(canTog?'onclick="togTask('+t.id+')"':'')+' >'
           +'<div class="tchk">'+(t.done?'✓':'')+'</div>'
           +'<div style="flex:1;min-width:0"><div class="ttxt">'+esc(t.text)+'</div>'+(tags?'<div style="margin-top:2px">'+tags+'</div>':'')+'</div>';
-        if(jd.toggle.indexOf(dv.id)>=0){html+='<span class="tx" onclick="event.stopPropagation();askDelTask('+t.id+')">×</span>';}
+        if(canDel){html+='<span class="tx" onclick="event.stopPropagation();askDelTask('+t.id+',\''+dv.id+'\')">×</span>';}
         html+='</div>';
       }
       if(jd.add&&jd.toggle.indexOf(dv.id)>=0){
@@ -669,17 +669,17 @@ function togTask(id){
   t.done=!t.done;lsSet('aff_tasks',JSON.stringify(tasks));
   renderTasks();renderStats();renderReport();sbWrite();
 }
-function askDelTask(id){
+function askDelTask(id,divId){
   var jd=JD[who]||JD.owner;
-  var t=findTask(id);
-  if(!t){return;}
-  // Cek apakah task ini masuk jobdesk user
-  if(jd.toggle.indexOf(t.div)<0){
-    toast('⛔ Kamu tidak bisa hapus tugas divisi lain');
+  if(jd.toggle.indexOf(divId)<0){
+    toast('⛔ Tidak bisa hapus tugas divisi lain');
     return;
   }
+  var t=findTask(id);
+  if(!t){return;}
   doConfirm('"'+t.text+'"',function(){
-    var n=[],i;for(i=0;i<tasks.length;i++){if(tasks[i].id!==id){n.push(tasks[i]);}}
+    var n=[],i;
+    for(i=0;i<tasks.length;i++){if(tasks[i].id!==id){n.push(tasks[i]);}}
     tasks=n;lsSet('aff_tasks',JSON.stringify(tasks));
     renderTasks();renderStats();renderReport();sbWrite();toast('Tugas dihapus');
   });
