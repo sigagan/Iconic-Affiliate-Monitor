@@ -670,8 +670,15 @@ function togTask(id){
   renderTasks();renderStats();renderReport();sbWrite();
 }
 function askDelTask(id){
+  var jd=JD[who]||JD.owner;
   var t=findTask(id);
-  doConfirm(t?'"'+t.text+'"':'Tugas ini?',function(){
+  if(!t){return;}
+  // Cek apakah task ini masuk jobdesk user
+  if(jd.toggle.indexOf(t.div)<0){
+    toast('⛔ Kamu tidak bisa hapus tugas divisi lain');
+    return;
+  }
+  doConfirm('"'+t.text+'"',function(){
     var n=[],i;for(i=0;i<tasks.length;i++){if(tasks[i].id!==id){n.push(tasks[i]);}}
     tasks=n;lsSet('aff_tasks',JSON.stringify(tasks));
     renderTasks();renderStats();renderReport();sbWrite();toast('Tugas dihapus');
