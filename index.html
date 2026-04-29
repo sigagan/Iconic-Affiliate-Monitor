@@ -177,7 +177,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
   <div class="who-grid">
     <button class="wb" id="wb-adit" onclick="pickWho('adit')">👤 Adit</button>
     <button class="wb" id="wb-najwa" onclick="pickWho('najwa')">👤 Najwa</button>
-    <button class="wb" id="wb-dio" onclick="pickWho('dio')">👤 Dio</button>
+    <button class="wb" id="wb-medsos" onclick="pickWho('medsos')">📱 Media Sosial</button>
     <button class="wb" id="wb-owner" onclick="pickWho('owner')">👑 Owner</button>
   </div>
   <div class="pin-wrap" id="pin-wrap" style="display:none">
@@ -290,7 +290,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
     <div class="modal-h">Tambah Tugas <div class="mpill" id="m-pill"></div></div>
     <div class="fg"><label class="fl">Divisi</label>
       <select class="fs" id="m-div" onchange="updatePill()">
-        <option value="adit">Adit</option><option value="najwa">Najwa</option><option value="dio">Dio</option>
+        <option value="adit">Adit</option>
+        <option value="najwa">Najwa</option>
+        <option value="medsos">Media Sosial</option>
       </select>
     </div>
     <div class="fg"><label class="fl">Hari</label>
@@ -396,15 +398,15 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 <script>
 var SB  = 'https://knvmvdjgsdikoglhcaxr.supabase.co/rest/v1/appdata';
 var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtudm12ZGpnc2Rpa29nbGhjYXhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NTM4MTksImV4cCI6MjA5MjMyOTgxOX0.QHnaq09tGBcfb5UwyrQFTMTQbimxyRGriD-_mPxntB8';
-var PINS = {adit:'1111',najwa:'2222',dio:'3333',owner:'0000'};
+var PINS = {adit:'1111',najwa:'2222',medsos:'3333',owner:'0000'};
 var JD = {
-  adit: {add:true,toggle:['adit'],prod:true},
-  najwa:{add:true,toggle:['najwa'],prod:true},
-  dio:  {add:true,toggle:['dio'],prod:true},
-  owner:{add:true,toggle:['adit','najwa','dio'],prod:true}
+  adit:  {add:true,toggle:['adit'],prod:true},
+  najwa: {add:true,toggle:['najwa'],prod:true},
+  medsos:{add:true,toggle:['medsos'],prod:true},
+  owner: {add:true,toggle:['adit','najwa','medsos'],prod:true}
 };
 
-var DIVS  = [{id:'adit',name:'Adit',role:'Produk & Konten'},{id:'najwa',name:'Najwa',role:'Edit & Ops'},{id:'dio',name:'Dio',role:'Media Sosial'}];
+var DIVS  = [{id:'adit',name:'Adit',role:'Produk & Konten'},{id:'najwa',name:'Najwa',role:'Edit & Ops'},{id:'medsos',name:'Media Sosial',role:'Social Media'}];
 var DAYS  = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
 var STAGES= ['riset','checkout','menunggu','datang','konten','editing','upload','live','review'];
 var SL    = {riset:'Riset',checkout:'Checkout',menunggu:'Menunggu',datang:'Datang',konten:'Konten',editing:'Editing',upload:'Upload',live:'Live',review:'Review'};
@@ -518,7 +520,7 @@ function renderStats(){
   document.getElementById('st-live').textContent=live;
   document.getElementById('sf-live').style.width=(pl?Math.round(live/pl*100):0)+'%';
   var dA=0,dD=0;
-  for(i=0;i<tasks.length;i++){if(tasks[i].div==='dio'){dA++;if(tasks[i].done){dD++;}}}
+  for(i=0;i<tasks.length;i++){if(tasks[i].div==='medsos'){dA++;if(tasks[i].done){dD++;}}}
   document.getElementById('st-share').textContent=dD;
   document.getElementById('sf-share').style.width=(dA?Math.round(dD/dA*100):0)+'%';
 }
@@ -557,9 +559,9 @@ function showInfo(type){
     }
     if(!html){html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada konten live.</p>';}
   } else if(type==='share'){
-    title='🔗 Tugas Dio';
+    title='🔗 Tugas Media Sosial';
     for(i=0;i<tasks.length;i++){
-      t=tasks[i];if(t.div!=='dio'){continue;}
+      t=tasks[i];if(t.div!=='medsos'){continue;}
       html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
         +'<div style="width:32px;height:32px;border-radius:8px;background:var(--dio-l);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">'+(t.done?'✓':'·')+'</div>'
         +'<div><div style="font-size:13px;font-weight:600;'+(t.done?'text-decoration:line-through;color:var(--muted)':'')+'">'+esc(t.text)+'</div>'
@@ -628,11 +630,37 @@ function setFilt(f){curFilt=f;renderTasks();}
 // TASK MODAL
 function openTaskModal(div,day){
   var jd=JD[who]||JD.owner;
-  var sel=document.getElementById('m-div'),i;
-  for(i=0;i<sel.options.length;i++){sel.options[i].disabled=(jd.toggle.indexOf(sel.options[i].value)<0);}
-  if(div&&jd.toggle.indexOf(div)>=0){sel.value=div;}
-  else{for(i=0;i<sel.options.length;i++){if(!sel.options[i].disabled){sel.value=sel.options[i].value;break;}}}
-  if(day!==null&&day!==undefined){document.getElementById('m-day').value=day;}
+  var sel=document.getElementById('m-div');
+
+  // Reset semua option
+  var i;
+  for(i=0;i<sel.options.length;i++){
+    sel.options[i].disabled=false;
+  }
+
+  // Set value dulu sebelum disable
+  if(div && jd.toggle.indexOf(div)>=0){
+    sel.value=div;
+  } else {
+    // Pilih divisi pertama yang dibolehkan
+    for(i=0;i<sel.options.length;i++){
+      if(jd.toggle.indexOf(sel.options[i].value)>=0){
+        sel.value=sel.options[i].value;
+        break;
+      }
+    }
+  }
+
+  // Disable divisi yang tidak boleh
+  for(i=0;i<sel.options.length;i++){
+    if(jd.toggle.indexOf(sel.options[i].value)<0){
+      sel.options[i].disabled=true;
+    }
+  }
+
+  if(day!==null&&day!==undefined){
+    document.getElementById('m-day').value=day;
+  }
   document.getElementById('m-text').value='';
   selTags=[];
   var tos=document.querySelectorAll('.to'),k;
@@ -640,11 +668,13 @@ function openTaskModal(div,day){
   updatePill();
   openModal('task-modal');
 }
+
 function updatePill(){
   var d=document.getElementById('m-div').value;
   var p=document.getElementById('m-pill');
-  p.textContent={adit:'Adit',najwa:'Najwa',dio:'Dio'}[d]||d;
-  p.className='mpill '+d;
+  var names={adit:'Adit',najwa:'Najwa',medsos:'Media Sosial',owner:'Owner'};
+  p.textContent=names[d]||d;
+  p.className='mpill '+(d==='medsos'?'dio':d);
 }
 function togTag(el,tag){
   el.classList.toggle('sel');
