@@ -318,7 +318,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
     </div>
     <div class="mbtns">
       <button class="mbtn" onclick="closeModal('task-modal')">Batal</button>
-      <button class="mbtn pri" id="btn-save-task">Simpan</button>
+      <button class="mbtn pri" onclick="saveTask()">Simpan</button>
     </div>
   </div>
 </div>
@@ -693,8 +693,21 @@ function saveTask(){
   sbWrite();toast('✅ Tugas ditambahkan!');
 }
 
-// TASK ACTIONS
-function findTask(id){var i;for(i=0;i<tasks.length;i++){if(tasks[i].id===id){return tasks[i];}}return null;}
+function saveTask(){
+  var txt=document.getElementById('m-text').value.trim();
+  if(!txt){document.getElementById('m-text').focus();return;}
+  var nid=1,i;
+  for(i=0;i<tasks.length;i++){if(tasks[i].id>=nid){nid=tasks[i].id+1;}}
+  var divVal=document.getElementById('m-div').value;
+  var dayVal=parseInt(document.getElementById('m-day').value,10);
+  if(!divVal){toast('Pilih divisi dulu');return;}
+  tasks.push({id:nid,div:divVal,day:dayVal,text:txt,tags:selTags.slice(),done:false});
+  lsSet('aff_tasks',JSON.stringify(tasks));
+  closeModal('task-modal');
+  renderTasks();renderStats();renderReport();
+  sbWrite();
+  toast('✅ Tugas ditambahkan!');
+}
 function togTask(id){
   var t=findTask(id);if(!t){return;}
   t.done=!t.done;lsSet('aff_tasks',JSON.stringify(tasks));
