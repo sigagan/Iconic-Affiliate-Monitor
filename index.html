@@ -493,8 +493,13 @@ function doSync() {
 }
 
 function renderStats() {
-  var i, dn=0, tot=tasks.length;
-  for(i=0; i<tasks.length; i++){ if(tasks[i].done){ dn++; } }
+  var i, dn=0, tot=0;
+  var curMonStr = getMon(0).toISOString().split('T')[0];
+  for(i=0; i<tasks.length; i++){
+    var tk=tasks[i];
+    var inThisWeek = (!tk.week && weekOff===0) || (tk.week===curMonStr);
+    if(inThisWeek){ tot++; if(tk.done){ dn++; } }
+  }
   var pct = tot ? Math.round(dn/tot*100) : 0;
   document.getElementById('st-done').textContent  = dn;
   document.getElementById('st-dones').textContent = 'dari '+tot;
@@ -507,7 +512,11 @@ function renderStats() {
   document.getElementById('st-live').textContent  = live;
   document.getElementById('sf-live').style.width  = (pl ? Math.round(live/pl*100) : 0)+'%';
   var dA=0, dD=0;
-  for(i=0; i<tasks.length; i++){ if(tasks[i].div==='medsos'){ dA++; if(tasks[i].done){ dD++; } } }
+  for(i=0; i<tasks.length; i++){
+    var tk=tasks[i];
+    var inThisWeek = (!tk.week && weekOff===0) || (tk.week===curMonStr);
+    if(inThisWeek && tk.div==='medsos'){ dA++; if(tk.done){ dD++; } }
+  }
   document.getElementById('st-share').textContent = dD;
   document.getElementById('sf-share').style.width = (dA ? Math.round(dD/dA*100) : 0)+'%';
 }
@@ -593,15 +602,27 @@ function renderTasks() {
   var divsShow = curFilt==='all' ? DIVS : DIVS.filter(function(d){ return d.id===curFilt; });
   for(di=0; di<divsShow.length; di++) {
     dv = divsShow[di]; tot=0; dn=0;
-    for(ti=0; ti<tasks.length; ti++){ if(tasks[ti].div===dv.id){ tot++; if(tasks[ti].done){ dn++; } } }
+    var curMonStr2 = MON.toISOString().split('T')[0];
+    for(ti=0; ti<tasks.length; ti++){
+      var tk2=tasks[ti];
+      var inW = (!tk2.week && weekOff===0) || (tk2.week===curMonStr2);
+      if(tk2.div===dv.id && inW){ tot++; if(tk2.done){ dn++; } }
+    }
     html += '<div class="dlbl '+dv.id+'"><div class="dname">'+dv.name+'</div><div class="drole">'+dv.role+'</div><div class="dprog '+dv.id+'">'+dn+'/'+tot+'</div></div>';
 
     for(ci=0; ci<7; ci++) {
       isToday = (weekOff===0 && ci===todayDi);
       isWE    = (ci===5 || ci===6);
       dayTasks = [];
+      var curMonStr = MON.toISOString().split('T')[0];
       for(ti=0; ti<tasks.length; ti++){
-        if(tasks[ti].div===dv.id && tasks[ti].day===ci){ dayTasks.push(tasks[ti]); }
+        var tk = tasks[ti];
+        if(tk.div===dv.id && tk.day===ci){
+          // Task lama (tanpa week) hanya tampil di minggu ini (weekOff=0)
+          // Task baru tampil sesuai week-nya
+          if(!tk.week && weekOff===0){ dayTasks.push(tk); }
+          else if(tk.week && tk.week===curMonStr){ dayTasks.push(tk); }
+        }
       }
       html += '<div class="dcell'+(isToday?' today':isWE?' wend':'')+'">';
       for(ti=0; ti<dayTasks.length; ti++) {
