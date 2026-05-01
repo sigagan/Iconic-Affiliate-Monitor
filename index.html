@@ -496,9 +496,7 @@ function renderStats() {
   var i, dn=0, tot=0;
   var curMonStr = getMon(0).toISOString().split('T')[0];
   for(i=0; i<tasks.length; i++){
-    var tk=tasks[i];
-    var inThisWeek = (!tk.week && weekOff===0) || (tk.week===curMonStr);
-    if(inThisWeek){ tot++; if(tk.done){ dn++; } }
+    if(tasks[i].week===curMonStr){ tot++; if(tasks[i].done){ dn++; } }
   }
   var pct = tot ? Math.round(dn/tot*100) : 0;
   document.getElementById('st-done').textContent  = dn;
@@ -513,9 +511,7 @@ function renderStats() {
   document.getElementById('sf-live').style.width  = (pl ? Math.round(live/pl*100) : 0)+'%';
   var dA=0, dD=0;
   for(i=0; i<tasks.length; i++){
-    var tk=tasks[i];
-    var inThisWeek = (!tk.week && weekOff===0) || (tk.week===curMonStr);
-    if(inThisWeek && tk.div==='medsos'){ dA++; if(tk.done){ dD++; } }
+    if(tasks[i].week===curMonStr && tasks[i].div==='medsos'){ dA++; if(tasks[i].done){ dD++; } }
   }
   document.getElementById('st-share').textContent = dD;
   document.getElementById('sf-share').style.width = (dA ? Math.round(dD/dA*100) : 0)+'%';
@@ -604,9 +600,7 @@ function renderTasks() {
     dv = divsShow[di]; tot=0; dn=0;
     var curMonStr2 = MON.toISOString().split('T')[0];
     for(ti=0; ti<tasks.length; ti++){
-      var tk2=tasks[ti];
-      var inW = (!tk2.week && weekOff===0) || (tk2.week===curMonStr2);
-      if(tk2.div===dv.id && inW){ tot++; if(tk2.done){ dn++; } }
+      if(tasks[ti].div===dv.id && tasks[ti].week===curMonStr2){ tot++; if(tasks[ti].done){ dn++; } }
     }
     html += '<div class="dlbl '+dv.id+'"><div class="dname">'+dv.name+'</div><div class="drole">'+dv.role+'</div><div class="dprog '+dv.id+'">'+dn+'/'+tot+'</div></div>';
 
@@ -617,11 +611,8 @@ function renderTasks() {
       var curMonStr = MON.toISOString().split('T')[0];
       for(ti=0; ti<tasks.length; ti++){
         var tk = tasks[ti];
-        if(tk.div===dv.id && tk.day===ci){
-          // Task lama (tanpa week) hanya tampil di minggu ini (weekOff=0)
-          // Task baru tampil sesuai week-nya
-          if(!tk.week && weekOff===0){ dayTasks.push(tk); }
-          else if(tk.week && tk.week===curMonStr){ dayTasks.push(tk); }
+        if(tk.div===dv.id && tk.day===ci && tk.week===curMonStr){
+          dayTasks.push(tk);
         }
       }
       html += '<div class="dcell'+(isToday?' today':isWE?' wend':'')+'">';
