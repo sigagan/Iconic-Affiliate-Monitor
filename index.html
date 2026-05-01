@@ -65,10 +65,10 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 .filt-row{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
 .fb{padding:4px 12px;border-radius:20px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;border:2px solid transparent}
 .cal-wrap{overflow-x:auto;border-radius:12px;border:1.5px solid var(--border)}
-.cal-grid{display:grid;grid-template-columns:72px repeat(7,minmax(120px,1fr));background:var(--border);gap:1px;min-width:900px}
+.cal-grid{display:grid;grid-template-columns:72px repeat(7,minmax(130px,1fr));background:var(--border);gap:1px;min-width:980px}
 .ch{background:var(--ink);color:#fff;padding:7px 8px}
 .ch.corner{background:#141420;display:flex;align-items:flex-end;padding-bottom:8px;font-size:8px;color:#666}
-.ch .dn{font-size:15px;font-weight:800;display:block;line-height:1;margin-bottom:1px}
+.ch .dn{font-size:13px;font-weight:800;display:block;line-height:1;margin-bottom:1px}
 .ch .dw{font-size:8px;font-weight:600;opacity:.7}
 .ch.today{background:var(--adit)}.ch.wend{background:#2c2c3a}
 .dlbl{background:var(--white);padding:8px 7px;display:flex;flex-direction:column;justify-content:center;border-left:3px solid transparent}
@@ -161,10 +161,10 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
   <div class="logo-sub">Dashboard tim affiliate</div>
   <span class="slbl">Kamu siapa?</span>
   <div class="who-grid">
-    <button class="wb" id="wb-adit" onclick="pickWho('adit')">👤 Adit</button>
-    <button class="wb" id="wb-najwa" onclick="pickWho('najwa')">👤 Najwa</button>
+    <button class="wb" id="wb-adit"   onclick="pickWho('adit')">👤 Adit</button>
+    <button class="wb" id="wb-najwa"  onclick="pickWho('najwa')">👤 Najwa</button>
     <button class="wb" id="wb-medsos" onclick="pickWho('medsos')">📱 Media Sosial</button>
-    <button class="wb" id="wb-owner" onclick="pickWho('owner')">👑 Owner</button>
+    <button class="wb" id="wb-owner"  onclick="pickWho('owner')">👑 Owner</button>
   </div>
   <div class="pin-wrap" id="pin-wrap" style="display:none">
     <span class="slbl" style="text-align:center">PIN 4 Digit</span>
@@ -236,13 +236,13 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
     <button class="wnav-btn" onclick="shiftWeek(1)">Depan ›</button>
   </div>
   <div class="tabs">
-    <button class="tab on" id="tab-tasks" onclick="switchTab('tasks')">📅 Tugas</button>
-    <button class="tab" id="tab-products" onclick="switchTab('products')">🛍 Produk</button>
-    <button class="tab" id="tab-report" onclick="switchTab('report')">📊 Laporan</button>
+    <button class="tab on" id="tab-tasks"    onclick="switchTab('tasks')">📅 Tugas</button>
+    <button class="tab"    id="tab-products" onclick="switchTab('products')">🛍 Produk</button>
+    <button class="tab"    id="tab-report"   onclick="switchTab('report')">📊 Laporan</button>
   </div>
   <div class="content">
     <div class="page on" id="pg-tasks"></div>
-    <div class="page" id="pg-products">
+    <div class="page"    id="pg-products">
       <div class="add-prod" id="add-prod-form">
         <h4>➕ Tambah Produk</h4>
         <div class="frow"><label class="flbl">Nama Produk</label><input class="finp" id="pf-name" placeholder="Nama produk..."></div>
@@ -285,16 +285,16 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
     <div class="fg"><label class="fl">Tugas</label><input class="fi" id="m-text" placeholder="Deskripsi tugas..."></div>
     <div class="fg"><label class="fl">Tag</label>
       <div class="tag-row">
-        <div class="to shopee" onclick="togTag(this,'shopee')" style="background:#fff4ec;color:#b84400">Shopee</div>
-        <div class="to tiktok" onclick="togTag(this,'tiktok')" style="background:#ecfdf5;color:#006830">TikTok</div>
-        <div class="to ig"     onclick="togTag(this,'ig')"     style="background:#fdf2f8;color:#9c0060">IG</div>
-        <div class="to yt"     onclick="togTag(this,'yt')"     style="background:#fef2f2;color:#9c0000">YouTube</div>
-        <div class="to x"      onclick="togTag(this,'x')"      style="background:#eff6ff;color:#004da0">X</div>
-        <div class="to fb"     onclick="togTag(this,'fb')"     style="background:#eff2ff;color:#002da0">Facebook</div>
+        <div class="to shopee"  onclick="togTag(this,'shopee')"  style="background:#fff4ec;color:#b84400">Shopee</div>
+        <div class="to tiktok"  onclick="togTag(this,'tiktok')"  style="background:#ecfdf5;color:#006830">TikTok</div>
+        <div class="to ig"      onclick="togTag(this,'ig')"      style="background:#fdf2f8;color:#9c0060">IG</div>
+        <div class="to yt"      onclick="togTag(this,'yt')"      style="background:#fef2f2;color:#9c0000">YouTube</div>
+        <div class="to x"       onclick="togTag(this,'x')"       style="background:#eff6ff;color:#004da0">X</div>
+        <div class="to fb"      onclick="togTag(this,'fb')"      style="background:#eff2ff;color:#002da0">Facebook</div>
         <div class="to threads" onclick="togTag(this,'threads')" style="background:#f5f0ff;color:#4c00a0">Threads</div>
-        <div class="to produk" onclick="togTag(this,'produk')" style="background:#fffbeb;color:#8c4a00">Produk</div>
-        <div class="to konten" onclick="togTag(this,'konten')" style="background:#f0fdf4;color:#2a6a00">Konten</div>
-        <div class="to edit"   onclick="togTag(this,'edit')"   style="background:#eff8ff;color:#004888">Edit</div>
+        <div class="to produk"  onclick="togTag(this,'produk')"  style="background:#fffbeb;color:#8c4a00">Produk</div>
+        <div class="to konten"  onclick="togTag(this,'konten')"  style="background:#f0fdf4;color:#2a6a00">Konten</div>
+        <div class="to edit"    onclick="togTag(this,'edit')"    style="background:#eff8ff;color:#004888">Edit</div>
       </div>
     </div>
     <div class="mbtns">
@@ -319,10 +319,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
     <div class="modal-h" style="justify-content:center">🔑 Ganti PIN</div>
     <div id="cp-step1">
       <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Masukkan PIN lama</p>
-      <div class="pin-dots">
-        <div class="pdot" id="cpd0"></div><div class="pdot" id="cpd1"></div>
-        <div class="pdot" id="cpd2"></div><div class="pdot" id="cpd3"></div>
-      </div>
+      <div class="pin-dots"><div class="pdot" id="cpd0"></div><div class="pdot" id="cpd1"></div><div class="pdot" id="cpd2"></div><div class="pdot" id="cpd3"></div></div>
       <div class="pin-pad" style="margin-top:10px">
         <button class="pk" onclick="cpPress('old','1')">1</button><button class="pk" onclick="cpPress('old','2')">2</button><button class="pk" onclick="cpPress('old','3')">3</button>
         <button class="pk" onclick="cpPress('old','4')">4</button><button class="pk" onclick="cpPress('old','5')">5</button><button class="pk" onclick="cpPress('old','6')">6</button>
@@ -334,10 +331,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
     </div>
     <div id="cp-step2" style="display:none">
       <p style="font-size:12px;color:var(--muted);margin-bottom:6px">PIN baru</p>
-      <div class="pin-dots">
-        <div class="pdot" id="cpn0"></div><div class="pdot" id="cpn1"></div>
-        <div class="pdot" id="cpn2"></div><div class="pdot" id="cpn3"></div>
-      </div>
+      <div class="pin-dots"><div class="pdot" id="cpn0"></div><div class="pdot" id="cpn1"></div><div class="pdot" id="cpn2"></div><div class="pdot" id="cpn3"></div></div>
       <div class="pin-pad" style="margin-top:8px">
         <button class="pk" onclick="cpPress('new','1')">1</button><button class="pk" onclick="cpPress('new','2')">2</button><button class="pk" onclick="cpPress('new','3')">3</button>
         <button class="pk" onclick="cpPress('new','4')">4</button><button class="pk" onclick="cpPress('new','5')">5</button><button class="pk" onclick="cpPress('new','6')">6</button>
@@ -346,10 +340,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
         <button class="pk" onclick="cpDel('new')" style="font-size:14px;color:var(--muted)">⌫</button>
       </div>
       <p style="font-size:12px;color:var(--muted);margin:10px 0 6px">Konfirmasi PIN baru</p>
-      <div class="pin-dots">
-        <div class="pdot" id="cpc0"></div><div class="pdot" id="cpc1"></div>
-        <div class="pdot" id="cpc2"></div><div class="pdot" id="cpc3"></div>
-      </div>
+      <div class="pin-dots"><div class="pdot" id="cpc0"></div><div class="pdot" id="cpc1"></div><div class="pdot" id="cpc2"></div><div class="pdot" id="cpc3"></div></div>
       <div class="pin-pad" style="margin-top:8px">
         <button class="pk" onclick="cpPress('conf','1')">1</button><button class="pk" onclick="cpPress('conf','2')">2</button><button class="pk" onclick="cpPress('conf','3')">3</button>
         <button class="pk" onclick="cpPress('conf','4')">4</button><button class="pk" onclick="cpPress('conf','5')">5</button><button class="pk" onclick="cpPress('conf','6')">6</button>
@@ -368,7 +359,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
   <div class="cbox">
     <h4>Konfirmasi</h4><p id="cmsg"></p>
     <div class="cbtns">
-      <button class="cno" onclick="closeConfirm(false)">Batal</button>
+      <button class="cno"  onclick="closeConfirm(false)">Batal</button>
       <button class="cyes" onclick="closeConfirm(true)">Ya, Hapus</button>
     </div>
   </div>
@@ -377,42 +368,47 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
 <div class="toast" id="toast"></div>
 
 <script>
+// ── CONFIG ───────────────────────────────────────────
 var SB  = 'https://knvmvdjgsdikoglhcaxr.supabase.co/rest/v1/appdata';
 var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtudm12ZGpnc2Rpa29nbGhjYXhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NTM4MTksImV4cCI6MjA5MjMyOTgxOX0.QHnaq09tGBcfb5UwyrQFTMTQbimxyRGriD-_mPxntB8';
-var PINS = {adit:'1111', najwa:'2222', medsos:'3333', owner:'0000'};
-var JD = {
-  adit:  {add:true, toggle:['adit'],  prod:true},
-  najwa: {add:true, toggle:['najwa'], prod:true},
-  medsos:{add:true, toggle:['medsos'],prod:true},
+var PINS   = {adit:'1111', najwa:'2222', medsos:'3333', owner:'0000'};
+var JD     = {
+  adit:  {add:true, toggle:['adit'],   prod:true},
+  najwa: {add:true, toggle:['najwa'],  prod:true},
+  medsos:{add:true, toggle:['medsos'], prod:true},
   owner: {add:true, toggle:['adit','najwa','medsos'], prod:true}
 };
-var SL     = {riset:'Riset',checkout:'Checkout',menunggu:'Menunggu',datang:'Datang',konten:'Konten',editing:'Editing',upload:'Upload',live:'Live',review:'Review'};
-  {id:'adit',  name:'Adit',        role:'Produk & Konten'},
-  {id:'najwa', name:'Najwa',       role:'Edit & Ops'},
-  {id:'medsos',name:'Media Sosial',role:'Social Media'}
+var DIVS   = [
+  {id:'adit',   name:'Adit',         role:'Produk & Konten'},
+  {id:'najwa',  name:'Najwa',        role:'Edit & Ops'},
+  {id:'medsos', name:'Media Sosial', role:'Social Media'}
 ];
-var MONTHS = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
 var DAYS   = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+var MONTHS = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
 var STAGES = ['riset','checkout','menunggu','datang','konten','editing','upload','live','review'];
+var SL     = {riset:'Riset',checkout:'Checkout',menunggu:'Menunggu',datang:'Datang',konten:'Konten',editing:'Editing',upload:'Upload',live:'Live',review:'Review'};
 
+// ── STATE ────────────────────────────────────────────
 var who = '', whoSel = '', pinVal = '';
 var tasks = [], products = [], selTags = [];
 var weekOff = 0, curTab = 'tasks', curFilt = 'all';
 var confirmCb = null, toastTmr = null, syncTmr = null;
 var cpOld = '', cpNew = '', cpConf = '';
-var TODAY = new Date();
+var TODAY  = new Date();
 var todayDi = (function(){ var d = TODAY.getDay(); return d===0 ? 6 : d-1; }());
-var MON = getMon(0);
+var MON    = getMon(0);
 
+// ── HELPERS ──────────────────────────────────────────
 function getMon(off) {
   var d = new Date(TODAY), day = d.getDay();
   d.setDate(d.getDate() - day + (day===0 ? -6 : 1) + off*7);
   return d;
 }
+function monStr(dt) { return dt.toISOString().split('T')[0]; }
 function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
-function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
-function lsDel(k){ try{ localStorage.removeItem(k); }catch(e){} }
-function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function lsGet(k)  { try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsDel(k)  { try{ localStorage.removeItem(k); }catch(e){} }
+function esc(s)    { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function capFirst(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : ''; }
 
 function toast(msg) {
@@ -421,16 +417,8 @@ function toast(msg) {
   if(toastTmr){ clearTimeout(toastTmr); }
   toastTmr = setTimeout(function(){ t.classList.remove('show'); }, 2500);
 }
-
-function openModal(id) {
-  var el = document.getElementById(id);
-  if(el){ el.style.display = 'flex'; }
-}
-function closeModal(id) {
-  var el = document.getElementById(id);
-  if(el){ el.style.display = 'none'; }
-}
-
+function openModal(id)  { var e=document.getElementById(id); if(e){ e.style.display='flex'; } }
+function closeModal(id) { var e=document.getElementById(id); if(e){ e.style.display='none'; } }
 function doConfirm(msg, cb) {
   document.getElementById('cmsg').textContent = msg;
   document.getElementById('cdialog').style.display = 'flex';
@@ -442,61 +430,60 @@ function closeConfirm(yes) {
   confirmCb = null;
 }
 
+// ── SYNC ─────────────────────────────────────────────
 function setSS(s, lbl) {
-  document.getElementById('sdot').className = 'dot' + (s ? ' '+s : '');
-  document.getElementById('sync-t').textContent = lbl || '—';
+  document.getElementById('sdot').className = 'dot'+(s?' '+s:'');
+  document.getElementById('sync-t').textContent = lbl||'—';
 }
-
 function sbRead(cb) {
   setSS('busy','Syncing...');
-  fetch(SB + '?select=key,value&apikey=' + KEY)
+  fetch(SB+'?select=key,value&apikey='+KEY)
   .then(function(r){ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); })
   .then(function(rows) {
     var i, p;
     for(i=0; i<rows.length; i++) {
       try {
         p = JSON.parse(rows[i].value);
-        if(rows[i].key==='tasks'    && Array.isArray(p)){ tasks    = p; lsSet('aff_tasks', rows[i].value); }
-        if(rows[i].key==='products' && Array.isArray(p)){ products = p; lsSet('aff_prods', rows[i].value); }
+        if(rows[i].key==='tasks'    && Array.isArray(p)){ tasks=p;    lsSet('aff_tasks',rows[i].value); }
+        if(rows[i].key==='products' && Array.isArray(p)){ products=p; lsSet('aff_prods',rows[i].value); }
       } catch(e){}
     }
-    var t = new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-    setSS('ok', t);
+    setSS('ok', new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}));
     if(cb){ cb(); }
   })
   .catch(function(err){ setSS('err','Gagal'); toast('Sync gagal: '+err.message); });
 }
-
 function sbWrite() {
   setSS('busy','Menyimpan...');
-  var base = SB + '?apikey=' + KEY + '&on_conflict=key';
+  var base = SB+'?apikey='+KEY+'&on_conflict=key';
   var hdrs = {'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=minimal'};
   var tb = JSON.stringify({key:'tasks',    value:JSON.stringify(tasks)});
   var pb = JSON.stringify({key:'products', value:JSON.stringify(products)});
   function tryW(n) {
-    fetch(base, {method:'POST', headers:hdrs, body:tb})
-    .then(function(r){ if(!r.ok){ throw new Error('HTTP '+r.status); } return fetch(base, {method:'POST', headers:hdrs, body:pb}); })
+    fetch(base,{method:'POST',headers:hdrs,body:tb})
+    .then(function(r){ if(!r.ok){ throw new Error('HTTP '+r.status); } return fetch(base,{method:'POST',headers:hdrs,body:pb}); })
     .then(function(r){ if(!r.ok){ throw new Error('HTTP '+r.status); }
-      var t = new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-      setSS('ok', t); toast('✅ Tersimpan!');
+      setSS('ok', new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}));
+      toast('✅ Tersimpan!');
     })
     .catch(function(err){
-      if(n > 0){ setTimeout(function(){ tryW(n-1); }, 2000); }
+      if(n>0){ setTimeout(function(){ tryW(n-1); },2000); }
       else{ setSS('err','Gagal'); toast('Gagal simpan: '+err.message); }
     });
   }
   tryW(2);
 }
+function doSync() { sbRead(function(){ renderAll(); }); }
 
-function doSync() {
-  sbRead(function(){ renderTasks(); renderStats(); renderReport(); renderProducts(); });
-}
+// ── RENDER ALL ───────────────────────────────────────
+function renderAll() { renderStats(); renderTasks(); renderReport(); renderProducts(); }
 
+// ── STATS ────────────────────────────────────────────
 function renderStats() {
   var i, dn=0, tot=0;
-  var curMonStr = MON.toISOString().split('T')[0];
+  var wk = monStr(MON);
   for(i=0; i<tasks.length; i++){
-    if(tasks[i].week===curMonStr){ tot++; if(tasks[i].done){ dn++; } }
+    if(tasks[i].week===wk){ tot++; if(tasks[i].done){ dn++; } }
   }
   var pct = tot ? Math.round(dn/tot*100) : 0;
   document.getElementById('st-done').textContent  = dn;
@@ -504,91 +491,96 @@ function renderStats() {
   document.getElementById('sf-done').style.width  = pct+'%';
   var pl = products.length;
   document.getElementById('st-prod').textContent  = pl;
-  document.getElementById('sf-prod').style.width  = Math.min(100, pl*10)+'%';
-  var live = 0;
+  document.getElementById('sf-prod').style.width  = Math.min(100,pl*10)+'%';
+  var live=0;
   for(i=0; i<products.length; i++){ if(products[i].status==='live'||products[i].status==='upload'){ live++; } }
   document.getElementById('st-live').textContent  = live;
-  document.getElementById('sf-live').style.width  = (pl ? Math.round(live/pl*100) : 0)+'%';
+  document.getElementById('sf-live').style.width  = (pl?Math.round(live/pl*100):0)+'%';
   var dA=0, dD=0;
   for(i=0; i<tasks.length; i++){
-    if(tasks[i].week===curMonStr && tasks[i].div==='medsos'){ dA++; if(tasks[i].done){ dD++; } }
+    if(tasks[i].week===wk && tasks[i].div==='medsos'){ dA++; if(tasks[i].done){ dD++; } }
   }
   document.getElementById('st-share').textContent = dD;
-  document.getElementById('sf-share').style.width = (dA ? Math.round(dD/dA*100) : 0)+'%';
+  document.getElementById('sf-share').style.width = (dA?Math.round(dD/dA*100):0)+'%';
 }
 
+// ── INFO MODAL ───────────────────────────────────────
 function showInfo(type) {
   var title='', html='', i, t, p;
+  var wk = monStr(getMon(0));
   if(type==='done') {
-    title = '✅ Tugas Selesai';
-    for(i=0; i<tasks.length; i++) {
-      t = tasks[i]; if(!t.done){ continue; }
-      html += '<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
+    title='✅ Tugas Selesai';
+    for(i=0; i<tasks.length; i++){
+      t=tasks[i]; if(!t.done){ continue; }
+      html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
         +'<div style="width:32px;height:32px;border-radius:8px;background:var(--'+t.div+'-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">✓</div>'
         +'<div><div style="font-size:13px;font-weight:600">'+esc(t.text)+'</div>'
         +'<div style="font-size:11px;color:var(--muted)">'+t.div+' — '+DAYS[t.day]+'</div></div></div>';
     }
-    if(!html){ html = '<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada tugas selesai.</p>'; }
+    if(!html){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada tugas selesai.</p>'; }
   } else if(type==='prod') {
-    title = '🛍 Semua Produk';
-    for(i=0; i<products.length; i++) {
-      p = products[i];
-      html += '<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
+    title='🛍 Semua Produk';
+    for(i=0; i<products.length; i++){
+      p=products[i];
+      html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
         +'<div style="width:32px;height:32px;border-radius:8px;background:var(--adit-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">🛍</div>'
         +'<div><div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
-        +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'">'+( SL[p.status]||p.status)+'</span></div></div></div>';
+        +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div></div></div>';
     }
-    if(!html){ html = '<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk.</p>'; }
+    if(!html){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk.</p>'; }
   } else if(type==='live') {
-    title = '📲 Produk Live / Upload';
-    for(i=0; i<products.length; i++) {
-      p = products[i]; if(p.status!=='live'&&p.status!=='upload'){ continue; }
-      html += '<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
+    title='📲 Produk Live/Upload';
+    for(i=0; i<products.length; i++){
+      p=products[i]; if(p.status!=='live'&&p.status!=='upload'){ continue; }
+      html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
         +'<div style="width:32px;height:32px;border-radius:8px;background:var(--najwa-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">📲</div>'
         +'<div><div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
         +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div></div></div>';
     }
-    if(!html){ html = '<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada konten live.</p>'; }
+    if(!html){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada konten live.</p>'; }
   } else if(type==='share') {
-    title = '🔗 Tugas Media Sosial';
-    for(i=0; i<tasks.length; i++) {
-      t = tasks[i]; if(t.div!=='medsos'){ continue; }
-      html += '<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
+    title='🔗 Tugas Media Sosial';
+    for(i=0; i<tasks.length; i++){
+      t=tasks[i]; if(t.div!=='medsos'){ continue; }
+      html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
         +'<div style="width:32px;height:32px;border-radius:8px;background:var(--dio-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">'+(t.done?'✓':'·')+'</div>'
         +'<div><div style="font-size:13px;font-weight:600;'+(t.done?'text-decoration:line-through;color:var(--muted)':'')+'">'+esc(t.text)+'</div>'
         +'<div style="font-size:11px;color:var(--muted)">'+DAYS[t.day]+' · '+(t.done?'<span style="color:var(--green);font-weight:700">Selesai</span>':'<span style="color:var(--amber)">Belum</span>')+'</div></div></div>';
     }
-    if(!html){ html = '<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada tugas Media Sosial.</p>'; }
+    if(!html){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada tugas Media Sosial.</p>'; }
   }
   document.getElementById('info-title').textContent = title;
-  document.getElementById('info-body').innerHTML = html;
+  document.getElementById('info-body').innerHTML    = html;
   openModal('info-modal');
 }
 
+// ── WEEK NAV ─────────────────────────────────────────
 function shiftWeek(dir) {
   weekOff += dir; MON = getMon(weekOff);
   var lbl = weekOff===0?'Minggu Ini':weekOff===1?'Minggu Depan':weekOff===-1?'Minggu Lalu':'Offset '+weekOff;
   document.getElementById('wnav-lbl').textContent = lbl;
-  renderTasks();
+  renderStats(); renderTasks();
 }
 
+// ── CALENDAR ─────────────────────────────────────────
 function renderTasks() {
-  var pg = document.getElementById('pg-tasks');
-  var jd = JD[who] || JD.owner;
+  var pg  = document.getElementById('pg-tasks');
+  var jd  = JD[who] || JD.owner;
+  var wk  = monStr(MON);
   var filts = [['all','Semua','var(--ink)'],['adit','Adit','var(--adit)'],['najwa','Najwa','var(--najwa)'],['medsos','Media Sosial','var(--dio)']];
   var html = '<div class="filt-row">';
   var fi, f, on;
-  for(fi=0; fi<filts.length; fi++) {
-    f = filts[fi]; on = (curFilt===f[0]);
+  for(fi=0; fi<filts.length; fi++){
+    f=filts[fi]; on=(curFilt===f[0]);
     html += '<button class="fb" onclick="setFilt(\''+f[0]+'\')" style="border-color:'+f[2]+';background:'+(on?f[2]:'transparent')+';color:'+(on?'#fff':f[2])+'">'+f[1]+'</button>';
   }
-  if(jd.add) {
+  if(jd.add){
     html += '<button onclick="openTaskModal(null,null)" style="margin-left:auto;padding:4px 12px;border-radius:20px;border:2px solid var(--ink);background:var(--ink);color:#fff;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer">+ Tugas</button>';
   }
   html += '</div><div class="cal-wrap"><div class="cal-grid"><div class="ch corner">Divisi</div>';
 
-  var ci, di, ti, tg, dt, isToday, isWE, dv, dayTasks, t, tags, tot, dn, akses;
-  for(ci=0; ci<7; ci++) {
+  var ci, di, ti, tg, dt, isToday, isWE, dv, dayTasks, tk, tags, tot, dn, akses;
+  for(ci=0; ci<7; ci++){
     dt = new Date(MON); dt.setDate(MON.getDate()+ci);
     isToday = (weekOff===0 && ci===todayDi);
     isWE    = (ci===5 || ci===6);
@@ -596,39 +588,33 @@ function renderTasks() {
   }
 
   var divsShow = curFilt==='all' ? DIVS : DIVS.filter(function(d){ return d.id===curFilt; });
-  for(di=0; di<divsShow.length; di++) {
-    dv = divsShow[di]; tot=0; dn=0;
-    var curMonStr2 = MON.toISOString().split('T')[0];
+  for(di=0; di<divsShow.length; di++){
+    dv=divsShow[di]; tot=0; dn=0;
     for(ti=0; ti<tasks.length; ti++){
-      if(tasks[ti].div===dv.id && tasks[ti].week===curMonStr2){ tot++; if(tasks[ti].done){ dn++; } }
+      tk=tasks[ti];
+      if(tk.div===dv.id && tk.week===wk){ tot++; if(tk.done){ dn++; } }
     }
     html += '<div class="dlbl '+dv.id+'"><div class="dname">'+dv.name+'</div><div class="drole">'+dv.role+'</div><div class="dprog '+dv.id+'">'+dn+'/'+tot+'</div></div>';
 
-    for(ci=0; ci<7; ci++) {
-      isToday = (weekOff===0 && ci===todayDi);
-      isWE    = (ci===5 || ci===6);
-      dayTasks = [];
-      var curMonStr = MON.toISOString().split('T')[0];
+    for(ci=0; ci<7; ci++){
+      isToday=(weekOff===0&&ci===todayDi); isWE=(ci===5||ci===6);
+      dayTasks=[];
       for(ti=0; ti<tasks.length; ti++){
-        var tk = tasks[ti];
-        if(tk.div===dv.id && tk.day===ci && tk.week===curMonStr){
-          dayTasks.push(tk);
-        }
+        tk=tasks[ti];
+        if(tk.div===dv.id && tk.day===ci && tk.week===wk){ dayTasks.push(tk); }
       }
       html += '<div class="dcell'+(isToday?' today':isWE?' wend':'')+'">';
-      for(ti=0; ti<dayTasks.length; ti++) {
-        t = dayTasks[ti]; tags = '';
-        for(tg=0; tg<(t.tags||[]).length; tg++){
-          tags += '<span class="ttag '+t.tags[tg]+'">'+t.tags[tg]+'</span>';
-        }
-        akses = (jd.toggle.indexOf(dv.id) >= 0);
-        html += '<div class="tc '+dv.id+(t.done?' done':'')+(akses?' can-tog':'')+'" '+(akses?'onclick="togTask('+t.id+')"':'')+' >';
-        html += '<div class="tchk">'+(t.done?'✓':'')+'</div>';
-        html += '<div style="flex:1;min-width:0"><div class="ttxt">'+esc(t.text)+'</div>'+(tags?'<div style="margin-top:2px">'+tags+'</div>':'')+'</div>';
-        if(akses){ html += '<span class="tx" onclick="event.stopPropagation();askDelTask('+t.id+',\''+dv.id+'\')">×</span>'; }
+      for(ti=0; ti<dayTasks.length; ti++){
+        tk=dayTasks[ti]; tags='';
+        for(tg=0; tg<(tk.tags||[]).length; tg++){ tags+='<span class="ttag '+tk.tags[tg]+'">'+tk.tags[tg]+'</span>'; }
+        akses = (jd.toggle.indexOf(dv.id)>=0);
+        html += '<div class="tc '+dv.id+(tk.done?' done':'')+(akses?' can-tog':'')+'" '+(akses?'onclick="togTask('+tk.id+')"':'')+' >';
+        html += '<div class="tchk">'+(tk.done?'✓':'')+'</div>';
+        html += '<div style="flex:1;min-width:0"><div class="ttxt">'+esc(tk.text)+'</div>'+(tags?'<div style="margin-top:2px">'+tags+'</div>':'')+'</div>';
+        if(akses){ html += '<span class="tx" onclick="event.stopPropagation();askDelTask('+tk.id+',\''+dv.id+'\')">×</span>'; }
         html += '</div>';
       }
-      if(jd.add && jd.toggle.indexOf(dv.id)>=0) {
+      if(jd.add && jd.toggle.indexOf(dv.id)>=0){
         html += '<div class="add-cell"><button class="add-btn-cell" onclick="openTaskModal(\''+dv.id+'\','+ci+')">+ tugas</button></div>';
       }
       html += '</div>';
@@ -638,150 +624,130 @@ function renderTasks() {
   pg.innerHTML = html;
 }
 
-function setFilt(f){ curFilt = f; renderTasks(); }
+function setFilt(f){ curFilt=f; renderTasks(); }
 
+// ── TASK MODAL ───────────────────────────────────────
 function openTaskModal(div, day) {
-  var jd = JD[who] || JD.owner;
-  var sel = document.getElementById('m-div');
-  var i;
-  for(i=0; i<sel.options.length; i++){
-    sel.options[i].disabled = (jd.toggle.indexOf(sel.options[i].value) < 0);
-  }
-  if(div && jd.toggle.indexOf(div)>=0){ sel.value = div; }
-  else {
-    for(i=0; i<sel.options.length; i++){
-      if(!sel.options[i].disabled){ sel.value = sel.options[i].value; break; }
-    }
-  }
-  if(day !== null && day !== undefined){ document.getElementById('m-day').value = day; }
-  document.getElementById('m-text').value = '';
-  selTags = [];
-  var tos = document.querySelectorAll('.to'), k;
+  var jd=JD[who]||JD.owner, sel=document.getElementById('m-div'), i;
+  for(i=0; i<sel.options.length; i++){ sel.options[i].disabled=(jd.toggle.indexOf(sel.options[i].value)<0); }
+  if(div && jd.toggle.indexOf(div)>=0){ sel.value=div; }
+  else{ for(i=0; i<sel.options.length; i++){ if(!sel.options[i].disabled){ sel.value=sel.options[i].value; break; } } }
+  if(day!==null && day!==undefined){ document.getElementById('m-day').value=day; }
+  document.getElementById('m-text').value='';
+  selTags=[];
+  var tos=document.querySelectorAll('.to'), k;
   for(k=0; k<tos.length; k++){ tos[k].classList.remove('sel'); }
   updatePill();
   openModal('task-modal');
 }
-
 function updatePill() {
-  var d = document.getElementById('m-div').value;
-  var p = document.getElementById('m-pill');
-  var names = {adit:'Adit', najwa:'Najwa', medsos:'Media Sosial'};
-  p.textContent = names[d] || d;
-  p.className = 'mpill ' + d;
+  var d=document.getElementById('m-div').value;
+  var p=document.getElementById('m-pill');
+  p.textContent = {adit:'Adit',najwa:'Najwa',medsos:'Media Sosial'}[d]||d;
+  p.className   = 'mpill '+d;
 }
-
 function togTag(el, tag) {
   el.classList.toggle('sel');
-  var idx = selTags.indexOf(tag);
+  var idx=selTags.indexOf(tag);
   if(idx>=0){ selTags.splice(idx,1); } else { selTags.push(tag); }
 }
-
 function saveTask() {
-  var txt = document.getElementById('m-text').value.trim();
+  var txt=document.getElementById('m-text').value.trim();
   if(!txt){ document.getElementById('m-text').focus(); return; }
-  var divVal = document.getElementById('m-div').value;
-  var dayVal = parseInt(document.getElementById('m-day').value, 10);
-  var nid = 1, i;
-  for(i=0; i<tasks.length; i++){ if(tasks[i].id >= nid){ nid = tasks[i].id + 1; } }
-  // Simpan tanggal Senin minggu ini sebagai identifier minggu
-  var monStr = MON.toISOString().split('T')[0];
-  tasks.push({id:nid, div:divVal, day:dayVal, week:monStr, text:txt, tags:selTags.slice(), done:false});
-  lsSet('aff_tasks', JSON.stringify(tasks));
+  var divVal=document.getElementById('m-div').value;
+  var dayVal=parseInt(document.getElementById('m-day').value,10);
+  var nid=1, i;
+  for(i=0; i<tasks.length; i++){ if(tasks[i].id>=nid){ nid=tasks[i].id+1; } }
+  tasks.push({id:nid, div:divVal, day:dayVal, week:monStr(MON), text:txt, tags:selTags.slice(), done:false});
+  lsSet('aff_tasks',JSON.stringify(tasks));
   closeModal('task-modal');
-  renderTasks(); renderStats(); renderReport();
+  renderStats(); renderTasks(); renderReport();
   sbWrite();
   toast('✅ Tugas ditambahkan!');
 }
 
-function findTask(id) {
-  var i;
-  for(i=0; i<tasks.length; i++){ if(tasks[i].id===id){ return tasks[i]; } }
-  return null;
-}
-
+// ── TASK ACTIONS ─────────────────────────────────────
+function findTask(id){ var i; for(i=0; i<tasks.length; i++){ if(tasks[i].id===id){ return tasks[i]; } } return null; }
 function togTask(id) {
-  var t = findTask(id); if(!t){ return; }
-  t.done = !t.done;
-  lsSet('aff_tasks', JSON.stringify(tasks));
-  renderTasks(); renderStats(); renderReport();
+  var t=findTask(id); if(!t){ return; }
+  t.done=!t.done;
+  lsSet('aff_tasks',JSON.stringify(tasks));
+  renderStats(); renderTasks(); renderReport();
   sbWrite();
 }
-
 function askDelTask(id, divId) {
-  var jd = JD[who] || JD.owner;
-  if(jd.toggle.indexOf(divId) < 0){ toast('⛔ Tidak bisa hapus tugas divisi lain'); return; }
-  var t = findTask(id); if(!t){ return; }
+  var jd=JD[who]||JD.owner;
+  if(jd.toggle.indexOf(divId)<0){ toast('⛔ Tidak bisa hapus tugas divisi lain'); return; }
+  var t=findTask(id); if(!t){ return; }
   doConfirm('"'+t.text+'"', function(){
-    var n=[], i;
+    var n=[],i;
     for(i=0; i<tasks.length; i++){ if(tasks[i].id!==id){ n.push(tasks[i]); } }
-    tasks = n;
-    lsSet('aff_tasks', JSON.stringify(tasks));
-    renderTasks(); renderStats(); renderReport();
+    tasks=n; lsSet('aff_tasks',JSON.stringify(tasks));
+    renderStats(); renderTasks(); renderReport();
     sbWrite(); toast('Tugas dihapus');
   });
 }
 
+// ── PRODUCTS ─────────────────────────────────────────
 function renderProducts() {
-  var jd = JD[who] || JD.owner;
-  var af = document.getElementById('add-prod-form');
-  if(af){ af.style.display = jd.prod ? 'block' : 'none'; }
-  var el = document.getElementById('prod-list');
-  if(!el){ return; }
-  if(!products.length){ el.innerHTML = '<div style="text-align:center;padding:28px;color:var(--muted)">Belum ada produk.</div>'; return; }
-  var html='', i, p, opts, j;
-  for(i=0; i<products.length; i++) {
-    p = products[i]; opts = '';
-    for(j=0; j<STAGES.length; j++){
-      opts += '<option value="'+STAGES[j]+'"'+(STAGES[j]===p.status?' selected':'')+'>'+SL[STAGES[j]]+'</option>';
-    }
-    html += '<div class="prod-card">'
+  var jd=JD[who]||JD.owner;
+  var af=document.getElementById('add-prod-form');
+  if(af){ af.style.display=jd.prod?'block':'none'; }
+  var el=document.getElementById('prod-list'); if(!el){ return; }
+  if(!products.length){ el.innerHTML='<div style="text-align:center;padding:28px;color:var(--muted)">Belum ada produk.</div>'; return; }
+  var html='',i,p,opts,j;
+  for(i=0; i<products.length; i++){
+    p=products[i]; opts='';
+    for(j=0; j<STAGES.length; j++){ opts+='<option value="'+STAGES[j]+'"'+(STAGES[j]===p.status?' selected':'')+'>'+SL[STAGES[j]]+'</option>'; }
+    html+='<div class="prod-card">'
       +'<div class="prod-head"><div><div class="prod-name">'+esc(p.name)+'</div><div class="prod-pic">PIC: '+esc(p.pic)+'</div></div>'
       +'<span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div>'
-      +'<div class="prod-body">'
-      +'<select class="prod-sel" data-idx="'+i+'"'+(jd.prod?'':' disabled')+'>'+opts+'</select>'
-      +(jd.prod ? '<button class="prod-del" data-idx="'+i+'">×</button>' : '')
+      +'<div class="prod-body"><select class="prod-sel" data-idx="'+i+'"'+(jd.prod?'':' disabled')+'>'+opts+'</select>'
+      +(jd.prod?'<button class="prod-del" data-idx="'+i+'">×</button>':'')
       +'</div></div>';
   }
-  el.innerHTML = html;
-  var sels = el.querySelectorAll('.prod-sel'), k;
-  for(k=0; k<sels.length; k++) {
-    sels[k].addEventListener('change', function(){
-      var idx = parseInt(this.getAttribute('data-idx'), 10);
-      products[idx].status = this.value;
-      lsSet('aff_prods', JSON.stringify(products));
+  el.innerHTML=html;
+  var sels=el.querySelectorAll('.prod-sel'),k;
+  for(k=0; k<sels.length; k++){
+    sels[k].addEventListener('change',function(){
+      var idx=parseInt(this.getAttribute('data-idx'),10);
+      products[idx].status=this.value;
+      lsSet('aff_prods',JSON.stringify(products));
       renderProducts(); renderStats(); sbWrite(); toast('Status diupdate!');
     });
   }
-  var dels = el.querySelectorAll('.prod-del');
-  for(k=0; k<dels.length; k++) {
-    dels[k].addEventListener('click', function(){
-      var idx = parseInt(this.getAttribute('data-idx'), 10);
-      var nama = products[idx] ? products[idx].name : '?';
-      doConfirm('Hapus "'+nama+'"?', function(){
-        products.splice(idx, 1);
-        lsSet('aff_prods', JSON.stringify(products));
+  var dels=el.querySelectorAll('.prod-del');
+  for(k=0; k<dels.length; k++){
+    dels[k].addEventListener('click',function(){
+      var idx=parseInt(this.getAttribute('data-idx'),10);
+      var nama=products[idx]?products[idx].name:'?';
+      doConfirm('Hapus "'+nama+'"?',function(){
+        products.splice(idx,1); lsSet('aff_prods',JSON.stringify(products));
         renderProducts(); renderStats(); sbWrite(); toast('Produk dihapus');
       });
     });
   }
 }
-
 function addProd() {
-  var name = document.getElementById('pf-name').value.trim();
+  var name=document.getElementById('pf-name').value.trim();
   if(!name){ document.getElementById('pf-name').focus(); return; }
-  products.push({name:name, pic:document.getElementById('pf-pic').value, status:document.getElementById('pf-status').value});
-  lsSet('aff_prods', JSON.stringify(products));
-  document.getElementById('pf-name').value = '';
+  products.push({name:name,pic:document.getElementById('pf-pic').value,status:document.getElementById('pf-status').value});
+  lsSet('aff_prods',JSON.stringify(products));
+  document.getElementById('pf-name').value='';
   renderProducts(); renderStats(); sbWrite(); toast('✅ Produk ditambahkan!');
 }
 
+// ── REPORT ───────────────────────────────────────────
 function renderReport() {
-  var html='', i, j, d, tot, dn, pct;
-  for(i=0; i<DIVS.length; i++) {
+  var html='',i,j,d,tot,dn,pct;
+  var wk=monStr(MON);
+  for(i=0; i<DIVS.length; i++){
     d=DIVS[i]; tot=0; dn=0;
-    for(j=0; j<tasks.length; j++){ if(tasks[j].div===d.id){ tot++; if(tasks[j].done){ dn++; } } }
-    pct = tot ? Math.round(dn/tot*100) : 0;
-    html += '<div class="rep-card"><div class="rep-head '+d.id+'">'+d.name
+    for(j=0; j<tasks.length; j++){
+      if(tasks[j].div===d.id && tasks[j].week===wk){ tot++; if(tasks[j].done){ dn++; } }
+    }
+    pct=tot?Math.round(dn/tot*100):0;
+    html+='<div class="rep-card"><div class="rep-head '+d.id+'">'+d.name
       +'<div style="font-size:10px;font-weight:400;opacity:.7;margin-top:1px">'+d.role+'</div></div>'
       +'<div class="rep-body">'
       +'<div class="rep-row"><span>Total</span><span class="rep-val">'+tot+'</span></div>'
@@ -791,121 +757,109 @@ function renderReport() {
       +'<div style="text-align:right;font-size:11px;font-weight:700;margin-top:3px">'+pct+'%</div>'
       +'</div></div>';
   }
-  document.getElementById('rep-grid').innerHTML = html;
+  document.getElementById('rep-grid').innerHTML=html;
 }
 
+// ── TABS ─────────────────────────────────────────────
 function switchTab(tab) {
-  curTab = tab;
-  var tabs = ['tasks','products','report'], i;
-  for(i=0; i<tabs.length; i++) {
-    document.getElementById('pg-'+tabs[i]).classList.toggle('on', tabs[i]===tab);
-    document.getElementById('tab-'+tabs[i]).classList.toggle('on', tabs[i]===tab);
+  curTab=tab;
+  var tabs=['tasks','products','report'],i;
+  for(i=0; i<tabs.length; i++){
+    document.getElementById('pg-'+tabs[i]).classList.toggle('on',tabs[i]===tab);
+    document.getElementById('tab-'+tabs[i]).classList.toggle('on',tabs[i]===tab);
   }
   if(tab==='tasks')   { renderTasks(); }
   if(tab==='products'){ renderProducts(); }
   if(tab==='report')  { renderReport(); }
 }
 
+// ── PIN ──────────────────────────────────────────────
 function pickWho(w) {
-  whoSel = w; pinVal = '';
-  var btns = document.querySelectorAll('.wb'), i;
-  for(i=0; i<btns.length; i++){ btns[i].className = 'wb'; }
-  document.getElementById('wb-'+w).className = 'wb on-'+w;
-  document.getElementById('pin-wrap').style.display = 'block';
-  document.getElementById('pin-err').textContent = '';
-  document.getElementById('pin-hint').textContent = 'PIN default: '+PINS[w];
+  whoSel=w; pinVal='';
+  var btns=document.querySelectorAll('.wb'),i;
+  for(i=0; i<btns.length; i++){ btns[i].className='wb'; }
+  document.getElementById('wb-'+w).className='wb on-'+w;
+  document.getElementById('pin-wrap').style.display='block';
+  document.getElementById('pin-err').textContent='';
+  document.getElementById('pin-hint').textContent='PIN default: '+PINS[w];
   updatePinDots();
-  var btn = document.getElementById('btn-go');
-  btn.textContent = 'Masuk →';
-  btn.className = 'setup-go ok';
+  document.getElementById('btn-go').textContent='Masuk →';
+  document.getElementById('btn-go').className='setup-go ok';
 }
-
 function updatePinDots() {
-  for(var i=0; i<4; i++){
-    document.getElementById('pd'+i).className = 'pdot'+(i<pinVal.length?' on':'');
-  }
+  for(var i=0; i<4; i++){ document.getElementById('pd'+i).className='pdot'+(i<pinVal.length?' on':''); }
 }
-
 function pressPin(n) {
   if(pinVal.length>=4){ return; }
-  pinVal += n; updatePinDots();
-  document.getElementById('pin-err').textContent = '';
+  pinVal+=n; updatePinDots();
+  document.getElementById('pin-err').textContent='';
   if(pinVal.length===4){ checkPin(); }
 }
-
-function delPin() {
-  if(!pinVal.length){ return; }
-  pinVal = pinVal.slice(0,-1); updatePinDots();
-}
-
+function delPin() { if(!pinVal.length){ return; } pinVal=pinVal.slice(0,-1); updatePinDots(); }
 function tryLogin() {
   if(!whoSel){ return; }
   if(pinVal.length===4){ checkPin(); }
-  else{ document.getElementById('pin-err').textContent = 'Masukkan 4 digit PIN'; }
+  else{ document.getElementById('pin-err').textContent='Masukkan 4 digit PIN'; }
 }
-
 function checkPin() {
-  var correct = lsGet('pin_'+whoSel) || PINS[whoSel];
+  var correct=lsGet('pin_'+whoSel)||PINS[whoSel];
   if(pinVal===correct){ who=whoSel; doLaunch(); }
   else{ document.getElementById('pin-err').textContent='❌ PIN salah'; pinVal=''; updatePinDots(); }
 }
 
+// ── LAUNCH ───────────────────────────────────────────
 function doLaunch() {
-  lsSet('aff_who', who);
-  document.getElementById('pg-setup').style.display = 'none';
-  document.getElementById('pg-app').style.display   = 'flex';
-  document.getElementById('hdr-who').textContent    = capFirst(who);
-  var lt = lsGet('aff_tasks'), lp = lsGet('aff_prods');
+  lsSet('aff_who',who);
+  document.getElementById('pg-setup').style.display='none';
+  document.getElementById('pg-app').style.display='flex';
+  document.getElementById('hdr-who').textContent=capFirst(who);
+  var lt=lsGet('aff_tasks'), lp=lsGet('aff_prods');
   tasks    = lt ? JSON.parse(lt) : [];
   products = lp ? JSON.parse(lp) : [];
-  weekOff = 0; MON = getMon(0);
-  document.getElementById('wnav-lbl').textContent = 'Minggu Ini';
-  renderStats(); renderTasks(); renderReport();
-  sbRead(function(){ renderTasks(); renderStats(); renderReport(); renderProducts(); });
+  weekOff=0; MON=getMon(0);
+  document.getElementById('wnav-lbl').textContent='Minggu Ini';
+  renderAll();
+  sbRead(function(){ renderAll(); });
   if(syncTmr){ clearInterval(syncTmr); }
-  syncTmr = setInterval(doSync, 15000);
+  syncTmr=setInterval(doSync,15000);
 }
-
 function doLogout() {
   clearInterval(syncTmr); lsDel('aff_who');
   who=''; whoSel=''; pinVal='';
-  document.getElementById('pg-app').style.display   = 'none';
-  document.getElementById('pin-wrap').style.display = 'none';
-  document.getElementById('pin-err').textContent    = '';
-  document.getElementById('pin-hint').textContent   = '';
-  var btns = document.querySelectorAll('.wb'), i;
-  for(i=0; i<btns.length; i++){ btns[i].className = 'wb'; }
-  document.getElementById('btn-go').textContent = 'Pilih nama dulu ↑';
-  document.getElementById('btn-go').className   = 'setup-go';
-  document.getElementById('pg-setup').style.display = 'flex';
+  document.getElementById('pg-app').style.display='none';
+  document.getElementById('pin-wrap').style.display='none';
+  document.getElementById('pin-err').textContent='';
+  document.getElementById('pin-hint').textContent='';
+  var btns=document.querySelectorAll('.wb'),i;
+  for(i=0; i<btns.length; i++){ btns[i].className='wb'; }
+  document.getElementById('btn-go').textContent='Pilih nama dulu ↑';
+  document.getElementById('btn-go').className='setup-go';
+  document.getElementById('pg-setup').style.display='flex';
   toast('Logged out');
 }
 
+// ── CHANGE PIN ───────────────────────────────────────
 function openChangePIN() {
   cpOld=''; cpNew=''; cpConf='';
   updateCpDots('d',''); updateCpDots('n',''); updateCpDots('c','');
-  document.getElementById('cp-step1').style.display = 'block';
-  document.getElementById('cp-step2').style.display = 'none';
-  document.getElementById('cp-err-old').textContent = '';
-  document.getElementById('cp-err-new').textContent = '';
+  document.getElementById('cp-step1').style.display='block';
+  document.getElementById('cp-step2').style.display='none';
+  document.getElementById('cp-err-old').textContent='';
+  document.getElementById('cp-err-new').textContent='';
   openModal('pin-modal');
 }
-
-function updateCpDots(prefix, val) {
-  var map = {d:['cpd0','cpd1','cpd2','cpd3'], n:['cpn0','cpn1','cpn2','cpn3'], c:['cpc0','cpc1','cpc2','cpc3']};
-  var arr = map[prefix]; if(!arr){ return; }
-  for(var i=0; i<4; i++){
-    document.getElementById(arr[i]).className = 'pdot'+(i<val.length?' on':'');
-  }
+function updateCpDots(p,v) {
+  var m={d:['cpd0','cpd1','cpd2','cpd3'],n:['cpn0','cpn1','cpn2','cpn3'],c:['cpc0','cpc1','cpc2','cpc3']};
+  var a=m[p]; if(!a){ return; }
+  for(var i=0; i<4; i++){ document.getElementById(a[i]).className='pdot'+(i<v.length?' on':''); }
 }
-
-function cpPress(step, n) {
+function cpPress(step,n) {
   if(step==='old') {
     if(cpOld.length>=4){ return; } cpOld+=n; updateCpDots('d',cpOld);
     document.getElementById('cp-err-old').textContent='';
-    if(cpOld.length===4) {
-      var correct = lsGet('pin_'+who) || PINS[who];
-      if(cpOld===correct){ document.getElementById('cp-step1').style.display='none'; document.getElementById('cp-step2').style.display='block'; }
+    if(cpOld.length===4){
+      var c=lsGet('pin_'+who)||PINS[who];
+      if(cpOld===c){ document.getElementById('cp-step1').style.display='none'; document.getElementById('cp-step2').style.display='block'; }
       else{ document.getElementById('cp-err-old').textContent='❌ PIN lama salah'; cpOld=''; updateCpDots('d',cpOld); }
     }
   } else if(step==='new') {
@@ -913,24 +867,24 @@ function cpPress(step, n) {
   } else if(step==='conf') {
     if(cpConf.length>=4){ return; } cpConf+=n; updateCpDots('c',cpConf);
     document.getElementById('cp-err-new').textContent='';
-    if(cpConf.length===4) {
+    if(cpConf.length===4){
       if(cpNew.length<4){ document.getElementById('cp-err-new').textContent='❌ PIN baru belum lengkap'; cpConf=''; updateCpDots('c',cpConf); return; }
       if(cpNew===cpConf){ lsSet('pin_'+who,cpNew); closeModal('pin-modal'); toast('✅ PIN berhasil diganti!'); }
       else{ document.getElementById('cp-err-new').textContent='❌ PIN tidak cocok'; cpNew=''; cpConf=''; updateCpDots('n',cpNew); updateCpDots('c',cpConf); }
     }
   }
 }
-
 function cpDel(step) {
   if(step==='old'){ if(!cpOld.length){return;} cpOld=cpOld.slice(0,-1); updateCpDots('d',cpOld); }
   else if(step==='new'){ if(!cpNew.length){return;} cpNew=cpNew.slice(0,-1); updateCpDots('n',cpNew); }
   else if(step==='conf'){ if(!cpConf.length){return;} cpConf=cpConf.slice(0,-1); updateCpDots('c',cpConf); }
 }
 
+// ── INIT ─────────────────────────────────────────────
 window.onload = function() {
   var w = lsGet('aff_who');
   if(w){ who=w; whoSel=w; doLaunch(); }
-  else{ document.getElementById('pg-setup').style.display='flex'; }
+  else { document.getElementById('pg-setup').style.display='flex'; }
 };
 </script>
 </body>
