@@ -218,8 +218,8 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
       <div class="sc-click">tap detail</div>
     </div>
     <div class="sc" onclick="showInfo('live')">
-      <div class="sc-l">📲 Live</div><div class="sc-v" id="st-live">0</div>
-      <div class="sc-s">konten</div>
+      <div class="sc-l">📦 Upload</div><div class="sc-v" id="st-live">0</div>
+      <div class="sc-s">minggu ini</div>
       <div class="sc-bar"><div class="sc-f" id="sf-live" style="background:var(--najwa);width:0%"></div></div>
       <div class="sc-click">tap detail</div>
     </div>
@@ -492,8 +492,10 @@ function renderStats() {
   var pl = products.length;
   document.getElementById('st-prod').textContent  = pl;
   document.getElementById('sf-prod').style.width  = Math.min(100,pl*10)+'%';
-  var live=0;
-  for(i=0; i<products.length; i++){ if(products[i].status==='live'||products[i].status==='upload'){ live++; } }
+  var live=0, wk2=monStr(MON);
+  for(i=0; i<products.length; i++){
+    if(products[i].status==='upload' && products[i].uploadWeek===wk2){ live++; }
+  }
   document.getElementById('st-live').textContent  = live;
   document.getElementById('sf-live').style.width  = (pl?Math.round(live/pl*100):0)+'%';
   var dA=0, dD=0;
@@ -524,9 +526,7 @@ function showInfo(type) {
 
   } else if(type==='prod') {
     title='🛍 Produk per Bulan';
-    // Kelompokkan produk per bulan berdasarkan field createdMonth, atau urutkan semua
-    var grouped = {};
-    var order = [];
+    var grouped = {}, order = [];
     for(i=0; i<products.length; i++){
       p=products[i];
       var bln = p.month || 'Lainnya';
@@ -535,8 +535,8 @@ function showInfo(type) {
     }
     if(!order.length){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk.</p>'; }
     for(var bi=0; bi<order.length; bi++){
-      var bln2=order[bi], prods=grouped[bln2];
-      html+='<div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 0 4px;border-bottom:2px solid var(--border);margin-bottom:4px">'+bln2+'</div>';
+      var blnKey=order[bi], prods=grouped[blnKey];
+      html+='<div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 0 4px;border-bottom:2px solid var(--border);margin-bottom:4px">'+blnKey+'</div>';
       for(i=0; i<prods.length; i++){
         p=prods[i];
         html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
@@ -547,19 +547,18 @@ function showInfo(type) {
     }
 
   } else if(type==='live') {
-    title='📲 Live/Upload — '+wkLabel;
-    // Cari produk live/upload yang dibuat minggu ini
-    var found=false;
+    title='📦 Produk Upload — '+wkLabel;
+    var foundUpload=false;
     for(i=0; i<products.length; i++){
       p=products[i];
-      if(p.status!=='live'&&p.status!=='upload'){ continue; }
-      found=true;
+      if(p.status!=='upload' || p.uploadWeek!==wk){ continue; }
+      foundUpload=true;
       html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
-        +'<div style="width:32px;height:32px;border-radius:8px;background:var(--najwa-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">📲</div>'
+        +'<div style="width:32px;height:32px;border-radius:8px;background:var(--najwa-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">📦</div>'
         +'<div><div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
-        +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div></div></div>';
+        +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+'</div></div></div>';
     }
-    if(!found){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada konten live.</p>'; }
+    if(!foundUpload){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk upload minggu ini.</p>'; }
 
   } else if(type==='share') {
     title='🔗 Tugas Media Sosial — '+wkLabel;
