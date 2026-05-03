@@ -507,48 +507,75 @@ function renderStats() {
 // ── INFO MODAL ───────────────────────────────────────
 function showInfo(type) {
   var title='', html='', i, t, p;
-  var wk = monStr(getMon(0));
+  var wk = monStr(MON);
+  var wkLabel = weekOff===0?'Minggu Ini':weekOff===1?'Minggu Depan':weekOff===-1?'Minggu Lalu':'Minggu Ini';
+
   if(type==='done') {
-    title='✅ Tugas Selesai';
+    title='✅ Tugas Selesai — '+wkLabel;
     for(i=0; i<tasks.length; i++){
-      t=tasks[i]; if(!t.done){ continue; }
+      t=tasks[i];
+      if(!t.done || t.week!==wk){ continue; }
       html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
         +'<div style="width:32px;height:32px;border-radius:8px;background:var(--'+t.div+'-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">✓</div>'
         +'<div><div style="font-size:13px;font-weight:600">'+esc(t.text)+'</div>'
         +'<div style="font-size:11px;color:var(--muted)">'+t.div+' — '+DAYS[t.day]+'</div></div></div>';
     }
-    if(!html){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada tugas selesai.</p>'; }
+    if(!html){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada tugas selesai minggu ini.</p>'; }
+
   } else if(type==='prod') {
-    title='🛍 Semua Produk';
+    title='🛍 Produk per Bulan';
+    // Kelompokkan produk per bulan berdasarkan field createdMonth, atau urutkan semua
+    var grouped = {};
+    var order = [];
     for(i=0; i<products.length; i++){
       p=products[i];
-      html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
-        +'<div style="width:32px;height:32px;border-radius:8px;background:var(--adit-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">🛍</div>'
-        +'<div><div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
-        +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div></div></div>';
+      var bln = p.month || 'Lainnya';
+      if(!grouped[bln]){ grouped[bln]=[]; order.push(bln); }
+      grouped[bln].push(p);
     }
-    if(!html){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk.</p>'; }
+    if(!order.length){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk.</p>'; }
+    for(var bi=0; bi<order.length; bi++){
+      var bln2=order[bi], prods=grouped[bln2];
+      html+='<div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 0 4px;border-bottom:2px solid var(--border);margin-bottom:4px">'+bln2+'</div>';
+      for(i=0; i<prods.length; i++){
+        p=prods[i];
+        html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
+          +'<div style="width:32px;height:32px;border-radius:8px;background:var(--adit-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">🛍</div>'
+          +'<div><div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
+          +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div></div></div>';
+      }
+    }
+
   } else if(type==='live') {
-    title='📲 Produk Live/Upload';
+    title='📲 Live/Upload — '+wkLabel;
+    // Cari produk live/upload yang dibuat minggu ini
+    var found=false;
     for(i=0; i<products.length; i++){
-      p=products[i]; if(p.status!=='live'&&p.status!=='upload'){ continue; }
+      p=products[i];
+      if(p.status!=='live'&&p.status!=='upload'){ continue; }
+      found=true;
       html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
         +'<div style="width:32px;height:32px;border-radius:8px;background:var(--najwa-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">📲</div>'
         +'<div><div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
         +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div></div></div>';
     }
-    if(!html){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada konten live.</p>'; }
+    if(!found){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada konten live.</p>'; }
+
   } else if(type==='share') {
-    title='🔗 Tugas Media Sosial';
+    title='🔗 Tugas Media Sosial — '+wkLabel;
+    var found2=false;
     for(i=0; i<tasks.length; i++){
-      t=tasks[i]; if(t.div!=='medsos'){ continue; }
+      t=tasks[i];
+      if(t.div!=='medsos' || t.week!==wk){ continue; }
+      found2=true;
       html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
         +'<div style="width:32px;height:32px;border-radius:8px;background:var(--dio-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">'+(t.done?'✓':'·')+'</div>'
         +'<div><div style="font-size:13px;font-weight:600;'+(t.done?'text-decoration:line-through;color:var(--muted)':'')+'">'+esc(t.text)+'</div>'
         +'<div style="font-size:11px;color:var(--muted)">'+DAYS[t.day]+' · '+(t.done?'<span style="color:var(--green);font-weight:700">Selesai</span>':'<span style="color:var(--amber)">Belum</span>')+'</div></div></div>';
     }
-    if(!html){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada tugas Media Sosial.</p>'; }
+    if(!found2){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada tugas Media Sosial minggu ini.</p>'; }
   }
+
   document.getElementById('info-title').textContent = title;
   document.getElementById('info-body').innerHTML    = html;
   openModal('info-modal');
