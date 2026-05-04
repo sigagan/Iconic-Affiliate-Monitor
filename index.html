@@ -757,7 +757,15 @@ function renderProducts() {
 function addProd() {
   var name=document.getElementById('pf-name').value.trim();
   if(!name){ document.getElementById('pf-name').focus(); return; }
-  products.push({name:name,pic:document.getElementById('pf-pic').value,status:document.getElementById('pf-status').value});
+  var now = new Date();
+  var bulan = MONTHS[now.getMonth()] + ' ' + now.getFullYear();
+  products.push({
+    name:name,
+    pic:document.getElementById('pf-pic').value,
+    status:document.getElementById('pf-status').value,
+    month:bulan,
+    uploadWeek:null
+  });
   lsSet('aff_prods',JSON.stringify(products));
   document.getElementById('pf-name').value='';
   renderProducts(); renderStats(); sbWrite(); toast('✅ Produk ditambahkan!');
