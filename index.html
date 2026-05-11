@@ -249,8 +249,33 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
         <div class="frow"><label class="flbl">PIC</label>
           <select class="fsel" id="pf-pic"><option>Adit</option><option>Najwa</option><option>Media Sosial</option></select>
         </div>
-        <div class="frow"><label class="flbl">Bulan Tambah</label>
-          <select class="fsel" id="pf-month"></select>
+        <div class="frow"><label class="flbl">Bulan</label>
+          <select class="fsel" id="pf-month">
+            <option value="Jan 2025">Jan 2025</option>
+            <option value="Feb 2025">Feb 2025</option>
+            <option value="Mar 2025">Mar 2025</option>
+            <option value="Apr 2025">Apr 2025</option>
+            <option value="Mei 2025">Mei 2025</option>
+            <option value="Jun 2025">Jun 2025</option>
+            <option value="Jul 2025">Jul 2025</option>
+            <option value="Agu 2025">Agu 2025</option>
+            <option value="Sep 2025">Sep 2025</option>
+            <option value="Okt 2025">Okt 2025</option>
+            <option value="Nov 2025">Nov 2025</option>
+            <option value="Des 2025">Des 2025</option>
+            <option value="Jan 2026">Jan 2026</option>
+            <option value="Feb 2026">Feb 2026</option>
+            <option value="Mar 2026">Mar 2026</option>
+            <option value="Apr 2026">Apr 2026</option>
+            <option value="Mei 2026">Mei 2026</option>
+            <option value="Jun 2026">Jun 2026</option>
+            <option value="Jul 2026">Jul 2026</option>
+            <option value="Agu 2026">Agu 2026</option>
+            <option value="Sep 2026">Sep 2026</option>
+            <option value="Okt 2026">Okt 2026</option>
+            <option value="Nov 2026">Nov 2026</option>
+            <option value="Des 2026">Des 2026</option>
+          </select>
         </div>
         <div class="frow"><label class="flbl">Status</label>
           <select class="fsel" id="pf-status">
@@ -260,8 +285,11 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
             <option value="upload">Upload</option><option value="live">Live</option><option value="review">Review</option>
           </select>
         </div>
+        <div class="frow"><label class="flbl">Catatan (opsional)</label>
+          <input class="finp" id="pf-notes" placeholder="Harga, komisi, platform target...">
+        </div>
         <div class="frow"><label class="flbl">Link Konten (opsional)</label>
-          <input class="finp" id="pf-link" placeholder="https://tiktok.com/... atau link lainnya">
+          <input class="finp" id="pf-link" placeholder="https://tiktok.com/...">
         </div>
         <button class="fbtn" onclick="addProd()">Tambah Produk</button>
       </div>
