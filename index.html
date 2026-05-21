@@ -249,8 +249,33 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
         <div class="frow"><label class="flbl">PIC</label>
           <select class="fsel" id="pf-pic"><option>Adit</option><option>Najwa</option><option>Media Sosial</option></select>
         </div>
-        <div class="frow"><label class="flbl">Bulan Tambah</label>
-          <select class="fsel" id="pf-month"></select>
+        <div class="frow"><label class="flbl">Bulan</label>
+          <select class="fsel" id="pf-month">
+            <option value="Jan 2025">Jan 2025</option>
+            <option value="Feb 2025">Feb 2025</option>
+            <option value="Mar 2025">Mar 2025</option>
+            <option value="Apr 2025">Apr 2025</option>
+            <option value="Mei 2025">Mei 2025</option>
+            <option value="Jun 2025">Jun 2025</option>
+            <option value="Jul 2025">Jul 2025</option>
+            <option value="Agu 2025">Agu 2025</option>
+            <option value="Sep 2025">Sep 2025</option>
+            <option value="Okt 2025">Okt 2025</option>
+            <option value="Nov 2025">Nov 2025</option>
+            <option value="Des 2025">Des 2025</option>
+            <option value="Jan 2026">Jan 2026</option>
+            <option value="Feb 2026">Feb 2026</option>
+            <option value="Mar 2026">Mar 2026</option>
+            <option value="Apr 2026">Apr 2026</option>
+            <option value="Mei 2026">Mei 2026</option>
+            <option value="Jun 2026">Jun 2026</option>
+            <option value="Jul 2026">Jul 2026</option>
+            <option value="Agu 2026">Agu 2026</option>
+            <option value="Sep 2026">Sep 2026</option>
+            <option value="Okt 2026">Okt 2026</option>
+            <option value="Nov 2026">Nov 2026</option>
+            <option value="Des 2026">Des 2026</option>
+          </select>
         </div>
         <div class="frow"><label class="flbl">Status</label>
           <select class="fsel" id="pf-status">
@@ -260,8 +285,11 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,sans-serif;ba
             <option value="upload">Upload</option><option value="live">Live</option><option value="review">Review</option>
           </select>
         </div>
+        <div class="frow"><label class="flbl">Catatan (opsional)</label>
+          <input class="finp" id="pf-notes" placeholder="Harga, komisi, platform target...">
+        </div>
         <div class="frow"><label class="flbl">Link Konten (opsional)</label>
-          <input class="finp" id="pf-link" placeholder="https://tiktok.com/... atau link lainnya">
+          <input class="finp" id="pf-link" placeholder="https://tiktok.com/...">
         </div>
         <button class="fbtn" onclick="addProd()">Tambah Produk</button>
       </div>
@@ -498,9 +526,9 @@ function renderStats() {
   var pl = products.length;
   document.getElementById('st-prod').textContent  = pl;
   document.getElementById('sf-prod').style.width  = Math.min(100,pl*10)+'%';
-  var live=0, wk2=monStr(MON);
+  var live=0, wkStat=monStr(MON);
   for(i=0; i<products.length; i++){
-    if(products[i].status==='upload' && products[i].uploadWeek===wk2){ live++; }
+    if(products[i].status==='upload' && products[i].uploadWeek===wkStat){ live++; }
   }
   document.getElementById('st-live').textContent  = live;
   document.getElementById('sf-live').style.width  = (pl?Math.round(live/pl*100):0)+'%';
@@ -532,39 +560,48 @@ function showInfo(type) {
 
   } else if(type==='prod') {
     title='🛍 Produk per Bulan';
-    var grouped = {}, order = [];
+    var grouped={}, order=[];
     for(i=0; i<products.length; i++){
       p=products[i];
-      var bln = p.month || 'Lainnya';
-      if(!grouped[bln]){ grouped[bln]=[]; order.push(bln); }
-      grouped[bln].push(p);
+      var bk=p.month||'Lainnya';
+      if(!grouped[bk]){ grouped[bk]=[]; order.push(bk); }
+      grouped[bk].push(p);
     }
     if(!order.length){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk.</p>'; }
     for(var bi=0; bi<order.length; bi++){
-      var blnKey=order[bi], prods=grouped[blnKey];
-      html+='<div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 0 4px;border-bottom:2px solid var(--border);margin-bottom:4px">'+blnKey+'</div>';
-      for(i=0; i<prods.length; i++){
-        p=prods[i];
+      var bkey=order[bi];
+      html+='<div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 0 4px;border-bottom:2px solid var(--border);margin-bottom:4px">'+esc(bkey)+'</div>';
+      var bprods=grouped[bkey];
+      for(i=0; i<bprods.length; i++){
+        p=bprods[i];
         html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
           +'<div style="width:32px;height:32px;border-radius:8px;background:var(--adit-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">🛍</div>'
-          +'<div><div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
-          +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div></div></div>';
+          +'<div style="flex:1;min-width:0">'
+          +'<div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
+          +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div>'
+          +(p.notes?'<div style="font-size:10px;color:var(--muted);margin-top:2px">📝 '+esc(p.notes)+'</div>':'')
+          +(p.link?'<a href="'+esc(p.link)+'" target="_blank" style="font-size:10px;color:var(--najwa);word-break:break-all">🔗 link</a>':'')
+          +'</div></div>';
       }
     }
 
   } else if(type==='live') {
     title='📦 Produk Upload — '+wkLabel;
-    var foundUpload=false;
+    var foundU=false;
     for(i=0; i<products.length; i++){
       p=products[i];
       if(p.status!=='upload' || p.uploadWeek!==wk){ continue; }
-      foundUpload=true;
+      foundU=true;
       html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
         +'<div style="width:32px;height:32px;border-radius:8px;background:var(--najwa-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">📦</div>'
-        +'<div><div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
-        +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+'</div></div></div>';
+        +'<div style="flex:1;min-width:0">'
+        +'<div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
+        +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+(p.month?' · '+p.month:'')+'</div>'
+        +(p.notes?'<div style="font-size:10px;color:var(--muted);margin-top:2px">📝 '+esc(p.notes)+'</div>':'')
+        +(p.link?'<a href="'+esc(p.link)+'" target="_blank" style="font-size:10px;color:var(--najwa);word-break:break-all">🔗 link</a>':'')
+        +'</div></div>';
     }
-    if(!foundUpload){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk upload minggu ini.</p>'; }
+    if(!foundU){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk upload minggu ini.</p>'; }
 
   } else if(type==='share') {
     title='🔗 Tugas Media Sosial — '+wkLabel;
