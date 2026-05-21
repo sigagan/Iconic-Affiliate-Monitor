@@ -877,6 +877,17 @@ function doLaunch() {
   products = lp ? JSON.parse(lp) : [];
   weekOff=0; MON=getMon(0);
   document.getElementById('wnav-lbl').textContent='Minggu Ini';
+
+  // Set default bulan dropdown ke bulan sekarang — hanya sekali saat launch
+  var mSel = document.getElementById('pf-month');
+  if(mSel){
+    var now2 = new Date();
+    var def  = MONTHS[now2.getMonth()]+' '+now2.getFullYear();
+    for(var oi=0; oi<mSel.options.length; oi++){
+      if(mSel.options[oi].value===def){ mSel.selectedIndex=oi; break; }
+    }
+  }
+
   renderAll();
   sbRead(function(){ renderAll(); });
   if(syncTmr){ clearInterval(syncTmr); }
