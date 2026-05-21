@@ -526,9 +526,9 @@ function renderStats() {
   var pl = products.length;
   document.getElementById('st-prod').textContent  = pl;
   document.getElementById('sf-prod').style.width  = Math.min(100,pl*10)+'%';
-  var live=0, wkStat=monStr(MON);
+  var live=0, wk2=monStr(MON);
   for(i=0; i<products.length; i++){
-    if(products[i].status==='upload' && products[i].uploadWeek===wkStat){ live++; }
+    if(products[i].status==='upload' && products[i].uploadWeek===wk2){ live++; }
   }
   document.getElementById('st-live').textContent  = live;
   document.getElementById('sf-live').style.width  = (pl?Math.round(live/pl*100):0)+'%';
@@ -560,48 +560,39 @@ function showInfo(type) {
 
   } else if(type==='prod') {
     title='🛍 Produk per Bulan';
-    var grouped={}, order=[];
+    var grouped = {}, order = [];
     for(i=0; i<products.length; i++){
       p=products[i];
-      var bk=p.month||'Lainnya';
-      if(!grouped[bk]){ grouped[bk]=[]; order.push(bk); }
-      grouped[bk].push(p);
+      var bln = p.month || 'Lainnya';
+      if(!grouped[bln]){ grouped[bln]=[]; order.push(bln); }
+      grouped[bln].push(p);
     }
     if(!order.length){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk.</p>'; }
     for(var bi=0; bi<order.length; bi++){
-      var bkey=order[bi];
-      html+='<div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 0 4px;border-bottom:2px solid var(--border);margin-bottom:4px">'+esc(bkey)+'</div>';
-      var bprods=grouped[bkey];
-      for(i=0; i<bprods.length; i++){
-        p=bprods[i];
+      var blnKey=order[bi], prods=grouped[blnKey];
+      html+='<div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 0 4px;border-bottom:2px solid var(--border);margin-bottom:4px">'+blnKey+'</div>';
+      for(i=0; i<prods.length; i++){
+        p=prods[i];
         html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
           +'<div style="width:32px;height:32px;border-radius:8px;background:var(--adit-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">🛍</div>'
-          +'<div style="flex:1;min-width:0">'
-          +'<div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
-          +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div>'
-          +(p.notes?'<div style="font-size:10px;color:var(--muted);margin-top:2px">📝 '+esc(p.notes)+'</div>':'')
-          +(p.link?'<a href="'+esc(p.link)+'" target="_blank" style="font-size:10px;color:var(--najwa);word-break:break-all">🔗 link</a>':'')
-          +'</div></div>';
+          +'<div><div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
+          +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+' · <span class="sbadge s-'+p.status+'">'+(SL[p.status]||p.status)+'</span></div></div></div>';
       }
     }
 
   } else if(type==='live') {
     title='📦 Produk Upload — '+wkLabel;
-    var foundU=false;
+    var foundUpload=false;
     for(i=0; i<products.length; i++){
       p=products[i];
       if(p.status!=='upload' || p.uploadWeek!==wk){ continue; }
-      foundU=true;
+      foundUpload=true;
       html+='<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">'
         +'<div style="width:32px;height:32px;border-radius:8px;background:var(--najwa-l);display:flex;align-items:center;justify-content:center;flex-shrink:0">📦</div>'
-        +'<div style="flex:1;min-width:0">'
-        +'<div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
-        +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+(p.month?' · '+p.month:'')+'</div>'
-        +(p.notes?'<div style="font-size:10px;color:var(--muted);margin-top:2px">📝 '+esc(p.notes)+'</div>':'')
-        +(p.link?'<a href="'+esc(p.link)+'" target="_blank" style="font-size:10px;color:var(--najwa);word-break:break-all">🔗 link</a>':'')
-        +'</div></div>';
+        +'<div><div style="font-size:13px;font-weight:600">'+esc(p.name)+'</div>'
+        +'<div style="font-size:11px;color:var(--muted)">PIC: '+esc(p.pic)+'</div></div></div>';
     }
-    if(!foundU){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk upload minggu ini.</p>'; }
+    if(!foundUpload){ html='<p style="text-align:center;padding:20px;color:var(--muted)">Belum ada produk upload minggu ini.</p>'; }
 
   } else if(type==='share') {
     title='🔗 Tugas Media Sosial — '+wkLabel;
