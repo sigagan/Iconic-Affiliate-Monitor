@@ -879,7 +879,7 @@ function doLaunch() {
   document.getElementById('wnav-lbl').textContent='Minggu Ini';
 
   // Set default bulan dropdown ke bulan sekarang — hanya sekali saat launch
-  var mSel = document.getElementById('pf-month');
+  var mSel = document.getElementById('prod-bulan-select');
   if(mSel){
     var now2 = new Date();
     var def  = MONTHS[now2.getMonth()]+' '+now2.getFullYear();
